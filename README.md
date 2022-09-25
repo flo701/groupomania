@@ -9,7 +9,9 @@ Utilisation de MySQL, Express et React.
 ## Lancer le projet :
 Node et "npm" devront être installés localement sur votre machine.
 
-Créer un dossier vide et cloner ce repository à l'intérieur avec la commande "git clone".
+Créer un dossier vide et cloner ce repository à l'intérieur en tapant : 
+
+"git clone https://github.com/flo701/groupomania.git".
 
 ### Back-end :
 Dans le dossier back-end, ouvrir le fichier ".env.example", le renommer ".env" 
@@ -21,20 +23,20 @@ DB_USER = "votre nom d'utilisateur pour votre base de données"
 
 DB_PASSWORD = "votre mot de passe pour votre base de données"
 
-Ouvrir un terminal, se positionner dans le dossier back-end (avec la commande "cd back-end") et taper :
+Ouvrir un terminal, se positionner dans le dossier back-end (avec la commande "cd groupomania/back-end") et taper :
 
 npm install, puis
 
-node server
+npm start
 
 Vous devriez voir le message suivant dans votre terminal : 
 
-Listening on port 3000
+"Listening on port 3000
 
-Connexion à mySQL réussie !
+Connexion à mySQL réussie !"
 
 ### Front-end :
-Ouvrir un autre terminal, se positionner dans le dossier front-end (avec la commande "cd front-end") et taper :
+Ouvrir un autre terminal, se positionner dans le dossier front-end (avec la commande "cd groupomania/front-end") et taper :
 
 npm install, puis
 
