@@ -1,0 +1,13 @@
+.footer_img-container {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  img {
+    width: 85%;
+    max-width: 200px;
+    @media screen and (max-width: 650px) {
+      width: 70%;
+    }
+  }
+}

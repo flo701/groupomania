@@ -1,0 +1,23 @@
+.heart1 {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  cursor: pointer;
+}
+
+.heart2 {
+  color: transparent;
+  background: $color-primary;
+  cursor: pointer;
+  background-clip: text;
+  -webkit-background-clip: text;
+  transform: scale(1.05);
+  @media screen and (max-width: 650px) {
+    transform: scale(1.05) translateY(-133%);
+  }
+}

@@ -1,0 +1,123 @@
+.new-post {
+  &_container {
+    margin: auto;
+    max-width: 600px;
+    padding: 16px 40px;
+    border-radius: 20px;
+    position: relative;
+    background: $color-secondary;
+
+    textarea {
+      text-align: center;
+      height: 60px;
+      width: 100%;
+      font-size: 1.4rem;
+      padding: 12px 15px;
+      border-radius: 20px 20px 6px 20px;
+    }
+
+    span {
+      display: flex;
+      justify-content: end;
+      padding-top: 10px;
+      padding-right: 10px;
+      padding-bottom: 15px;
+      @media screen and (max-width: 650px) {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+  }
+
+  &_h3 {
+    margin-top: 0px;
+    text-align: center;
+  }
+
+  &_content {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: white;
+    border-radius: 20px;
+    p {
+      text-align: center;
+      margin: 2px 0 6px;
+      font-size: 1.1rem;
+      overflow-wrap: anywhere;
+    }
+    img {
+      width: 100%;
+      border-radius: 6px;
+      margin-top: 12px;
+    }
+    @media screen and (max-width: 632px) {
+      margin-top: 20px;
+    }
+  }
+
+  &_footer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    width: 100%;
+
+    .icon {
+      position: relative;
+      cursor: pointer;
+      width: 35px;
+      height: 35px;
+      margin: auto;
+      margin-bottom: 5px;
+
+      img {
+        position: absolute;
+        left: 0px;
+        height: 35px;
+        width: 35px;
+      }
+
+      button {
+        width: 190px;
+        padding: 10px 20px;
+        background: white;
+        transition: 0.2s;
+      }
+
+      input {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+
+        &::-webkit-file-upload-button {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .btn-send {
+      margin: auto;
+      .cancel {
+        border-radius: 10px;
+        margin-right: 8px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .send {
+        border-radius: 10px;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      button {
+        @media screen and (max-width: 460px) {
+          font-size: 0.8rem;
+          padding: 8px;
+        }
+      }
+    }
+  }
+}

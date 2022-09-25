@@ -1,0 +1,220 @@
+.card {
+  position: relative;
+  display: flex;
+  margin: auto;
+  margin-bottom: 10px;
+  min-height: 280px;
+  max-width: 600px;
+  border-radius: 20px;
+  border: solid 1px black;
+  padding: 20px 20px 20px 20px;
+  column-gap: 15px;
+  @media screen and (max-width: 650px) {
+    display: block;
+  }
+
+  &_profileImage-and-names-and-modify-and-like {
+    position: relative;
+    overflow-wrap: anywhere;
+    width: 95px;
+    @media screen and (max-width: 650px) {
+      width: auto;
+      padding-top: 35px;
+    }
+    @media screen and (max-width: 281px) {
+      padding-top: 43px;
+    }
+  }
+
+  &_profileImage {
+    display: flex;
+    margin: auto;
+    margin-bottom: 10px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    @media screen and (max-width: 650px) {
+      margin-top: 10px;
+    }
+  }
+
+  &_firstname {
+    text-align: center;
+  }
+
+  &_lastname {
+    text-align: center;
+  }
+
+  &_modify-and-delete {
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  &_modify {
+    margin-bottom: 7px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    @media screen and (max-width: 650px) {
+      width: 100px;
+      margin: auto;
+      margin-right: 3px;
+      margin-bottom: 7px;
+    }
+  }
+
+  &_delete {
+    margin-bottom: 30px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    @media screen and (max-width: 650px) {
+      width: 100px;
+      margin: auto;
+      margin-left: 3px;
+    }
+  }
+
+  &_like {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    @media screen and (max-width: 650px) {
+      transform: translate(-50%, 140%);
+    }
+  }
+
+  &_number-of-likes {
+    position: absolute;
+    bottom: 0px;
+    left: -20px;
+    @media screen and (max-width: 650px) {
+      bottom: 5px;
+    }
+  }
+
+  &_date {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    @media screen and (max-width: 650px) {
+      text-align: center;
+      right: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
+  &_title-and-description-and-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+    overflow-wrap: anywhere;
+    textarea {
+      width: 450px;
+      @media screen and (max-width: 500px) {
+        width: 350px;
+      }
+      @media screen and (max-width: 400px) {
+        width: 300px;
+      }
+      @media screen and (max-width: 340px) {
+        width: 220px;
+      }
+    }
+  }
+
+  &_title {
+    margin-top: 23px;
+    margin-bottom: 10px;
+    width: 450px;
+    text-align: center;
+    @media screen and (max-width: 650px) {
+      width: auto;
+    }
+  }
+
+  textarea.card_title {
+    margin-top: 40px;
+  }
+
+  &_description {
+    width: 450px;
+    margin-bottom: 30px;
+    text-align: center;
+    @media screen and (max-width: 650px) {
+      width: auto;
+    }
+  }
+
+  &_post-img {
+    height: 290px;
+    width: 450px;
+    object-fit: cover;
+    border-radius: 10px;
+    @media screen and (max-width: 500px) {
+      height: 200px;
+      width: 350px;
+    }
+    @media screen and (max-width: 400px) {
+      height: 200px;
+      width: 300px;
+    }
+    @media screen and (max-width: 340px) {
+      height: 200px;
+      width: 220px;
+    }
+  }
+
+  &_file img {
+    width: 450px;
+    height: 306px;
+    border-radius: 6px;
+    margin-top: -290px;
+    @media screen and (max-width: 500px) {
+      margin-top: -200px;
+      height: 216px;
+      width: 350px;
+    }
+    @media screen and (max-width: 400px) {
+      margin-top: -200px;
+      height: 216px;
+      width: 300px;
+    }
+    @media screen and (max-width: 340px) {
+      margin-top: -200px;
+      height: 216px;
+      width: 220px;
+    }
+  }
+
+  &_file-icon {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    margin: auto;
+    margin-bottom: 5px;
+    img {
+      position: absolute;
+      left: 0px;
+      height: 35px;
+      width: 35px;
+      cursor: pointer;
+    }
+    input {
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+  }
+
+  &_validation-btn {
+    cursor: pointer;
+  }
+}

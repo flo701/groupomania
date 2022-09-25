@@ -1,0 +1,101 @@
+.connection-form {
+  background: $color-secondary;
+  max-width: 400px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 23px;
+  padding-bottom: 23px;
+  border-radius: 20px;
+  @media screen and (max-width: 420px) {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  @media screen and (max-width: 290px) {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0px;
+    margin-top: 0;
+  }
+
+  li {
+    cursor: pointer;
+    width: 47%;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  &_active-btn {
+    border: solid 1px transparent;
+    background: white;
+    border-radius: 7px;
+  }
+}
+
+.signup {
+  &_success {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    color: green;
+    font-weight: 600;
+  }
+
+  &_form input[type='text'],
+  &_form input[type='password'] {
+    width: 100%;
+    height: 30px;
+    border: solid 1px transparent;
+    background: white;
+    border-radius: 7px;
+  }
+
+  &_form input[type='submit'] {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 57%;
+    height: 30px;
+    margin-top: 15px;
+    margin: auto;
+    border-radius: 7px;
+  }
+}
+
+.signin {
+  &_form input[type='text'],
+  &_form input[type='password'] {
+    width: 100%;
+    height: 30px;
+    border: solid 1px transparent;
+    background: white;
+    border-radius: 7px;
+  }
+  &_form input[type='submit'] {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 55%;
+    height: 30px;
+    margin-top: 15px;
+    margin: auto;
+    border-radius: 7px;
+  }
+}
+
+.lastName.error,
+.firstName.error,
+.email.error,
+.password.error,
+.password-confirm.error,
+.terms.error {
+  color: $color-primary;
+}
