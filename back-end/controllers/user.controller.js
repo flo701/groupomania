@@ -110,10 +110,10 @@ exports.login = (req, res) => {
                   token: jwt.sign(
                     {
                       userId: results[0].id,
+                      status: results[0].status,
                       lastname: results[0].lastname,
                       firstname: results[0].firstname,
                       email: results[0].email,
-                      password: results[0].password,
                       profileImage: results[0].profileImage,
                       creationDate: results[0].creationDate,
                     },
@@ -129,6 +129,22 @@ exports.login = (req, res) => {
               res.status(500).json({ error })
             })
         }
+      }
+    }
+  )
+}
+
+// -----------------------------------------------------------------------------------------------------------
+// Obtenir les infos d'un utilisateur :
+exports.getOneUser = (req, res) => {
+  connection.query(
+    `SELECT * FROM user WHERE id=${req.params.userId}`,
+    function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        console.log('Result : ' + JSON.stringify(result))
+        res.status(200).json(result)
       }
     }
   )
@@ -176,8 +192,7 @@ exports.updateProfileImage = (req, res) => {
             // Ancienne photo que l'on veut supprimer :
             console.log("Filename de l'ancienne photo : " + filename)
             fs.unlink(`images/${filename}`, () => {
-              profileImage =
-                ({ _id: req.params.id }, { ...result, _id: req.params })
+              profileImage = profileImage
             })
 
             connection.query(
@@ -189,7 +204,10 @@ exports.updateProfileImage = (req, res) => {
                   )
                   res.json({ error })
                 } else {
-                  res.status(201).json({ message: 'Photo de profil modifiée' })
+                  res.status(201).json({
+                    message: 'Photo de profil modifiée',
+                    profileImage: profileImage,
+                  })
                 }
               }
             )
@@ -200,6 +218,7 @@ exports.updateProfileImage = (req, res) => {
               req.file.filename
             }`
             console.log('Nouvelle profileImage :' + profileImage)
+
             connection.query(
               `UPDATE user SET profileImage="${profileImage}" WHERE id= ${userId}`,
               (error, results, fields) => {
@@ -209,7 +228,10 @@ exports.updateProfileImage = (req, res) => {
                   )
                   res.json({ error })
                 } else {
-                  res.status(201).json({ message: 'Photo de profil ajoutée' })
+                  res.status(201).json({
+                    message: 'Photo de profil ajoutée',
+                    profileImage: profileImage,
+                  })
                 }
               }
             )
@@ -231,24 +253,22 @@ exports.updateProfileInfos = (req, res) => {
         throw err
       } else {
         let user = {
-          email: req.body.email,
           password: req.body.password,
         }
 
         bcrypt.hash(req.body.password, 10).then((hash) => {
           user = {
-            email: req.body.email,
             password: hash,
           }
 
           connection.query(
-            `UPDATE user SET  email="${user.email}", password="${user.password}"  WHERE id= ${req.auth.userId} `,
+            `UPDATE user SET password="${user.password}"  WHERE id= ${req.auth.userId} `,
             function (error, result) {
               if (error) {
                 console.log('Echec de la modification du profil : ' + error)
                 res.status(400).json({ error })
               } else {
-                res.status(201).json({ message: 'Profil modifié' })
+                res.status(201).json({ message: 'Mot de passe modifié' })
               }
             }
           )
@@ -263,49 +283,4 @@ exports.updateProfileInfos = (req, res) => {
 exports.logout = (req, res) => {
   res.clearCookie('token')
   res.status(200).json('Déconnecté')
-}
-
-// ---------------------------------------------------------------------------------------------------------------
-// Désinscription d'un utilisateur :
-exports.deleteUser = (req, res, next) => {
-  console.log(req.auth.userId)
-  connection.query(
-    `SELECT * FROM user WHERE id=${req.auth.userId}`,
-    function (err, result) {
-      if (err) {
-        throw err
-      } else {
-        console.log(result)
-        if (result[0].profileImage) {
-          // On supprime l'utilisateur de la base de données, mais aussi sa photo de profil :
-          const filename = result[0].profileImage.split('/images/')[1]
-          fs.unlink(`images/${filename}`, () => {
-            connection.query(
-              `DELETE FROM user WHERE id=${req.auth.userId}`,
-              function (err, result) {
-                if (err) {
-                  throw err
-                } else {
-                  console.log(result)
-                  return res.status(200).json('Utilisateur désinscrit')
-                }
-              }
-            )
-          })
-        } else {
-          connection.query(
-            `DELETE FROM user WHERE id=${req.auth.userId}`,
-            function (err, result) {
-              if (err) {
-                throw err
-              } else {
-                console.log(result)
-                return res.status(200).json('Utilisateur désinscrit')
-              }
-            }
-          )
-        }
-      }
-    }
-  )
 }
