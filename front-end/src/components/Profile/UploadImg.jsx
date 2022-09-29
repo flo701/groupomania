@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-import cookie from 'js-cookie'
 import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
 
 const UploadImg = () => {
-  console.log('Je suis dans la fonction UploadImg')
+  // Image que l'on envoie au back-end :
+  const [file, setFile] = useState()
+  console.log(file)
+
+  // Image que l'on voit à l'écran après sélection de la photo :
+  const [profileImage, setProfileImage] = useState()
+  console.log(profileImage)
+
+  // Photo de profil provenant du back-end :
+  const [userProfileImage, setUserProfileImage] = useState()
+
+  // Si on a ajouté/changé la photo de profil :
   const [newPhoto, setNewPhoto] = useState(false)
 
   const token = getCookie('token')
@@ -14,18 +24,28 @@ const UploadImg = () => {
     decodedToken = jwt_decode(token)
     console.log(decodedToken.profileImage)
   }
+  const headers = { Authorization: `Bearer ${token}` }
 
-  const [file, setFile] = useState()
-  console.log(file)
-  const [profileImage, setProfileImage] = useState()
-  console.log(profileImage)
+  const getOneUser = (id) => {
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_URL}/api/auth/getOneUser/${id}`,
+      headers: headers,
+    })
+      .then((res) => {
+        console.log(res)
+        setUserProfileImage(res.data[0].profileImage)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  if (token) getOneUser(decodedToken.userId)
 
   const modifyPicture = (e) => {
     e.preventDefault()
     const data = new FormData()
     data.append('image', file)
-
-    console.log(file)
 
     const api = axios.create({
       baseURL: `${process.env.REACT_APP_API_URL}/api`,
@@ -40,12 +60,7 @@ const UploadImg = () => {
         .put('/auth/profile-image', data)
         .then((res) => {
           setNewPhoto(true)
-          const removeCookie = (key) => {
-            if (window !== 'undefined') {
-              cookie.remove(key, { expires: 1 })
-            }
-          }
-          removeCookie('token')
+          console.log(res.data.profileImage)
         })
         .catch((err) => console.log(err))
     }
@@ -64,15 +79,11 @@ const UploadImg = () => {
           <div className="profile-pictures">
             <img src={profileImage} className="new-image" alt="user-pic" />
           </div>
-          <span className="update-success">
-            Nouvelle photo de profil enregistrée.
-            <br />
-            Veuillez vous reconnecter.
-          </span>
+          <span className="update-success">Photo de profil enregistrée</span>
         </>
       ) : (
         <>
-          {decodedToken.profileImage === null ? (
+          {userProfileImage === null ? (
             <>
               <div className="profile-pictures">
                 <div className="file">
@@ -105,7 +116,7 @@ const UploadImg = () => {
               <div className="profile-pictures">
                 <div className="file">
                   <img
-                    src={decodedToken.profileImage}
+                    src={userProfileImage}
                     className="token-image"
                     alt="user-pic"
                   />
