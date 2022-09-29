@@ -26,7 +26,6 @@ const NewPostForm = () => {
   })
 
   const handlePost = async () => {
-    // if (title && description) {
     if (title.length > 4 && description.length > 4) {
       const data = new FormData()
       data.append('title', title)

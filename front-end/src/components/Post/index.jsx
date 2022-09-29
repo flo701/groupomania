@@ -34,14 +34,11 @@ const Posts = () => {
     <div className="posts">
       {token ? (
         <>
-          <h3 className="posts_h3">Bienvenue {decodedToken.firstname} </h3>
+          <h3 className="posts_h3">
+            Bienvenue sur Groupomania {decodedToken.firstname}{' '}
+          </h3>
         </>
-      ) : (
-        <h3 className="posts_h3">
-          Veuillez vous connecter pour créer un post et consulter les posts de
-          vos collègues
-        </h3>
-      )}
+      ) : null}
       <NewPostForm />
       <ul>
         {posts.map((post, index) => (
