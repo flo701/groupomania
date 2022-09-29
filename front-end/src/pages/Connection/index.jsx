@@ -7,7 +7,7 @@ const Connection = () => {
 
   return (
     <div>
-      <ConnectionForm signup={true} signin={false} />
+      <ConnectionForm signup={false} signin={true} />
     </div>
   )
 }
