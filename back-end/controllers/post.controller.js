@@ -9,6 +9,8 @@ const connection = mysql.createConnection({
 
 const fs = require('fs')
 
+const jwt = require('jsonwebtoken')
+
 // ---------------------------------------------------------------------------------------------------------------
 // Récupérer tous les posts de notre base de données :
 exports.getAllPosts = (req, res, next) => {
@@ -67,6 +69,7 @@ exports.createPost = (req, res, next) => {
       ...postBody,
       user_id: req.auth.userId,
       image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+      // image: `${req.file.filename}`,
     }
     console.log(post)
 
@@ -101,17 +104,23 @@ exports.createPost = (req, res, next) => {
 exports.modifyPost = (req, res, next) => {
   console.log('Je suis dans la fonction modifyPost')
 
+  const token = req.headers.authorization.split(' ')[1]
+  const decodedToken = jwt.verify(token, process.env.RANDOM_TOKEN_SECRET)
+
   connection.query(
     `SELECT * FROM post WHERE id=${req.params.id}`,
     function (err, result) {
       console.log(result[0].user_id)
-      if (err || result[0].user_id != req.auth.userId) {
-        if (err) {
-          throw err
-        }
-        if (result[0].user_id != req.auth.userId) {
-          res.status(403).json({ message: 'Requête non autorisée' })
-        }
+      console.log(decodedToken.status)
+
+      if (err) {
+        throw err
+      }
+      if (
+        result[0].user_id != req.auth.userId &&
+        decodedToken.status != 'ADMIN'
+      ) {
+        res.status(403).json({ message: 'Requête non autorisée' })
       } else {
         if (req.file) {
           delete req.auth.userId
@@ -153,7 +162,7 @@ exports.modifyPost = (req, res, next) => {
                 res.status(400).json({ err })
                 throw err
               } else {
-                res.status(201).json('Post modifié' + post)
+                res.status(201).json('Post modifié :' + JSON.stringify(post))
               }
             }
           )
@@ -182,6 +191,9 @@ exports.modifyPost = (req, res, next) => {
 // -------------------------------------------------------------------------------------------------------------
 // Supprimer un post :
 exports.deletePost = (req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1]
+  const decodedToken = jwt.verify(token, process.env.RANDOM_TOKEN_SECRET)
+
   connection.query(
     `SELECT * FROM post WHERE id=${req.params.id}`,
     function (err, result) {
@@ -189,7 +201,10 @@ exports.deletePost = (req, res, next) => {
         throw err
       } else {
         console.log(result[0].user_id)
-        if (result[0].user_id != req.auth.userId) {
+        if (
+          result[0].user_id != req.auth.userId &&
+          decodedToken.status != 'ADMIN'
+        ) {
           res.status(403).json({ message: 'Requête non autorisée' })
         } else {
           if (result[0].image) {
