@@ -87,7 +87,14 @@
     height: 30px;
     margin-top: 15px;
     margin: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
     border-radius: 7px;
+  }
+  &_toggle {
+    text-align: center;
+    margin-top: 20px;
+    cursor: pointer;
   }
 }
 

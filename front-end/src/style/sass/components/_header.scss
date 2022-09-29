@@ -1,9 +1,12 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-top: 30px;
   margin-bottom: 40px;
+  max-width: 600px;
+  margin-right: auto;
+  margin-left: auto;
   @media screen and (max-width: 767px) {
     margin-bottom: 0px;
     flex-direction: column;
@@ -11,8 +14,17 @@
   &_img-container {
     text-align: center;
     @media screen and (max-width: 767px) {
-      margin: auto;
-      margin-top: 20px;
+    }
+    img {
+      width: 85%;
+      max-width: 300px;
+    }
+  }
+  &_img-container-notoken {
+    text-align: center;
+    margin-top: 30px;
+    @media screen and (max-width: 767px) {
+      margin-top: 30px;
     }
     img {
       width: 85%;

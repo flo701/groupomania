@@ -1,10 +1,18 @@
 .posts {
   margin-left: 5px;
   margin-right: 5px;
+
   &_h3 {
     text-align: center;
     margin-bottom: 40px;
   }
+
+  &_p {
+    text-align: center;
+    margin-top: -25px;
+    margin-bottom: 30px;
+  }
+
   ul {
     padding: 0px;
   }
