@@ -3,57 +3,36 @@ import UploadImg from './UploadImg'
 import { timestampParser } from '../Utils'
 import axios from 'axios'
 import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
-import cookie from 'js-cookie'
 import jwt_decode from 'jwt-decode'
-// import Unsubscribe from './Unsubscribe'
 
 const UpdateProfile = () => {
-  const [updateFormSubmit, setUpdateFormSubmit] = useState(false)
-
   const token = getCookie('token')
   let decodedToken
   if (token) {
     decodedToken = jwt_decode(token)
-    console.log(decodedToken.profileImage)
   }
+  const headers = { Authorization: `Bearer ${token}` }
 
-  const [emailUpdate, setEmailUpdate] = useState('')
+  const [updateFormSubmit, setUpdateFormSubmit] = useState(false)
+
   const [passwordUpdate, setPasswordUpdate] = useState('')
   const [controlPasswordUpdate, setControlPasswordUpdate] = useState('')
-
-  // const [unsubscribe, setUnsubscribe] = useState(false)
 
   const handleRegister = async (e) => {
     e.preventDefault()
 
-    const emailUpdateInput = document.querySelector('#email-update')
     const passwordUpdateInput = document.querySelector('#password-update')
     const controlPasswordUpdateInput = document.querySelector(
       '#password-conf-update'
     )
-
-    const emailError = document.querySelector('.email-update.error')
     const passwordError = document.querySelector('.password-update.error')
     const passwordConfirmError = document.querySelector(
       '.password-confirm-update.error'
     )
 
-    let regExpEmail = /^[A-Z0-9.+-_]+@[A-Z0-9]+\.[A-Z]{2,4}$/i
     // Entre 8 et 25 caractères, au moins une lettre minuscule, au moins une lettre majuscule et au moins 2 chiffres :
     let regExpPassword =
       /^(?=.{8,25}$)(?=.*?[a-z])(?=.*?[A-Z])(?=(?:.*?[0-9]){2}).*$/
-
-    const checkEmailUpdate = () => {
-      if (!emailUpdateInput.value.match(regExpEmail)) {
-        emailError.innerHTML = 'Email invalide'
-        return false
-      } else {
-        emailError.innerHTML = ''
-        console.log(emailUpdate)
-        return true
-      }
-    }
-    checkEmailUpdate()
 
     const checkPasswordUpdate = () => {
       console.log()
@@ -81,36 +60,20 @@ const UpdateProfile = () => {
     }
     checkControlPasswordUpdate()
 
-    if (
-      checkEmailUpdate() &&
-      checkPasswordUpdate() &&
-      checkControlPasswordUpdate()
-    ) {
-      const token = getCookie('token')
-      const headers = { Authorization: `Bearer ${token}` }
-
+    if (checkPasswordUpdate() && checkControlPasswordUpdate()) {
       await axios({
         method: 'put',
         url: `${process.env.REACT_APP_API_URL}/api/auth/profile-infos`,
         headers: headers,
         data: {
-          email: emailUpdate,
           password: passwordUpdate,
         },
       })
         .then((res) => {
           setUpdateFormSubmit(true)
-          const removeCookie = (key) => {
-            if (window !== 'undefined') {
-              cookie.remove(key, { expires: 1 })
-            }
-          }
-          removeCookie('token')
         })
         .catch((err) => {
-          emailError.innerHTML = 'Email déjà enregistré dans la base de données'
           console.log(err)
-          console.log('Email déjà enregistré dans la base de données')
         })
     }
   }
@@ -157,20 +120,12 @@ const UpdateProfile = () => {
             <>
               <div className="right-part">
                 <div>
-                  <h3>Modifier vos informations</h3>
+                  <h3>Modifier votre mot de passe</h3>
                   <form action="" onSubmit={handleRegister} id="form">
-                    <label htmlFor="email-update">Email</label>
                     <br />
-                    <input
-                      type="text"
-                      name="email-update"
-                      id="email-update"
-                      onChange={(e) => setEmailUpdate(e.target.value)}
-                      value={emailUpdate}
-                    />
-                    <div className="email-update error"></div>
-                    <br />
-                    <label htmlFor="password-update">Mot de passe</label>
+                    <label htmlFor="password-update">
+                      Nouveau mot de passe
+                    </label>
                     <br />
                     <input
                       type="password"
@@ -193,39 +148,20 @@ const UpdateProfile = () => {
                       value={controlPasswordUpdate}
                     />
                     <div className="password-confirm-update error"></div>
-                    {token ? (
-                      <button type="submit">Valider les modifications</button>
-                    ) : null}
-                    {updateFormSubmit && (
+                    {updateFormSubmit ? (
                       <>
                         <span className="update-success">
-                          Modifications enregistrées.
-                          <br /> Veuillez-vous reconnecter.
+                          Nouveau mot de passe enregistré
                         </span>
                       </>
-                    )}
+                    ) : token ? (
+                      <button type="submit">Valider la modification </button>
+                    ) : null}
                   </form>
                 </div>
               </div>
             </>
           </div>
-          {/* {token && (
-            <div
-              className="unsubscribe"
-              onClick={(e) => {
-                if (window.confirm('Voulez-vous vraiment vous désinscrire ?')) {
-                  setUnsubscribe(true)
-                }
-              }}
-            >
-              Désincription
-            </div>
-          )}
-          {unsubscribe && (
-            <>
-              <Unsubscribe />
-            </>
-          )} */}
         </>
       </div>
     </>
