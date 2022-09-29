@@ -92,7 +92,8 @@ const Card = (props) => {
         )}
         <div className="card_firstname">{props.post.firstname}</div>
         <div className="card_lastname">{props.post.lastname}</div>
-        {decodedToken.userId === props.post.user_id && (
+        {(decodedToken.userId === props.post.user_id ||
+          decodedToken.status === 'ADMIN') && (
           <div className="card_modify-and-delete">
             <button
               className="card_modify"
