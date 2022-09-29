@@ -25,9 +25,9 @@ const userCtrl = require('../controllers/user.controller')
 // car le reste de l'adresse de la route est déclaré dans notre application Express :
 router.post('/signup', email, password, userCtrl.signup)
 router.post('/login', userCtrl.login)
+router.get('/getOneUser/:userId', userCtrl.getOneUser)
 router.put('/profile-image', auth, multer, userCtrl.updateProfileImage)
 router.put('/profile-infos', auth, userCtrl.updateProfileInfos)
 router.get('/logout', userCtrl.logout)
-router.delete('/delete', auth, multer, userCtrl.deleteUser)
 
 module.exports = router
