@@ -80,7 +80,7 @@ const NewPostForm = () => {
         value={description}
       />
       {title || description || postPicture ? (
-        <li>
+        <>
           <div>
             <span>{timestampParser(Date.now())}</span>
           </div>
@@ -89,7 +89,7 @@ const NewPostForm = () => {
             <p>{description}</p>
             <img src={postPicture} alt="" />
           </div>
-        </li>
+        </>
       ) : null}
       <div className="new-post_footer">
         <div className="icon">
