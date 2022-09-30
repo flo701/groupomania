@@ -8,7 +8,7 @@ import Picture from '../../assets/icons/picture.svg'
 import jwt_decode from 'jwt-decode'
 import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
 
-const Card = (props) => {
+const Card = ({ post }) => {
   const token = getCookie('token')
   let decodedToken
   if (token) {
@@ -16,15 +16,13 @@ const Card = (props) => {
     console.log("Id de l'utilisateur : " + decodedToken.userId)
   }
 
-  console.log('Id du créateur du post :' + props.post.user_id)
-  console.log('Id du post :' + props.post.id)
+  console.log('Id du créateur du post :' + post.user_id)
+  console.log('Id du post :' + post.id)
 
   const [isUpdated, setIsUpdated] = useState(false)
 
-  const [titleUpdated, setTitleUpdated] = useState(props.post.title)
-  const [descriptionUpdated, setDescriptionUpdated] = useState(
-    props.post.description
-  )
+  const [titleUpdated, setTitleUpdated] = useState(post.title)
+  const [descriptionUpdated, setDescriptionUpdated] = useState(post.description)
 
   // postUpdatedPicture est l'image que l'on voit à l'écran lors de la modification du post :
   const [postUpdatedPicture, setPostUpdatedPicture] = useState()
@@ -42,7 +40,7 @@ const Card = (props) => {
 
   const headers = { Authorization: `Bearer ${token}` }
 
-  const postId = props.post.id
+  const postId = post.id
   const title = titleUpdated
   const description = descriptionUpdated
   const file = fileUpdated
@@ -77,10 +75,10 @@ const Card = (props) => {
   return (
     <li className="card">
       <div className="card_profileImage-and-names-and-modify-and-like">
-        {props.post.profileImage ? (
+        {post.profileImage ? (
           <img
             className="card_profileImage"
-            src={props.post.profileImage}
+            src={post.profileImage}
             alt=""
           ></img>
         ) : (
@@ -90,9 +88,9 @@ const Card = (props) => {
             alt=""
           ></img>
         )}
-        <div className="card_firstname">{props.post.firstname}</div>
-        <div className="card_lastname">{props.post.lastname}</div>
-        {(decodedToken.userId === props.post.user_id ||
+        <div className="card_firstname">{post.firstname}</div>
+        <div className="card_lastname">{post.lastname}</div>
+        {(decodedToken.userId === post.user_id ||
           decodedToken.status === 'ADMIN') && (
           <div className="card_modify-and-delete">
             <button
@@ -112,29 +110,29 @@ const Card = (props) => {
               }}
             >
               Supprimer
-              {deleteButton && <DeleteCard props={props} />}
+              {deleteButton && <DeleteCard post={post} />}
             </button>
           </div>
         )}
 
         <div className="card_like">
           <i className="fa-regular fa-2x fa-heart"></i>
-          <LikeCard props={props} />
+          <LikeCard post={post} />
         </div>
       </div>
 
       {isUpdated === false && (
         <>
           <div className="card_date">
-            <p>{timestampParser(props.post.creationDate)}</p>
+            <p>{timestampParser(post.creationDate)}</p>
           </div>
           <div className="card_title-and-description-and-image">
             <div className="card_title">
-              <h2> {props.post.title}</h2>
+              <h2> {post.title}</h2>
             </div>
-            <div className="card_description">{props.post.description}</div>
-            {props.post.image && (
-              <img src={props.post.image} alt="" className="card_post-img" />
+            <div className="card_description">{post.description}</div>
+            {post.image && (
+              <img src={post.image} alt="" className="card_post-img" />
             )}
           </div>
         </>
@@ -143,25 +141,25 @@ const Card = (props) => {
       {isUpdated && (
         <>
           <div className="card_date">
-            <p>{timestampParser(props.post.creationDate)}</p>
+            <p>{timestampParser(post.creationDate)}</p>
           </div>
           <div className="card_title-and-description-and-image">
             <textarea
               className="card_title"
               maxLength="40"
-              defaultValue={props.post.title}
+              defaultValue={post.title}
               onChange={(e) => setTitleUpdated(e.target.value)}
             />
             <textarea
               className="card_description"
               maxLength="255"
-              defaultValue={props.post.description}
+              defaultValue={post.description}
               onChange={(e) => setDescriptionUpdated(e.target.value)}
             />
 
-            {props.post.image && (
+            {post.image && (
               <>
-                <img src={props.post.image} alt="" className="card_post-img" />
+                <img src={post.image} alt="" className="card_post-img" />
                 <div className="card_file">
                   <img src={postUpdatedPicture} alt="" />
                 </div>

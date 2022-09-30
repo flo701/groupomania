@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
-const LikeCard = (props) => {
+const LikeCard = ({ post }) => {
   const token = getCookie('token')
   let decodedToken
   if (token) {
@@ -12,15 +12,15 @@ const LikeCard = (props) => {
   }
   const headers = { Authorization: `Bearer ${token}` }
 
-  console.log(props)
+  console.log({ post })
 
-  const postId = props.props.post.id
+  const postId = post.id
   console.log('Id du post : ' + postId)
 
   const [postLiked, setPostLiked] = useState(false)
   console.log('Statut de la const postLiked dans LikeCard: ', postLiked)
 
-  const [numberOfLikes, setNumberOfLikes] = useState(props.props.post.postLikes)
+  const [numberOfLikes, setNumberOfLikes] = useState(post.postLikes)
 
   // On regarde si l'utilisateur a déjà liké ce post :
   useEffect(() => {
@@ -45,7 +45,7 @@ const LikeCard = (props) => {
 
   // Au click sur le coeur, on appelle la fonction "likePost" :
   const likeHandle = () => {
-    const postId = props.props.post.id
+    const postId = post.id
 
     axios({
       method: 'post',
@@ -76,8 +76,7 @@ const LikeCard = (props) => {
 
         console.log('Nombre de likes pour ce post : ' + res.data)
         console.log(
-          'Résultat de props.props.post.likes pour ce post : ' +
-            props.props.post.postLikes
+          'Résultat de props.props.post.likes pour ce post : ' + post.postLikes
         )
       })
       .catch((err) => {

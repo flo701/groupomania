@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import axios from 'axios'
 
-const DeleteCard = (props) => {
+const DeleteCard = ({ post }) => {
   const token = getCookie('token')
   const headers = { Authorization: `Bearer ${token}` }
   const config = { headers }
@@ -10,12 +10,9 @@ const DeleteCard = (props) => {
   console.log(`${token}`)
 
   useEffect(() => {
-    const postId = props.props.post.id
+    const postId = post.id
 
-    console.log(props.props.post)
-
-    console.log(props.props)
-    console.log(props)
+    console.log(post)
 
     axios
       .delete(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, config)
