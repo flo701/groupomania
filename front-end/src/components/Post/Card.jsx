@@ -7,6 +7,8 @@ import { timestampParser } from '../Utils'
 import Picture from '../../assets/icons/picture.svg'
 import jwt_decode from 'jwt-decode'
 import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
+import Trash from '../../assets/icons/trash.svg'
+import Edit from '../../assets/icons/edit.svg'
 
 const Card = ({ post }) => {
   const token = getCookie('token')
@@ -93,13 +95,13 @@ const Card = ({ post }) => {
         {(decodedToken.userId === post.user_id ||
           decodedToken.status === 'ADMIN') && (
           <div className="card_modify-and-delete">
-            <button
+            <img
               className="card_modify"
               onClick={(e) => setIsUpdated(!isUpdated)}
-            >
-              Modifier
-            </button>
-            <button
+              src={Edit}
+              alt="img"
+            />
+            <img
               className="card_delete"
               onClick={(e) => {
                 if (
@@ -108,10 +110,10 @@ const Card = ({ post }) => {
                   setDeleteButton(true)
                 }
               }}
-            >
-              Supprimer
-              {deleteButton && <DeleteCard post={post} />}
-            </button>
+              src={Trash}
+              alt="img"
+            />
+            {deleteButton && <DeleteCard post={post} />}
           </div>
         )}
 
