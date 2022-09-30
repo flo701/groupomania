@@ -13,7 +13,12 @@ Créer un dossier vide et cloner ce repository à l'intérieur en tapant :
 
 "git clone https://github.com/flo701/groupomania.git".
 
-### Back-end :
+### Créer la base de données groupomania :
+Démarrer MySQL sur votre machine.
+
+Créer la base de données groupomania en tapant la commande : `CREATE DATABASE groupomania`.
+
+### Lancer le back-end :
 Dans le dossier back-end, ouvrir le fichier ".env.example", le renommer ".env" 
 et assigner des valeurs aux 3 variables suivantes :
 
@@ -35,7 +40,7 @@ Vous devriez voir le message suivant dans votre terminal :
 
 Connexion à mySQL réussie !"
 
-### Front-end :
+### Lancer le front-end :
 Ouvrir un autre terminal, se positionner dans le dossier front-end (avec la commande "cd groupomania/front-end") et taper :
 
 npm install, puis
