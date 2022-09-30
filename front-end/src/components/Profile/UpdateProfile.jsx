@@ -30,7 +30,6 @@ const UpdateProfile = () => {
       '.password-confirm-update.error'
     )
 
-    // Entre 8 et 25 caractères, au moins une lettre minuscule, au moins une lettre majuscule et au moins 2 chiffres :
     let regExpPassword =
       /^(?=.{8,25}$)(?=.*?[a-z])(?=.*?[A-Z])(?=(?:.*?[0-9]){2}).*$/
 

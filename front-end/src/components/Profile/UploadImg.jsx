@@ -12,7 +12,7 @@ const UploadImg = () => {
   const [profileImage, setProfileImage] = useState()
   console.log(profileImage)
 
-  // Photo de profil provenant du back-end :
+  // Photo de profil provenant du back-end, de la bdd :
   const [userProfileImage, setUserProfileImage] = useState()
 
   // Si on a ajouté/changé la photo de profil :

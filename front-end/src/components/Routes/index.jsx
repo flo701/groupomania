@@ -6,9 +6,9 @@ import Profile from '../../pages/Profile'
 import Connection from '../../pages/Connection'
 import Footer from '../Footer'
 
-const token = getCookie('token')
-
 const index = () => {
+  const token = getCookie('token')
+
   return (
     <Router>
       <Header />
