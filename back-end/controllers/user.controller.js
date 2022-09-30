@@ -19,8 +19,6 @@ const connection = mysql.createConnection({
 // --------------------------------------------------------------------------------------------------------------
 // Inscription de nos utilisateurs :
 exports.signup = (req, res) => {
-  console.log('je suis dans le back-end à la fonction signup')
-
   let userBody = {
     lastname: req.body.lastname,
     firstname: req.body.firstname,
@@ -92,13 +90,12 @@ exports.login = (req, res) => {
         console.log(
           'Résultats de la recherche du user : ' + JSON.stringify(results)
         )
-        console.log('Email : ' + email)
-        console.log('Mot de passe : ' + password)
         if (results == 0) {
           return res
             .status(401)
             .json({ error: 'Email non enregistré dans la base de données' })
         } else {
+          console.log('Mot de passe : ' + password)
           console.log('Mot de passe crypté : ' + results[0].password)
           bcrypt
             .compare(password, results[0].password)

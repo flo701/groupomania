@@ -3,9 +3,6 @@ const validator = require('validator')
 
 // Le middleware suivant va nous premettre de contrôler la validité de l'email entré dans la requête :
 module.exports = (req, res, next) => {
-  console.log(
-    'je suis dans le middleware email du back-end, email : ' + req.body.email
-  )
   // Si l'email est valide, on passe à la suite :
   if (validator.isEmail(req.body.email)) {
     next()
