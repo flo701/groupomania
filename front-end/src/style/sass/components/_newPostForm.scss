@@ -39,19 +39,21 @@
     padding-right: 10px;
     background: white;
     border-radius: 20px;
+    @media screen and (max-width: 632px) {
+      margin-top: 20px;
+    }
+
     p {
       text-align: center;
       margin: 2px 0 6px;
       font-size: 1.1rem;
       overflow-wrap: anywhere;
     }
+
     img {
       width: 100%;
       border-radius: 6px;
       margin-top: 12px;
-    }
-    @media screen and (max-width: 632px) {
-      margin-top: 20px;
     }
   }
 
