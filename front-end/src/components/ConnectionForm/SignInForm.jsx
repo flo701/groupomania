@@ -3,7 +3,7 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 // import SignUpForm from './SignUpForm'
 
-const SignInForm = (props) => {
+const SignInForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 

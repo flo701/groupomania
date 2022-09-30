@@ -3,8 +3,7 @@ import SignUpForm from './SignUpForm'
 import SignInForm from './SignInForm'
 
 // Les props ont été définis dans pages/Connection/index.jsx.
-// Pour rappel, on a mis signup={true} signin={false}.
-// ({signup}) est l'équivalent de (props.signup) :
+// Pour rappel, on a mis signup={false} signin={true} :
 const ConnectionForm = (props) => {
   const [signUpModal, setSignUpModal] = useState(props.signup)
   const [signInModal, setSignInModal] = useState(props.signin)

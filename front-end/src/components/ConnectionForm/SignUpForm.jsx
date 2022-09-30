@@ -18,6 +18,7 @@ const SignUpForm = () => {
     const emailInput = document.querySelector('#email')
     const passwordInput = document.querySelector('#password')
     const controlPasswordInput = document.querySelector('#password-conf')
+    const terms = document.getElementById('terms')
 
     const lastNameError = document.querySelector('.lastName.error')
     const firstNameError = document.querySelector('.firstName.error')
@@ -26,8 +27,6 @@ const SignUpForm = () => {
     const passwordConfirmError = document.querySelector(
       '.password-confirm.error'
     )
-
-    const terms = document.getElementById('terms')
     const termsError = document.querySelector('.terms.error')
 
     let regExpNames = /^[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ'\s-]{2,20}$/i
@@ -119,12 +118,6 @@ const SignUpForm = () => {
       checkControlPassword() &&
       checkTerms()
     ) {
-      const data = new FormData()
-      data.append('firstname', firstName)
-      data.append('lastname', lastName)
-      data.append('email', email)
-      data.append('password', password)
-
       await axios({
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/api/auth/signup`,
@@ -137,7 +130,7 @@ const SignUpForm = () => {
       })
         .then((res) => {
           console.log(res)
-          // if (res.status !== 201) => L'un ou l'autre fonctionne...
+          // if (res.status != 201) => L'un ou l'autre fonctionne...
           if (res.data.error) {
             emailError.innerHTML =
               'Email déjà enregistré dans la base de données'
