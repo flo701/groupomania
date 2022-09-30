@@ -3,13 +3,13 @@
   display: flex;
   margin: auto;
   margin-bottom: 10px;
-  min-height: 280px;
+  min-height: 255px;
   max-width: 600px;
   border-radius: 20px;
   border: solid 1px black;
   padding: 20px 20px 20px 20px;
   column-gap: 15px;
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 615px) {
     display: block;
   }
 
@@ -17,7 +17,7 @@
     position: relative;
     overflow-wrap: anywhere;
     width: 95px;
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 615px) {
       width: auto;
       padding-top: 35px;
     }
@@ -33,7 +33,7 @@
     width: 70px;
     height: 70px;
     border-radius: 50%;
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 615px) {
       margin-top: 10px;
     }
   }
@@ -47,30 +47,29 @@
   }
 
   &_modify-and-delete {
-    margin-top: 12px;
+    margin-top: 15px;
     text-align: center;
+    display: flex;
+    justify-content: space-evenly;
   }
 
   &_modify {
-    margin-bottom: 7px;
     text-align: center;
     border-radius: 10px;
     cursor: pointer;
-    @media screen and (max-width: 650px) {
-      width: 100px;
+    width: 33px;
+    @media screen and (max-width: 615px) {
       margin: auto;
       margin-right: 3px;
-      margin-bottom: 7px;
     }
   }
 
   &_delete {
-    margin-bottom: 30px;
     text-align: center;
     border-radius: 10px;
     cursor: pointer;
-    @media screen and (max-width: 650px) {
-      width: 100px;
+    width: 30px;
+    @media screen and (max-width: 615px) {
       margin: auto;
       margin-left: 3px;
     }
@@ -82,7 +81,7 @@
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 615px) {
       transform: translate(-50%, 140%);
     }
   }
@@ -91,7 +90,7 @@
     position: absolute;
     bottom: 0px;
     left: -20px;
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 615px) {
       bottom: 5px;
     }
   }
@@ -100,7 +99,7 @@
     position: absolute;
     right: 20px;
     top: 0px;
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 615px) {
       text-align: center;
       right: 0px;
       left: 50%;
@@ -133,7 +132,7 @@
     margin-bottom: 10px;
     width: 450px;
     text-align: center;
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 615px) {
       width: auto;
     }
   }
@@ -146,7 +145,7 @@
     width: 450px;
     margin-bottom: 30px;
     text-align: center;
-    @media screen and (max-width: 650px) {
+    @media screen and (max-width: 615px) {
       width: auto;
     }
   }
