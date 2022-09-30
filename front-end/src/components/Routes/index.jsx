@@ -5,14 +5,8 @@ import Posts from '../../pages/Posts'
 import Profile from '../../pages/Profile'
 import Connection from '../../pages/Connection'
 import Footer from '../Footer'
-import jwt_decode from 'jwt-decode'
 
 const token = getCookie('token')
-
-let decodedToken
-if (token) {
-  decodedToken = jwt_decode(token)
-}
 
 const index = () => {
   return (
