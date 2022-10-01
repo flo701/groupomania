@@ -34,9 +34,7 @@ const Posts = () => {
     <div className="posts">
       {token ? (
         <>
-          <h3 className="posts_h3">
-            Bienvenue sur Groupomania {decodedToken.firstname}{' '}
-          </h3>
+          <h3 className="posts_h3">Bienvenue {decodedToken.firstname} </h3>
         </>
       ) : null}
       <NewPostForm />
