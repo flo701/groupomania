@@ -43,16 +43,42 @@ const Card = ({ post }) => {
   const headers = { Authorization: `Bearer ${token}` }
 
   const postId = post.id
-  const title = titleUpdated
-  const description = descriptionUpdated
-  const file = fileUpdated
 
   const UpdateCard = () => {
-    if (title.length > 4 && description.length > 4) {
+    const titleUpdatedError = document.querySelector('.titleUpdated-error')
+    const descriptionUpdatedError = document.querySelector(
+      '.descriptionUpdated-error'
+    )
+
+    const checkTitleUpdated = () => {
+      if (titleUpdated.length < 5) {
+        titleUpdatedError.innerHTML =
+          'Veuillez renseigner un titre avec 5 caractères minimum'
+        return false
+      } else {
+        titleUpdatedError.innerHTML = ''
+        return true
+      }
+    }
+    checkTitleUpdated()
+
+    const checkDescriptionUpdated = () => {
+      if (descriptionUpdated.length < 5) {
+        descriptionUpdatedError.innerHTML =
+          'Veuillez renseigner une description avec 5 caractères minimum'
+        return false
+      } else {
+        descriptionUpdatedError.innerHTML = ''
+        return true
+      }
+    }
+    checkDescriptionUpdated()
+
+    if (checkTitleUpdated() && checkDescriptionUpdated()) {
       const data = new FormData()
-      data.append('title', title)
-      data.append('description', description)
-      if (file) data.append('image', file)
+      data.append('title', titleUpdated)
+      data.append('description', descriptionUpdated)
+      if (fileUpdated) data.append('image', fileUpdated)
 
       axios({
         method: 'put',
@@ -67,10 +93,6 @@ const Card = ({ post }) => {
         .catch((err) => {
           console.log(err)
         })
-    } else {
-      alert(
-        'Veuillez renseigner un titre et une description comportant 5 caractères minimum'
-      )
     }
   }
 
@@ -152,13 +174,14 @@ const Card = ({ post }) => {
               defaultValue={post.title}
               onChange={(e) => setTitleUpdated(e.target.value)}
             />
+            <p className="titleUpdated-error"></p>
             <textarea
               className="card_description"
               maxLength="255"
               defaultValue={post.description}
               onChange={(e) => setDescriptionUpdated(e.target.value)}
             />
-
+            <p className="descriptionUpdated-error"></p>
             {post.image && (
               <>
                 <img src={post.image} alt="" className="card_post-img" />

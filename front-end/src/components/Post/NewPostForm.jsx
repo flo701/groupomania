@@ -25,8 +25,35 @@ const NewPostForm = () => {
     return req
   })
 
+  const titleError = document.querySelector('.title-error')
+  const descriptionError = document.querySelector('.description-error')
+
   const handlePost = async () => {
-    if (title.length > 4 && description.length > 4) {
+    const checkTitle = () => {
+      if (title.length < 5) {
+        titleError.innerHTML =
+          'Veuillez renseigner un titre avec 5 caractères minimum'
+        return false
+      } else {
+        titleError.innerHTML = ''
+        return true
+      }
+    }
+    checkTitle()
+
+    const checkDescription = () => {
+      if (description.length < 5) {
+        descriptionError.innerHTML =
+          'Veuillez renseigner une description avec 5 caractères minimum'
+        return false
+      } else {
+        descriptionError.innerHTML = ''
+        return true
+      }
+    }
+    checkDescription()
+
+    if (checkTitle() && checkDescription()) {
       const data = new FormData()
       data.append('title', title)
       data.append('description', description)
@@ -41,10 +68,6 @@ const NewPostForm = () => {
         .catch((err) => console.log(err))
       // Une fois les données envoyées au back-end, on supprime le visuel de la création du post :
       cancelPost()
-    } else {
-      alert(
-        'Veuillez renseigner un titre et une description comportant 5 caractères minimum'
-      )
     }
   }
 
@@ -58,6 +81,8 @@ const NewPostForm = () => {
     setDescription('')
     setPostPicture('')
     setFile('')
+    titleError.innerHTML = ''
+    descriptionError.innerHTML = ''
   }
 
   return (
@@ -71,6 +96,7 @@ const NewPostForm = () => {
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
+      <p className="title-error"></p>
       <textarea
         name="description"
         maxLength="255"
@@ -79,6 +105,7 @@ const NewPostForm = () => {
         onChange={(e) => setDescription(e.target.value)}
         value={description}
       />
+      <p className="description-error"></p>
       {title || description || postPicture ? (
         <>
           <div>
