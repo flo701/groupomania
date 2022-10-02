@@ -2,6 +2,7 @@
 "Créez un réseau social d'entreprise".
 
 Projet 7 de la formation "Développeur Web" d'OpenClassrooms :
+
 https://course.oc-static.com/projects/DWJ_FR_P7/DW+P7+28-09-2022+Sce%CC%81nario.pdf
 
 Utilisation de MySQL, Express et React.
