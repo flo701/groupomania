@@ -2,7 +2,7 @@
 "Créez un réseau social d'entreprise".
 
 Projet 7 de la formation "Développeur Web" d'OpenClassrooms :
-https://openclassrooms.com/fr/paths/556/projects/677/assignment
+https://course.oc-static.com/projects/DWJ_FR_P7/DW+P7+28-09-2022+Sce%CC%81nario.pdf
 
 Utilisation de MySQL, Express et React.
 
@@ -14,19 +14,18 @@ Créer un dossier vide et cloner ce repository à l'intérieur en tapant :
 "git clone https://github.com/flo701/groupomania.git".
 
 ### Créer la base de données groupomania :
-Démarrer MySQL sur votre machine.
+Ouvrir le dossier db-config/index.sql situé dans le back-end. 
 
-Créer la base de données groupomania en tapant la commande : `CREATE DATABASE groupomania`.
+Et suivre les indications pour créer votre propre base de données Groupomania.
 
-### Lancer le back-end :
-Dans le dossier back-end, ouvrir le fichier ".env.example", le renommer ".env" 
-et assigner des valeurs aux 3 variables suivantes :
+### Démarrer le back-end :
+Dans le dossier back-end, ouvrir le fichier ".env" 
 
-RANDOM_TOKEN_SECRET = "variable de votre choix"
+(à l'origine fichier ".env.example" que vous avez renommé en ".env" lors de l'étape précédente),
 
-DB_USER = "votre nom d'utilisateur pour votre base de données"
+et assigner une variable de votre choix à :
 
-DB_PASSWORD = "votre mot de passe pour votre base de données"
+RANDOM_TOKEN_SECRET = " "
 
 Ouvrir un terminal, se positionner dans le dossier back-end (avec la commande "cd groupomania/back-end") et taper :
 
@@ -40,7 +39,7 @@ Vous devriez voir le message suivant dans votre terminal :
 
 Connexion à mySQL réussie !"
 
-### Lancer le front-end :
+### Démarrer le front-end :
 Ouvrir un autre terminal, se positionner dans le dossier front-end (avec la commande "cd groupomania/front-end") et taper :
 
 npm install, puis
