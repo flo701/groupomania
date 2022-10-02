@@ -41,7 +41,7 @@ CREATE TABLE `likes` (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1334 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci --
 --
 --
--- 3 / Créez un ADMIN, avec la commande : --
+-- 3 / Créez un ADMIN, avec la commande : 
 UPDATE `user`
 SET `status` = 'ADMIN'
 WHERE id = 1;
