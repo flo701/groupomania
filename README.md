@@ -17,7 +17,7 @@ Créer un dossier vide et cloner ce repository à l'intérieur en tapant :
 ### Créer la base de données groupomania :
 Ouvrir le dossier db-config/index.sql situé dans le back-end. 
 
-Et suivre les indications pour créer votre propre base de données Groupomania.
+Et suivre les indications pour créer votre propre base de données Groupomania, et la connecter au serveur.
 
 ### Démarrer le back-end :
 Dans le dossier back-end, ouvrir le fichier ".env" 
@@ -55,7 +55,7 @@ Would you like to run the app on another port instead ?"
 
 Taper "y". 
 
-Dans votre navigateur, vous devriez voir apparaître la page d'accueil de groupomania (généralement sur le port 3001).
+Dans votre navigateur, vous devriez voir apparaître la page de connexion à groupomania (généralement sur le port 3001).
 
 
 

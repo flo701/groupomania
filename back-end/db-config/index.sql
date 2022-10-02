@@ -27,7 +27,7 @@ CREATE TABLE `post` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 324 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci -- 
+) ENGINE = InnoDB AUTO_INCREMENT = 324 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci --
 --
 CREATE TABLE `likes` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -47,6 +47,7 @@ SET `status` = 'ADMIN'
 WHERE id = 1;
 --
 --
--- 4 / Enfin, renommez le fichier .env.example en .env. Et renseignez-y vos identifiants DB_USER et DB_PASSWORD :
-DB_USER = "votre nom d'utilisateur pour votre base de données" -- 
+-- 4 / Enfin, connectez votre serveur à votre base de données. 
+-- Pour cela, renommez le fichier .env.example en .env. Et renseignez-y vos identifiants DB_USER et DB_PASSWORD :
+DB_USER = "votre nom d'utilisateur pour votre base de données" --
 DB_PASSWORD = "votre mot de passe pour votre base de données"
