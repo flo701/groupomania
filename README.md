@@ -1,7 +1,6 @@
-# Groupomania
-"Créez un réseau social d'entreprise".
-
 ![This is an image](https://github.com/flo701/groupomania/blob/9a68c5ac2b9f905c4f1faae1e866dbc665fe5e7a/front-end/src/assets/logo/icon-left-font.png)
+
+"Créez un réseau social d'entreprise".
 
 [Projet 7](https://course.oc-static.com/projects/DWJ_FR_P7/DW+P7+28-09-2022+Sce%CC%81nario.pdf) de la formation "Développeur Web" d'OpenClassrooms.
 
