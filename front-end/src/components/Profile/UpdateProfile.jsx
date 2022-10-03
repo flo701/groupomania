@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import UploadImg from './UploadImg'
 import { timestampParser } from '../Utils'
 import axios from 'axios'
-import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
 import jwt_decode from 'jwt-decode'
+import Unsubscribe from './Unsubscribe'
 
 const UpdateProfile = () => {
   const token = getCookie('token')
@@ -13,10 +13,11 @@ const UpdateProfile = () => {
   }
   const headers = { Authorization: `Bearer ${token}` }
 
-  const [updateFormSubmit, setUpdateFormSubmit] = useState(false)
-
   const [passwordUpdate, setPasswordUpdate] = useState('')
   const [controlPasswordUpdate, setControlPasswordUpdate] = useState('')
+
+  const [updateFormSubmit, setUpdateFormSubmit] = useState(false)
+  const [unsubscribe, setUnsubscribe] = useState(false)
 
   const handleRegister = async (e) => {
     e.preventDefault()
@@ -81,42 +82,23 @@ const UpdateProfile = () => {
     <>
       <div className="profile">
         <>
-          {token ? (
-            <>
-              <h3>Voici votre profil {decodedToken.firstname}</h3>
-              <div className="profile_creation-date">
-                Vous êtes membre depuis :{' '}
-                {timestampParser(decodedToken.creationDate)}
-              </div>
-            </>
-          ) : (
-            <>
-              <h3>Veuillez vous connecter pour modifier votre profil</h3>
-            </>
-          )}
+          <>
+            <h3>Voici votre profil {decodedToken.firstname}</h3>
+            <div className="profile_creation-date">
+              Vous êtes membre depuis :{' '}
+              {timestampParser(decodedToken.creationDate)}
+            </div>
+          </>
         </>
         <>
           <div className="profile_update-container">
             <>
-              {token ? (
-                <>
-                  <div className="left-part">
-                    <h3>Photo de profil</h3>
-                    <UploadImg />
-                  </div>
-                </>
-              ) : (
+              <>
                 <div className="left-part">
                   <h3>Photo de profil</h3>
-                  <img
-                    className="no-token-image"
-                    src={ProfileNoConnected}
-                    alt="user-pic"
-                  />
+                  <UploadImg />
                 </div>
-              )}
-            </>
-            <>
+              </>
               <div className="right-part">
                 <div>
                   <h3>Modifier votre mot de passe</h3>
@@ -153,14 +135,29 @@ const UpdateProfile = () => {
                           Nouveau mot de passe enregistré
                         </span>
                       </>
-                    ) : token ? (
+                    ) : (
                       <button type="submit">Valider la modification </button>
-                    ) : null}
+                    )}
                   </form>
                 </div>
               </div>
             </>
           </div>
+          <div
+            className="unsubscribe"
+            onClick={(e) => {
+              if (window.confirm('Voulez-vous vraiment vous désinscrire ?')) {
+                setUnsubscribe(true)
+              }
+            }}
+          >
+            Désinscription
+          </div>
+          {unsubscribe && (
+            <>
+              <Unsubscribe />
+            </>
+          )}
         </>
       </div>
     </>
