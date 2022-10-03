@@ -1,4 +1,4 @@
-![This is an image](https://github.com/flo701/groupomania/blob/9a68c5ac2b9f905c4f1faae1e866dbc665fe5e7a/front-end/src/assets/logo/icon-left-font.png)
+![This is an image](https://github.com/flo701/groupomania/blob/9a68c5ac2b9f905c4f1faae1e866dbc665fe5e7a/front-end/src/assets/logo/icon-left-font.svg)
 
 "Créez un réseau social d'entreprise".
 
