@@ -15,7 +15,7 @@ Créez un dossier vide et clonez ce repository à l'intérieur en tapant :
 "git clone https://github.com/flo701/groupomania.git".
 
 ### Créer la base de données groupomania :
-Ouvrez le dossier Dump20221003 situé dans le dossier back-end, et suivez les indications pour créer votre base de données Groupomania.
+Ouvrez le dossier db-config situé dans le dossier back-end, et suivez les indications pour créer votre base de données Groupomania.
 
 ### Démarrer le back-end :
 Connectez votre serveur à votre base de données. 
