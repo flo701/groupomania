@@ -10,25 +10,27 @@ Utilisation de MySQL, Express et React.
 ## Lancer le projet :
 Node et "npm" devront être installés localement sur votre machine.
 
-Créer un dossier vide et cloner ce repository à l'intérieur en tapant : 
+Créez un dossier vide et clonez ce repository à l'intérieur en tapant : 
 
 "git clone https://github.com/flo701/groupomania.git".
 
 ### Créer la base de données groupomania :
-Ouvrir le dossier db-config/index.sql situé dans le back-end. 
-
-Et suivre les indications pour créer votre propre base de données Groupomania, et la connecter au serveur.
+Ouvrez le dossier DUMP20221003 situé dans le dossier back-end, et suivez les indications pour créer votre base de données Groupomania.
 
 ### Démarrer le back-end :
-Dans le dossier back-end, ouvrir le fichier ".env" 
+Connectez votre serveur à votre base de données. 
 
-(à l'origine fichier ".env.example" que vous avez renommé en ".env" lors de l'étape précédente),
+Pour cela, renommez le fichier .env.example en .env. Et renseignez-y vos identifiants DB_USER et DB_PASSWORD :
 
-et assigner une variable de votre choix à :
+DB_USER = "votre nom d'utilisateur pour votre base de données" 
+
+DB_PASSWORD = "votre mot de passe pour votre base de données"
+
+Assignez une variable de votre choix à :
 
 RANDOM_TOKEN_SECRET = " "
 
-Ouvrir un terminal, se positionner dans le dossier back-end (avec la commande "cd groupomania/back-end") et taper :
+Ouvrez un terminal, positionnez-vous dans le dossier back-end (avec la commande "cd groupomania/back-end") et tapez :
 
 npm install, puis
 
@@ -41,19 +43,11 @@ Vous devriez voir le message suivant dans votre terminal :
 Connexion à mySQL réussie !"
 
 ### Démarrer le front-end :
-Ouvrir un autre terminal, se positionner dans le dossier front-end (avec la commande "cd groupomania/front-end") et taper :
+Ouvrez un autre terminal, positionnez-vous dans le dossier front-end (avec la commande "cd groupomania/front-end") et tapez :
 
 npm install, puis
 
 npm start
-
-Vous devriez voir le message suivant dans votre terminal : 
-
-"Something is already running on port 3000.
-
-Would you like to run the app on another port instead ?"
-
-Taper "y". 
 
 Dans votre navigateur, vous devriez voir apparaître la page de connexion à groupomania (généralement sur le port 3001).
 
