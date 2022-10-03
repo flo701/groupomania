@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
+import jwt_encode from 'jwt-encode'
 import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
 
 const UploadImg = () => {
@@ -12,35 +13,23 @@ const UploadImg = () => {
   const [profileImage, setProfileImage] = useState()
   console.log(profileImage)
 
-  // Photo de profil provenant du back-end, de la bdd :
-  const [userProfileImage, setUserProfileImage] = useState()
-
   // Si on a ajouté/changé la photo de profil :
   const [newPhoto, setNewPhoto] = useState(false)
 
   const token = getCookie('token')
-  let decodedToken
-  if (token) {
-    decodedToken = jwt_decode(token)
-    console.log(decodedToken.profileImage)
-  }
-  const headers = { Authorization: `Bearer ${token}` }
 
-  const getOneUser = (id) => {
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_URL}/api/auth/getOneUser/${id}`,
-      headers: headers,
-    })
-      .then((res) => {
-        console.log(res)
-        setUserProfileImage(res.data[0].profileImage)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+  let decodedToken
+  decodedToken = jwt_decode(token)
+  console.log(decodedToken.profileImage)
+
+  const modifyTokenProfileImage = (image) => {
+    decodedToken.profileImage = image
+    const encodedToken = jwt_encode(
+      decodedToken,
+      'bWrE3_3!%n#dVV2Z58>>c42:Ummp2C'
+    )
+    setCookie('token', encodedToken, 1)
   }
-  if (token) getOneUser(decodedToken.userId)
 
   const modifyPicture = (e) => {
     e.preventDefault()
@@ -60,6 +49,7 @@ const UploadImg = () => {
         .put('/auth/profile-image', data)
         .then((res) => {
           setNewPhoto(true)
+          modifyTokenProfileImage(res.data.profileImage)
           console.log(res.data.profileImage)
         })
         .catch((err) => console.log(err))
@@ -83,7 +73,7 @@ const UploadImg = () => {
         </>
       ) : (
         <>
-          {userProfileImage === null ? (
+          {decodedToken.profileImage === null ? (
             <>
               <div className="profile-pictures">
                 <div className="file">
@@ -116,7 +106,7 @@ const UploadImg = () => {
               <div className="profile-pictures">
                 <div className="file">
                   <img
-                    src={userProfileImage}
+                    src={decodedToken.profileImage}
                     className="token-image"
                     alt="user-pic"
                   />
@@ -161,6 +151,14 @@ function getCookie(cname) {
     }
   }
   return ''
+}
+
+// https://www.w3schools.com/js/js_cookies.asp :
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date()
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
+  let expires = 'expires=' + d.toUTCString()
+  document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/'
 }
 
 export default UploadImg
