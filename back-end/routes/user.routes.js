@@ -29,5 +29,6 @@ router.get('/getOneUser/:userId', userCtrl.getOneUser)
 router.put('/profile-image', auth, multer, userCtrl.updateProfileImage)
 router.put('/profile-infos', auth, userCtrl.updateProfileInfos)
 router.get('/logout', userCtrl.logout)
+router.delete('/delete', auth, multer, userCtrl.deleteUser)
 
 module.exports = router
