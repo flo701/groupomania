@@ -281,3 +281,48 @@ exports.logout = (req, res) => {
   res.clearCookie('token')
   res.status(200).json('Déconnecté')
 }
+
+// ---------------------------------------------------------------------------------------------------------------
+// Désinscription d'un utilisateur :
+exports.deleteUser = (req, res, next) => {
+  console.log(req.auth.userId)
+  connection.query(
+    `SELECT * FROM user WHERE id=${req.auth.userId}`,
+    function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        console.log(result)
+        if (result[0].profileImage) {
+          // On supprime l'utilisateur de la base de données, mais aussi sa photo de profil :
+          const filename = result[0].profileImage.split('/images/')[1]
+          fs.unlink(`images/${filename}`, () => {
+            connection.query(
+              `DELETE FROM user WHERE id=${req.auth.userId}`,
+              function (err, result) {
+                if (err) {
+                  throw err
+                } else {
+                  console.log(result)
+                  return res.status(200).json('Utilisateur désinscrit')
+                }
+              }
+            )
+          })
+        } else {
+          connection.query(
+            `DELETE FROM user WHERE id=${req.auth.userId}`,
+            function (err, result) {
+              if (err) {
+                throw err
+              } else {
+                console.log(result)
+                return res.status(200).json('Utilisateur désinscrit')
+              }
+            }
+          )
+        }
+      }
+    }
+  )
+}
