@@ -42,7 +42,7 @@ Vous devriez voir le message suivant dans votre terminal :
 Connexion à mySQL réussie !"
 
 ### Démarrer le front-end :
-Renommez le fichier .env.example du front-end, en .env. Et assignez une variable de votre choix à :
+Renommez le fichier .env.example du front-end en .env.local. Et assignez une variable de votre choix à :
 
 REACT_APP_RANDOM_TOKEN_SECRET = " "
 
