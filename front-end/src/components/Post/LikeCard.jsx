@@ -22,7 +22,7 @@ const LikeCard = ({ post }) => {
 
   const [numberOfLikes, setNumberOfLikes] = useState(post.postLikes)
 
-  // On regarde si l'utilisateur a déjà liké ce post :
+  // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
   useEffect(() => {
     axios({
       method: 'get',
@@ -30,10 +30,7 @@ const LikeCard = ({ post }) => {
       headers: headers,
     })
       .then((res) => {
-        console.log(
-          'Résultat de la recherche de like de ce user pour ce post : ' +
-            res.data.length
-        )
+        console.log(res)
         if (res.data.length > 0) {
           setPostLiked(true)
         }
@@ -45,8 +42,6 @@ const LikeCard = ({ post }) => {
 
   // Au click sur le coeur, on appelle la fonction "likePost" :
   const likeHandle = () => {
-    const postId = post.id
-
     axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}/api/posts/${postId}/like`,
@@ -75,9 +70,7 @@ const LikeCard = ({ post }) => {
         setNumberOfLikes(res.data)
 
         console.log('Nombre de likes pour ce post : ' + res.data)
-        console.log(
-          'Résultat de props.props.post.likes pour ce post : ' + post.postLikes
-        )
+        console.log('Résultat de post.likes pour ce post : ' + post.postLikes)
       })
       .catch((err) => {
         console.log(err)
