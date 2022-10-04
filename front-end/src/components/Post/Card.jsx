@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react'
-import DeleteCard from './DeleteCard'
 import LikeCard from './LikeCard'
 import axios from 'axios'
 import { timestampParser } from '../Utils'
@@ -21,6 +20,8 @@ const Card = ({ post }) => {
   console.log('Id du créateur du post :' + post.user_id)
   console.log('Id du post :' + post.id)
 
+  const postId = post.id
+
   const [isUpdated, setIsUpdated] = useState(false)
 
   const [titleUpdated, setTitleUpdated] = useState(post.title)
@@ -33,16 +34,12 @@ const Card = ({ post }) => {
   const [fileUpdated, setFileUpdated] = useState()
   console.log(fileUpdated)
 
-  const [deleteButton, setDeleteButton] = useState(false)
-
   const handlePicture = (e) => {
     setPostUpdatedPicture(URL.createObjectURL(e.target.files[0]))
     setFileUpdated(e.target.files[0])
   }
 
   const headers = { Authorization: `Bearer ${token}` }
-
-  const postId = post.id
 
   const UpdateCard = () => {
     const titleUpdatedError = document.querySelector('.titleUpdated-error')
@@ -96,6 +93,27 @@ const Card = ({ post }) => {
     }
   }
 
+  const deleteCard = () => {
+    const token = getCookie('token')
+    const headers = { Authorization: `Bearer ${token}` }
+    const config = { headers }
+
+    console.log(headers)
+    console.log(`${token}`)
+
+    const postId = post.id
+
+    console.log(post)
+
+    axios
+      .delete(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, config)
+      .then((res) => {
+        window.location = '/'
+        console.log(res.data)
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
     <li className="card">
       <div className="card_profileImage-and-names-and-modify-and-like">
@@ -129,13 +147,12 @@ const Card = ({ post }) => {
                 if (
                   window.confirm('Voulez-vous vraiment supprimer ce post ?')
                 ) {
-                  setDeleteButton(true)
+                  deleteCard()
                 }
               }}
               src={Trash}
               alt="img"
             />
-            {deleteButton && <DeleteCard post={post} />}
           </div>
         )}
 
