@@ -38,7 +38,8 @@ const LikeCard = ({ post }) => {
       .catch((err) => {
         console.log(err)
       })
-  })
+    // eslint-disable-next-line
+  }, [])
 
   // Au click sur le coeur, on appelle la fonction "likePost" :
   const likeHandle = () => {

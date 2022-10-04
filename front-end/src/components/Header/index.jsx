@@ -1,14 +1,29 @@
 import React from 'react'
-import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import GroupomaniaLogo from '../../assets/logo/icon-left-font.png'
 import LogOutIcon from '../../assets/icons/logout.svg'
-import LogOut from '../ConnectionForm/LogOut'
+import cookie from 'js-cookie'
+import axios from 'axios'
 
 const Header = () => {
-  const [logout, setLogout] = useState(false)
-
   const token = getCookie('token')
+
+  const LogOut = () => {
+    const removeCookie = (key) => {
+      if (window !== 'undefined') {
+        cookie.remove(key, { expires: 1 })
+      }
+    }
+
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_URL}/api/auth/logout`,
+    })
+      .then(() => removeCookie('token'))
+      .catch((err) => console.log(err))
+
+    window.location = '/'
+  }
 
   return (
     <>
@@ -33,10 +48,9 @@ const Header = () => {
               >
                 <li>Profil</li>
               </NavLink>
-              <li className="logOut" onClick={(e) => setLogout(true)}>
+              <li className="logOut" onClick={LogOut}>
                 <img src={LogOutIcon} alt="déconnexion" />
               </li>
-              {logout && <LogOut />}
             </ul>
           </div>
         </div>
