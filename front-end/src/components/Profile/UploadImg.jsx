@@ -26,7 +26,7 @@ const UploadImg = () => {
     decodedToken.profileImage = image
     const encodedToken = jwt_encode(
       decodedToken,
-      'bWrE3_3!%n#dVV2Z58>>c42:Ummp2C'
+      `${process.env.REACT_APP_RANDOM_TOKEN_SECRET}`
     )
     setCookie('token', encodedToken, 1)
   }
