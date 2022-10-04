@@ -1,4 +1,3 @@
-import React from 'react'
 import axios from 'axios'
 import cookie from 'js-cookie'
 import jwt_decode from 'jwt-decode'
@@ -16,7 +15,7 @@ const Unsubscribe = () => {
   const userId = decodedToken.userId
   console.log(userId)
 
-  const getUserPosts = () => {
+  const deleteUserPosts = () => {
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_API_URL}/api/posts/${userId}`,
@@ -24,32 +23,29 @@ const Unsubscribe = () => {
     })
       .then((res) => {
         console.log(res.data)
-
         res.data.forEach((i) => {
           console.log(i)
           console.log(i.id)
           deletePost(i.id)
         })
-
-        // for (let i of res.data) {
-        //   console.log(i.id)
-        //   deletePost(i.id)
-        // }
       })
-      .catch((err) => console.log(err))
-  }
-  getUserPosts()
-
-  const deletePost = (postId) => {
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, config)
       .then((res) => {
-        console.log(res.data)
+        handleUnsubscribe()
       })
+
       .catch((err) => console.log(err))
+
+    const deletePost = (postId) => {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, config)
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => console.log(err))
+    }
   }
 
-  const unsubscribe = () => {
+  const handleUnsubscribe = () => {
     axios
       .delete(`${process.env.REACT_APP_API_URL}/api/auth/delete`, config)
       .then(() => {
@@ -58,7 +54,6 @@ const Unsubscribe = () => {
       })
       .catch((err) => console.log(err))
   }
-  unsubscribe()
 
   const removeCookie = (key) => {
     if (window !== 'undefined') {
@@ -66,7 +61,18 @@ const Unsubscribe = () => {
     }
   }
 
-  return <div></div>
+  return (
+    <div
+      className="unsubscribe"
+      onClick={(e) => {
+        if (window.confirm('Voulez-vous vraiment vous désinscrire ?')) {
+          deleteUserPosts()
+        }
+      }}
+    >
+      Désinscription
+    </div>
+  )
 }
 
 // https://www.w3schools.com/js/js_cookies.asp :

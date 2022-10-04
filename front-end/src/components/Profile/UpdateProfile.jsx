@@ -17,7 +17,6 @@ const UpdateProfile = () => {
   const [controlPasswordUpdate, setControlPasswordUpdate] = useState('')
 
   const [updateFormSubmit, setUpdateFormSubmit] = useState(false)
-  const [unsubscribe, setUnsubscribe] = useState(false)
 
   const handleRegister = async (e) => {
     e.preventDefault()
@@ -143,21 +142,7 @@ const UpdateProfile = () => {
               </div>
             </>
           </div>
-          <div
-            className="unsubscribe"
-            onClick={(e) => {
-              if (window.confirm('Voulez-vous vraiment vous désinscrire ?')) {
-                setUnsubscribe(true)
-              }
-            }}
-          >
-            Désinscription
-          </div>
-          {unsubscribe && (
-            <>
-              <Unsubscribe />
-            </>
-          )}
+          <Unsubscribe />
         </>
       </div>
     </>
