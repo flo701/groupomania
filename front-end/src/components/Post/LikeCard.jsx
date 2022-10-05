@@ -26,7 +26,7 @@ const LikeCard = ({ post }) => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API_URL}/api/posts/verifyLike/${postId}`,
+      url: `${process.env.REACT_APP_API_URL}/api/posts/verifyLikes/${postId}`,
       headers: headers,
     })
       .then((res) => {
