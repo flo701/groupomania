@@ -11,11 +11,7 @@ const Posts = () => {
   const headers = { Authorization: `Bearer ${token}` }
   const config = { headers }
 
-  let decodedToken
-
-  if (token) {
-    decodedToken = jwt_decode(token)
-  }
+  let decodedToken = jwt_decode(token)
 
   useEffect(() => {
     axios
@@ -32,11 +28,9 @@ const Posts = () => {
 
   return (
     <div className="posts">
-      {token ? (
-        <>
-          <h3 className="posts_h3">Bienvenue {decodedToken.firstname} </h3>
-        </>
-      ) : null}
+      <>
+        <h3 className="posts_h3">Bienvenue {decodedToken.firstname} </h3>
+      </>
       <NewPostForm />
       <ul>
         {posts.map((post, index) => (
