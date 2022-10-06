@@ -21,15 +21,14 @@ const LikeCard = (props) => {
   const [numberOfLikes, setNumberOfLikes] = useState(props.post.postLikes)
 
   // Ca fonctionne, et on évite une requête pour chaque post.
-  // Au rechargement de la page, les coeurs rouges restent rouges.
-  // (Bugs parfois après la visite du profil...) :
+  // Au rechargement de la page, les coeurs rouges restent rouges :
   useEffect(() => {
     for (let i = 0; i < arrayOfLikes.length; i++) {
       console.log(arrayOfLikes[i].post_id)
       if (postId === arrayOfLikes[i].post_id) setPostLiked(true)
     }
     // eslint-disable-next-line
-  }, [])
+  }, [arrayOfLikes])
 
   // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
   // useEffect(() => {

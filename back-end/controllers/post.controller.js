@@ -319,18 +319,18 @@ exports.countLikes = (req, res) => {
 
 // -------------------------------------------------------------------------------------------------------------
 // Vérifier les posts likés par l'utilisateur :
-exports.verifyLikes = (req, res, next) => {
-  connection.query(
-    `SELECT user_id, post_id FROM likes WHERE user_id = ${req.auth.userId} AND post_id=${req.params.postId}`,
-    function (err, result) {
-      if (err) {
-        throw err
-      } else {
-        return res.status(200).json(result)
-      }
-    }
-  )
-}
+// exports.verifyLikes = (req, res, next) => {
+//   connection.query(
+//     `SELECT user_id, post_id FROM likes WHERE user_id = ${req.auth.userId} AND post_id=${req.params.postId}`,
+//     function (err, result) {
+//       if (err) {
+//         throw err
+//       } else {
+//         return res.status(200).json(result)
+//       }
+//     }
+//   )
+// }
 
 // -------------------------------------------------------------------------------------------------------------
 // Vérifier les posts likés par l'utilisateur :
