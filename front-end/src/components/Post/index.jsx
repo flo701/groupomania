@@ -6,6 +6,8 @@ import jwt_decode from 'jwt-decode'
 
 const Posts = () => {
   const [posts, setPosts] = useState([])
+  const [arrayPostsLiked, setArrayPostsLiked] = useState([])
+  console.log(arrayPostsLiked)
 
   const token = getCookie('token')
   const headers = { Authorization: `Bearer ${token}` }
@@ -35,9 +37,7 @@ const Posts = () => {
     })
       .then((res) => {
         console.log(res.data)
-        res.data.forEach((i) => {
-          console.log(i)
-        })
+        setArrayPostsLiked(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -47,6 +47,8 @@ const Posts = () => {
 
   console.log(posts)
 
+  console.log(arrayPostsLiked) // C'est ce tableau qu'on veut transmettre à LikeCard
+
   return (
     <div className="posts">
       <>
@@ -55,7 +57,7 @@ const Posts = () => {
       <NewPostForm />
       <ul>
         {posts.map((post, index) => (
-          <Card key={index} post={post} />
+          <Card key={index} post={post} arrayPostsLiked={arrayPostsLiked} />
         ))}
       </ul>
     </div>

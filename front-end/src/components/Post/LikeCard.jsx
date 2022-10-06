@@ -1,28 +1,35 @@
 import React, { useState } from 'react'
-// import { useEffect } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
-const LikeCard = ({ post }) => {
+const LikeCard = (props) => {
   const token = getCookie('token')
   let decodedToken
-  if (token) {
-    decodedToken = jwt_decode(token)
-    console.log("Id de l'utilisateur : " + decodedToken.userId)
-  }
+  decodedToken = jwt_decode(token)
+  console.log("Id de l'utilisateur : " + decodedToken.userId)
+
   const headers = { Authorization: `Bearer ${token}` }
 
-  // const userId = decodedToken.userId
+  const arrayOfLikes = props.arrayPostsLiked
 
-  console.log({ post })
-
-  const postId = post.id
+  const postId = props.post.id
   console.log('Id du post : ' + postId)
 
   const [postLiked, setPostLiked] = useState(false)
   console.log('Statut de la const postLiked dans LikeCard: ', postLiked)
+  const [numberOfLikes, setNumberOfLikes] = useState(props.post.postLikes)
 
-  const [numberOfLikes, setNumberOfLikes] = useState(post.postLikes)
+  // Ca fonctionne, et on évite une requête pour chaque post.
+  // Au rechargement de la page, les coeurs rouges restent rouges.
+  // (Bugs parfois après la visite du profil...) :
+  useEffect(() => {
+    for (let i = 0; i < arrayOfLikes.length; i++) {
+      console.log(arrayOfLikes[i].post_id)
+      if (postId === arrayOfLikes[i].post_id) setPostLiked(true)
+    }
+    // eslint-disable-next-line
+  }, [])
 
   // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
   // useEffect(() => {
@@ -96,7 +103,9 @@ const LikeCard = ({ post }) => {
         setNumberOfLikes(res.data)
 
         console.log('Nombre de likes pour ce post : ' + res.data)
-        console.log('Résultat de post.likes pour ce post : ' + post.postLikes)
+        console.log(
+          'Résultat de post.likes pour ce post : ' + props.post.postLikes
+        )
       })
       .catch((err) => {
         console.log(err)
