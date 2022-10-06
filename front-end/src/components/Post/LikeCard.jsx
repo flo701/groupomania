@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
@@ -12,6 +12,8 @@ const LikeCard = ({ post }) => {
   }
   const headers = { Authorization: `Bearer ${token}` }
 
+  // const userId = decodedToken.userId
+
   console.log({ post })
 
   const postId = post.id
@@ -23,23 +25,46 @@ const LikeCard = ({ post }) => {
   const [numberOfLikes, setNumberOfLikes] = useState(post.postLikes)
 
   // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
-  useEffect(() => {
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_URL}/api/posts/verifyLikes/${postId}`,
-      headers: headers,
-    })
-      .then((res) => {
-        console.log(res)
-        if (res.data.length > 0) {
-          setPostLiked(true)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    // eslint-disable-next-line
-  }, [])
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get',
+  //     url: `${process.env.REACT_APP_API_URL}/api/posts/verifyLikes/${postId}`,
+  //     headers: headers,
+  //   })
+  //     .then((res) => {
+  //       console.log(res)
+  //       if (res.data.length > 0) {
+  //         setPostLiked(true)
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  //   // eslint-disable-next-line
+  // }, [])
+
+  // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
+  // useEffect(() => {
+  //   axios({
+  //     method: 'get',
+  //     url: `${process.env.REACT_APP_API_URL}/api/posts/verifyPostsLiked/${postId}`,
+  //     headers: headers,
+  //   })
+  //     .then((res) => {
+  //       console.log(res.data)
+
+  //       res.data.forEach((i) => {
+  //         console.log(i)
+  //         if (i.post_id === postId) {
+  //           setPostLiked(true)
+  //         }
+  //       })
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  //   // eslint-disable-next-line
+  // }, [])
 
   // Au click sur le coeur, on appelle la fonction "likePost" :
   const likeHandle = () => {

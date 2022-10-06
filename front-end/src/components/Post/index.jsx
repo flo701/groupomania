@@ -13,6 +13,8 @@ const Posts = () => {
 
   let decodedToken = jwt_decode(token)
 
+  const userId = decodedToken.userId
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/posts`, config)
@@ -21,6 +23,25 @@ const Posts = () => {
         console.log(res.data)
       })
       .catch((err) => console.log(err))
+    // eslint-disable-next-line
+  }, [])
+
+  // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
+  useEffect(() => {
+    axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_URL}/api/posts/verifyPostsLiked/${userId}`,
+      headers: headers,
+    })
+      .then((res) => {
+        console.log(res.data)
+        res.data.forEach((i) => {
+          console.log(i)
+        })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     // eslint-disable-next-line
   }, [])
 
