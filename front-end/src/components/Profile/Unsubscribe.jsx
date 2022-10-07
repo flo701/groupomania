@@ -1,6 +1,7 @@
 import axios from 'axios'
 import cookie from 'js-cookie'
 import jwt_decode from 'jwt-decode'
+// import { useState } from 'react'
 
 const Unsubscribe = () => {
   const token = getCookie('token')
@@ -13,9 +14,10 @@ const Unsubscribe = () => {
   }
 
   const userId = decodedToken.userId
-  console.log(userId)
 
-  const deleteUserPosts = () => {
+  // const [confirmUnsubscribe, setConfirmUnsubscribe] = useState(false)
+
+  const getAndDeleteUserPostsAndUnsubscribe = () => {
     axios({
       method: 'get',
       url: `${process.env.REACT_APP_API_URL}/api/posts/${userId}`,
@@ -24,7 +26,6 @@ const Unsubscribe = () => {
       .then((res) => {
         console.log(res.data)
         res.data.forEach((i) => {
-          console.log(i)
           console.log(i.id)
           deletePost(i.id)
         })
@@ -32,7 +33,6 @@ const Unsubscribe = () => {
       .then((res) => {
         handleUnsubscribe()
       })
-
       .catch((err) => console.log(err))
 
     const deletePost = (postId) => {
@@ -43,21 +43,21 @@ const Unsubscribe = () => {
         })
         .catch((err) => console.log(err))
     }
-  }
 
-  const handleUnsubscribe = () => {
-    axios
-      .delete(`${process.env.REACT_APP_API_URL}/api/auth/delete`, config)
-      .then(() => {
-        removeCookie('token')
-        window.location = '/'
-      })
-      .catch((err) => console.log(err))
-  }
+    const handleUnsubscribe = () => {
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/api/auth/delete`, config)
+        .then(() => {
+          removeCookie('token')
+          window.location = '/'
+        })
+        .catch((err) => console.log(err))
+    }
 
-  const removeCookie = (key) => {
-    if (window !== 'undefined') {
-      cookie.remove(key, { expires: 1 })
+    const removeCookie = (key) => {
+      if (window !== 'undefined') {
+        cookie.remove(key, { expires: 1 })
+      }
     }
   }
 
@@ -66,11 +66,18 @@ const Unsubscribe = () => {
       className="unsubscribe"
       onClick={(e) => {
         if (window.confirm('Voulez-vous vraiment vous désinscrire ?')) {
-          deleteUserPosts()
+          getAndDeleteUserPostsAndUnsubscribe()
         }
       }}
+      // onClick={setConfirmUnsubscribe(true)}
     >
       Désinscription
+      {/* {confirmUnsubscribe && (
+        <div onClick={getAndDeleteUserPostsAndUnsubscribe()}>
+          {' '}
+          Voulez-vous vraiment vous désinscrire ?
+        </div>
+      )} */}
     </div>
   )
 }
