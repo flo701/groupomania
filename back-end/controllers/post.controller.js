@@ -1,3 +1,8 @@
+const jwt = require('jsonwebtoken')
+// Le package fs (file system) nous donne accès aux fonctions qui nous permettent de modifier le système de fichiers,
+// y compris aux fonctions permettant de supprimer les fichiers :
+const fs = require('fs')
+
 const mysql = require('mysql')
 
 const connection = mysql.createConnection({
@@ -7,30 +12,11 @@ const connection = mysql.createConnection({
   database: 'groupomania',
 })
 
-const fs = require('fs')
-
-const jwt = require('jsonwebtoken')
-
 // ---------------------------------------------------------------------------------------------------------------
 // Récupérer tous les posts de notre base de données :
 exports.getAllPosts = (req, res, next) => {
   connection.query(
     'SELECT post.*, lastname, firstname, profileImage FROM post JOIN user ON user.id=post.user_id ORDER BY creationDate DESC',
-    function (err, result) {
-      if (err) {
-        throw err
-      } else {
-        return res.status(200).json(result)
-      }
-    }
-  )
-}
-
-// --------------------------------------------------------------------------------------------------------------
-// Récupérer un post :
-exports.getOnePost = (req, res, next) => {
-  connection.query(
-    `SELECT * FROM post WHERE id=${req.params.id}`,
     function (err, result) {
       if (err) {
         throw err
@@ -63,56 +49,39 @@ exports.createPost = (req, res, next) => {
     title: req.body.title,
     description: req.body.description,
   }
+  let post
 
   if (req.file) {
-    const post = {
+    post = {
       ...postBody,
       user_id: req.auth.userId,
       image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-      // image: `${req.file.filename}`,
     }
-    console.log(post)
-
-    connection.query(' INSERT INTO post SET ?', post, function (err, result) {
-      if (err) {
-        res.status(400).json({ err })
-        throw err
-      }
-      res.status(201).json('Post créé et enregistré')
-    })
-  } else if (!req.file) {
-    const post = {
-      title: req.body.title,
-      description: req.body.description,
+  } else {
+    post = {
+      ...postBody,
       user_id: req.auth.userId,
     }
-
-    console.log(post)
-
-    connection.query('INSERT INTO post SET ?', post, function (err, result) {
-      if (err) {
-        res.status(400).json({ err })
-        throw err
-      }
-      res.status(201).json('Post créé et enregistré')
-    })
   }
+
+  connection.query('INSERT INTO post SET ?', post, function (err, result) {
+    if (err) {
+      res.status(400).json({ err })
+      throw err
+    }
+    res.status(201).json('Post créé et enregistré')
+  })
 }
 
 // --------------------------------------------------------------------------------------------------------------
 // Modifier un post :
 exports.modifyPost = (req, res, next) => {
-  console.log('Je suis dans la fonction modifyPost')
-
   const token = req.headers.authorization.split(' ')[1]
   const decodedToken = jwt.verify(token, process.env.RANDOM_TOKEN_SECRET)
 
   connection.query(
     `SELECT * FROM post WHERE id=${req.params.id}`,
     function (err, result) {
-      console.log(result[0].user_id)
-      console.log(decodedToken.status)
-
       if (err) {
         throw err
       }
@@ -125,9 +94,6 @@ exports.modifyPost = (req, res, next) => {
         if (req.file) {
           delete req.auth.userId
 
-          console.log(req.body)
-          console.log(req.file)
-
           let postBody = {
             title: req.body.title,
             description: req.body.description,
@@ -138,7 +104,6 @@ exports.modifyPost = (req, res, next) => {
               req.file.filename
             }`,
           }
-          console.log(post)
 
           // On supprime l'ancienne image de la base de données.
           // Nous utilisons le fait de savoir que notre URL d'image contient un segment /images/
@@ -147,13 +112,8 @@ exports.modifyPost = (req, res, next) => {
           // en lui passant le fichier à supprimer et le callback à exécuter une fois ce fichier supprimé :
           if (result[0].image != null) {
             const filename = result[0].image.split('/images/')[1]
-            console.log('Ancienne image :' + filename)
-            fs.unlink(`images/${filename}`, () => {
-              post = ({ _id: req.params.id }, { ...result, _id: req.params })
-            })
+            fs.unlink(`images/${filename}`, () => {})
           }
-
-          console.log('Post modifié : ', post)
 
           connection.query(
             `UPDATE post SET title="${post.title}" , description="${post.description}", creationDate=CURRENT_TIMESTAMP, image="${post.image}"  WHERE id= ${req.params.id} `,
@@ -168,9 +128,7 @@ exports.modifyPost = (req, res, next) => {
           )
         } else {
           delete req.auth.userId
-
           let post = req.body
-          console.log(post)
 
           connection.query(
             `UPDATE post SET title="${post.title}", description="${post.description}", creationDate=CURRENT_TIMESTAMP  WHERE id= ${req.params.id} `,
@@ -200,7 +158,6 @@ exports.deletePost = (req, res, next) => {
       if (err) {
         throw err
       } else {
-        console.log(result[0].user_id)
         if (
           result[0].user_id != req.auth.userId &&
           decodedToken.status != 'ADMIN'
@@ -208,34 +165,20 @@ exports.deletePost = (req, res, next) => {
           res.status(403).json({ message: 'Requête non autorisée' })
         } else {
           if (result[0].image) {
-            // Sinon, on supprime l'objet de la base de données, mais aussi l'image :
+            // S'il y a une image, on la supprime du dossier images :
             const filename = result[0].image.split('/images/')[1]
-            fs.unlink(`images/${filename}`, () => {
-              connection.query(
-                `DELETE FROM post WHERE id=${req.params.id}`,
-                function (err, result) {
-                  if (err) {
-                    throw err
-                  } else {
-                    console.log(result)
-                    return res.status(200).json('Post supprimé')
-                  }
-                }
-              )
-            })
-          } else {
-            connection.query(
-              `DELETE FROM post WHERE id=${req.params.id}`,
-              function (err, result) {
-                if (err) {
-                  throw err
-                } else {
-                  console.log(result)
-                  return res.status(200).json('Post supprimé')
-                }
-              }
-            )
+            fs.unlink(`images/${filename}`, () => {})
           }
+          connection.query(
+            `DELETE FROM post WHERE id=${req.params.id}`,
+            function (err, result) {
+              if (err) {
+                throw err
+              } else {
+                return res.status(200).json('Post supprimé')
+              }
+            }
+          )
         }
       }
     }
@@ -247,14 +190,11 @@ exports.deletePost = (req, res, next) => {
 exports.likePost = (req, res, next) => {
   let userId = req.auth.userId
   let postId = req.params.id
-  console.log("Id de l'utilisateur : " + req.auth.userId)
-  console.log('Id du post liké ou déliké : ' + req.params.id)
 
   connection.query(
     `SELECT * FROM likes WHERE likes.user_id = ${userId} AND likes.post_id = ${postId}`,
     function (err, result) {
       if (err) {
-        console.log(err)
         res.status(404).json({ err })
         throw err
       } else {
@@ -290,7 +230,6 @@ exports.likePost = (req, res, next) => {
 // Compter les likes d'un post, et mettre le résultat dans la table post :
 exports.countLikes = (req, res) => {
   let postId = req.params.id
-  console.log('Id du post en paramètre : ' + postId)
 
   connection.query(
     `SELECT COUNT(*) AS total FROM likes WHERE post_id=${postId}`,
@@ -300,7 +239,6 @@ exports.countLikes = (req, res) => {
         throw err
       } else {
         const postLikes = result[0].total
-        console.log('Nombre de likes pour ce post : ' + postLikes)
 
         connection.query(
           `UPDATE post SET postLikes=(${postLikes}) WHERE id=${postId}`,

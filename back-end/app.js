@@ -27,10 +27,10 @@ const limiter2 = rateLimit({
   message: 'Too many requests, please try again in 10 minutes.',
 })
 
-// On importe le package mysql :
+// On importe le package mysql, qui est un système de gestion de base de données relationnelle open source:
 const mysql = require('mysql')
 
-// On se connecte à notre base de données mysql :
+// On renseigne les identifiants de connexion pour la base de données groupomania:
 const connection = mysql.createConnection({
   host: 'localhost',
   user: process.env.DB_USER,
@@ -38,13 +38,13 @@ const connection = mysql.createConnection({
   database: 'groupomania',
 })
 
+// On se connecte à la base de données :
 connection.connect((err) => {
   if (err) {
     console.log('Echec de connexion à mySql : ' + err)
     throw err
   } else {
     console.log('Connexion à mySQL réussie !')
-    console.log(`Id de connexion : ${connection.threadId}`)
   }
 })
 

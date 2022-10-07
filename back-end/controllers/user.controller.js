@@ -1,12 +1,6 @@
-// On importe bcrypt qui permet de hacher les mots de passe :
 const bcrypt = require('bcrypt')
-
-// On importe le package jsonwebtoken qui va nous permettre de créer des tokens et de les vérifier :
 const jwt = require('jsonwebtoken')
-
-// On importe le package fs (file system) de Node.
 const fs = require('fs')
-
 const mysql = require('mysql')
 
 const connection = mysql.createConnection({
@@ -25,18 +19,11 @@ exports.signup = (req, res) => {
     email: req.body.email,
     password: req.body.password,
   }
-  let user = {
-    ...userBody,
-  }
-
-  console.log(
-    'Utilisateur avant le cyptage du mot de passe : ' + JSON.stringify(user)
-  )
 
   bcrypt
     .hash(req.body.password, 10)
     .then((hash) => {
-      let userBody = {
+      userBody = {
         lastname: req.body.lastname,
         firstname: req.body.firstname,
         email: req.body.email,
@@ -47,11 +34,6 @@ exports.signup = (req, res) => {
         ...userBody,
       }
 
-      console.log(
-        'Utilisateur après le cyptage du mot de passe : ' + JSON.stringify(user)
-      )
-
-      // On enregistre cet utilisateur dans la base de données :
       connection.query(
         'INSERT INTO user SET ?',
         user,
@@ -69,7 +51,6 @@ exports.signup = (req, res) => {
     })
     .catch((error) => {
       res.status(500).json({ error })
-      console.log('Echec de signup :' + error)
     })
 }
 
@@ -84,19 +65,13 @@ exports.login = (req, res) => {
     email,
     (error, results, fields) => {
       if (error) {
-        console.log('Erreur lors de la recherche du user : ' + error)
         res.json({ error })
       } else {
-        console.log(
-          'Résultats de la recherche du user : ' + JSON.stringify(results)
-        )
         if (results == 0) {
           return res
             .status(401)
             .json({ error: 'Email non enregistré dans la base de données' })
         } else {
-          console.log('Mot de passe : ' + password)
-          console.log('Mot de passe crypté : ' + results[0].password)
           bcrypt
             .compare(password, results[0].password)
             .then((valid) => {
@@ -131,108 +106,40 @@ exports.login = (req, res) => {
   )
 }
 
-// -----------------------------------------------------------------------------------------------------------
-// Obtenir les infos d'un utilisateur :
-exports.getOneUser = (req, res) => {
-  connection.query(
-    `SELECT * FROM user WHERE id=${req.params.userId}`,
-    function (err, result) {
-      if (err) {
-        throw err
-      } else {
-        console.log('Result : ' + JSON.stringify(result))
-        res.status(200).json(result)
-      }
-    }
-  )
-}
-
 // ------------------------------------------------------------------------------------------------------------
 // Ajouter ou modifier la photo de profil :
 exports.updateProfileImage = (req, res) => {
-  console.log('Je suis dans la fonction updateProfileImage du back-end')
-
-  console.log(req.file)
-
   connection.query(
     `SELECT * FROM user WHERE id=${req.auth.userId}`,
     function (err, result) {
+      let userId = req.auth.userId
+      let profileImage = `${req.protocol}://${req.get('host')}/images/${
+        req.file.filename
+      }`
+
       if (err) {
         throw err
       } else {
-        console.log('Result : ' + JSON.stringify(result))
-        console.log('Result id : ' + result[0].id)
-        console.log(
-          'Result profileImage, donc ancienne image : ' + result[0].profileImage
-        )
-
         if (result[0].id != req.auth.userId) {
           res.status(403).json({ message: 'Requête non autorisée' })
         } else {
           if (result[0].profileImage != null) {
-            const userProfileImage = {
-              image: `${req.protocol}://${req.get('host')}/images/${
-                req.file.filename
-              }`,
-            }
-
-            console.log(userProfileImage)
-
-            let userId = req.auth.userId
-
-            let profileImage = `${req.protocol}://${req.get('host')}/images/${
-              req.file.filename
-            }`
-            console.log('Nouvelle profileImage :' + profileImage)
-
             const filename = result[0].profileImage.split('/images/')[1]
-            // Ancienne photo que l'on veut supprimer :
-            console.log("Filename de l'ancienne photo : " + filename)
-            fs.unlink(`images/${filename}`, () => {
-              profileImage = profileImage
-            })
-
-            connection.query(
-              `UPDATE user SET profileImage="${profileImage}"  WHERE id= ${userId}`,
-              (error, results, fields) => {
-                if (error) {
-                  console.log(
-                    "Echec de l'enregistrement de la photo de profil : " + error
-                  )
-                  res.json({ error })
-                } else {
-                  res.status(201).json({
-                    message: 'Photo de profil modifiée',
-                    profileImage: profileImage,
-                  })
-                }
-              }
-            )
-          } else {
-            let userId = req.auth.userId
-
-            let profileImage = `${req.protocol}://${req.get('host')}/images/${
-              req.file.filename
-            }`
-            console.log('Nouvelle profileImage :' + profileImage)
-
-            connection.query(
-              `UPDATE user SET profileImage="${profileImage}" WHERE id= ${userId}`,
-              (error, results, fields) => {
-                if (error) {
-                  console.log(
-                    "Echec de l'enregistrement de la photo de profil : " + error
-                  )
-                  res.json({ error })
-                } else {
-                  res.status(201).json({
-                    message: 'Photo de profil ajoutée',
-                    profileImage: profileImage,
-                  })
-                }
-              }
-            )
+            fs.unlink(`images/${filename}`, () => {})
           }
+          connection.query(
+            `UPDATE user SET profileImage="${profileImage}"  WHERE id= ${userId}`,
+            (error, results, fields) => {
+              if (error) {
+                res.json({ error })
+              } else {
+                res.status(201).json({
+                  message: 'Photo de profil modifiée',
+                  profileImage: profileImage,
+                })
+              }
+            }
+          )
         }
       }
     }
@@ -242,7 +149,6 @@ exports.updateProfileImage = (req, res) => {
 // -----------------------------------------------------------------------------------------------------------
 // Modifier les infos du profil :
 exports.updateProfileInfos = (req, res) => {
-  console.log(req.auth.userId)
   connection.query(
     `SELECT * FROM user WHERE id=${req.auth.userId}`,
     function (err, result) {
@@ -262,10 +168,9 @@ exports.updateProfileInfos = (req, res) => {
             `UPDATE user SET password="${user.password}"  WHERE id= ${req.auth.userId} `,
             function (error, result) {
               if (error) {
-                console.log('Echec de la modification du profil : ' + error)
                 res.status(400).json({ error })
               } else {
-                res.status(201).json({ message: 'Mot de passe modifié' })
+                res.status(201).json({ message: 'Mot de passe enregistré' })
               }
             }
           )
@@ -285,43 +190,27 @@ exports.logout = (req, res) => {
 // ---------------------------------------------------------------------------------------------------------------
 // Désinscription d'un utilisateur :
 exports.deleteUser = (req, res, next) => {
-  console.log(req.auth.userId)
   connection.query(
     `SELECT * FROM user WHERE id=${req.auth.userId}`,
     function (err, result) {
       if (err) {
         throw err
       } else {
-        console.log(result)
         if (result[0].profileImage) {
           // On supprime l'utilisateur de la base de données, mais aussi sa photo de profil :
           const filename = result[0].profileImage.split('/images/')[1]
-          fs.unlink(`images/${filename}`, () => {
-            connection.query(
-              `DELETE FROM user WHERE id=${req.auth.userId}`,
-              function (err, result) {
-                if (err) {
-                  throw err
-                } else {
-                  console.log(result)
-                  return res.status(200).json('Utilisateur désinscrit')
-                }
-              }
-            )
-          })
-        } else {
-          connection.query(
-            `DELETE FROM user WHERE id=${req.auth.userId}`,
-            function (err, result) {
-              if (err) {
-                throw err
-              } else {
-                console.log(result)
-                return res.status(200).json('Utilisateur désinscrit')
-              }
-            }
-          )
+          fs.unlink(`images/${filename}`, () => {})
         }
+        connection.query(
+          `DELETE FROM user WHERE id=${req.auth.userId}`,
+          function (err, result) {
+            if (err) {
+              throw err
+            } else {
+              return res.status(200).json('Utilisateur désinscrit')
+            }
+          }
+        )
       }
     }
   )
