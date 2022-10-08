@@ -35,7 +35,7 @@ CREATE TABLE `post` (
   PRIMARY KEY (`id`),
   KEY `post_ibfk_1` (`user_id`),
   CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=457 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=527 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (138,'On a (encore) le droit de rêver...','Alors profitons-en ! Toutefois, je trouve les habitations un peu trop sages et alignées. Chacune mériterait de se différencier des autres... comme les êtres humains. Cette photo m\'inspire, tout est relié. Il fallait bien écrire 255 caractères. C\'est fait.','2022-10-01 14:35:43','http://localhost:3000/images/Ile_paradisiaque1664627743032.jpg',178,2),(279,'Titre avec 40 caractères. Voilà voilà...','Description avec 255 caractères. Pour l\'instant, je n\'ai rien de spécial à dire. Alors je ne parle pas pour ne rien dire. Quand j\'aurai quelque chose à dire, je vous le dirai. Wouaaah ! Les répétitions ! Mais c\'était juste pour avoir quelque chose à dire.','2022-09-25 10:10:58',NULL,178,1),(291,'Quelle beauté...','On a l\'impression qu\'il nous sourit ;-)','2022-09-27 13:25:51','http://localhost:3000/images/dauphin1664276986631.jpg',194,2),(292,'Nos amis les animaux','Aimons-les comme ils nous aiment. Ils sont incroyables...','2022-09-29 13:41:07','http://localhost:3000/images/animaux1664451667893.jpg',195,2),(315,'Qui me suit ?','Je pars profiter un peu de la vie, et prendre soin de moi...','2022-10-01 21:37:46','http://localhost:3000/images/Ile_de_Nosy_Be_a_Madagascar1664653046186.jpg',196,1),(331,'Trop bien !','Allez plouf !','2022-10-02 22:30:12','http://localhost:3000/images/nager_dans_ocean1664742612703.jpg',230,3),(456,'Incroyable beauté','La nature est magnifique','2022-10-07 11:55:46','http://localhost:3000/images/arbre-a-fleurs1665136546776.webp',265,1);
+INSERT INTO `post` VALUES (138,'On a (encore) le droit de rêver...','Alors profitons-en ! Toutefois, je trouve les habitations un peu trop sages et alignées. Chacune mériterait de se différencier des autres... comme les êtres humains. Cette photo m\'inspire, tout est relié. Il fallait bien écrire 255 caractères. C\'est fait.','2022-10-01 14:35:43','http://localhost:3000/images/Ile_paradisiaque1664627743032.jpg',178,2),(279,'Titre avec 40 caractères. Voilà voilà...','Description avec 255 caractères. Pour l\'instant, je n\'ai rien de spécial à dire. Alors je ne parle pas pour ne rien dire. Quand j\'aurai quelque chose à dire, je vous le dirai. Wouaaah ! Les répétitions ! Mais c\'était juste pour avoir quelque chose à dire.','2022-09-25 10:10:58',NULL,178,1),(291,'Quelle beauté...','On a l\'impression qu\'il nous sourit ;-)','2022-09-27 13:25:51','http://localhost:3000/images/dauphin1664276986631.jpg',194,2),(292,'Nos amis les animaux','Aimons-les comme ils nous aiment. Ils sont incroyables...','2022-09-29 13:41:07','http://localhost:3000/images/animaux1664451667893.jpg',195,2),(315,'Qui me suit ?','Je pars profiter un peu de la vie, et prendre soin de moi...','2022-10-07 22:15:37','http://localhost:3000/images/bora-bora21665173737796.jpg',196,1),(331,'Allez ! Plouf !','Plongée dans un autre univers... Et regardez-moi ces couleurs ! C\'est incroyable...','2022-10-08 09:19:17','http://localhost:3000/images/poissons1665174205372.jpg',230,3),(456,'Incroyable beauté','La nature est magnifique','2022-10-07 11:55:46','http://localhost:3000/images/arbre-a-fleurs1665136546776.webp',265,1);
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-07 12:10:37
+-- Dump completed on 2022-10-08 11:44:22
