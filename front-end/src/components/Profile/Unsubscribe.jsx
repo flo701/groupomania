@@ -8,11 +8,7 @@ const Unsubscribe = () => {
   const headers = { Authorization: `Bearer ${token}` }
   const config = { headers }
 
-  let decodedToken
-  if (token) {
-    decodedToken = jwt_decode(token)
-  }
-
+  const decodedToken = jwt_decode(token)
   const userId = decodedToken.userId
 
   // const [confirmUnsubscribe, setConfirmUnsubscribe] = useState(false)
@@ -24,9 +20,7 @@ const Unsubscribe = () => {
       headers: headers,
     })
       .then((res) => {
-        console.log(res.data)
         res.data.forEach((i) => {
-          console.log(i.id)
           deletePost(i.id)
         })
       })
@@ -55,9 +49,7 @@ const Unsubscribe = () => {
     }
 
     const removeCookie = (key) => {
-      if (window !== 'undefined') {
-        cookie.remove(key, { expires: 1 })
-      }
+      cookie.remove(key, { expires: 1 })
     }
   }
 

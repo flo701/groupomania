@@ -10,9 +10,7 @@ const Header = () => {
 
   const LogOut = () => {
     const removeCookie = (key) => {
-      if (window !== 'undefined') {
-        cookie.remove(key, { expires: 1 })
-      }
+      cookie.remove(key, { expires: 1 })
     }
 
     axios({

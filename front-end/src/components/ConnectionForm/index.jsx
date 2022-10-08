@@ -18,25 +18,15 @@ const ConnectionForm = (props) => {
     }
   }
 
-  const token = getCookie('token')
-
   return (
     <>
-      {token ? (
-        <>
-          <h3 className="posts_h3">{''} </h3>
-        </>
-      ) : (
-        <>
-          <h3 className="posts_h3">
-            Bienvenue sur Groupomania, votre réseau social d'entreprise
-          </h3>
-          <p className="posts_p">
-            Veuillez vous connecter pour créer un post et consulter les posts de
-            vos collègues
-          </p>
-        </>
-      )}
+      <h3 className="posts_h3">
+        Bienvenue sur Groupomania, votre réseau social d'entreprise
+      </h3>
+      <p className="posts_p">
+        Veuillez vous connecter pour créer un post et consulter les posts de vos
+        collègues
+      </p>
       <div className="connection-form">
         <ul>
           <li
@@ -59,23 +49,6 @@ const ConnectionForm = (props) => {
       </div>
     </>
   )
-}
-
-// https://www.w3schools.com/js/js_cookies.asp :
-function getCookie(cname) {
-  let name = cname + '='
-  let decodedCookie = decodeURIComponent(document.cookie)
-  let ca = decodedCookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1)
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length)
-    }
-  }
-  return ''
 }
 
 export default ConnectionForm

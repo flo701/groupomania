@@ -22,7 +22,6 @@ const postCtrl = require('../controllers/post.controller')
 // (nous avons ici le segment final de l'adresse de la route, le reste est déclaré dans app.js) :
 router.get('/', auth, postCtrl.getAllPosts)
 router.get('/:userId', auth, postCtrl.getUserAllPosts)
-router.get('/:id', auth, postCtrl.getOnePost)
 router.post('/', auth, multer, postCtrl.createPost)
 router.put('/:id', auth, multer, postCtrl.modifyPost)
 router.delete('/:id', auth, postCtrl.deletePost)

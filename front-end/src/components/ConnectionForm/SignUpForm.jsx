@@ -11,7 +11,7 @@ const SignUpForm = () => {
   const [password, setPassword] = useState('')
   const [controlPassword, setControlPassword] = useState('')
 
-  const handleRegister = async (e) => {
+  const handleRegister = (e) => {
     e.preventDefault()
     const lastNameInput = document.querySelector('#lastName')
     const firstNameInput = document.querySelector('#firstName')
@@ -118,7 +118,7 @@ const SignUpForm = () => {
       checkControlPassword() &&
       checkTerms()
     ) {
-      await axios({
+      axios({
         method: 'post',
         url: `${process.env.REACT_APP_API_URL}/api/auth/signup`,
         data: {
@@ -130,7 +130,6 @@ const SignUpForm = () => {
       })
         .then((res) => {
           console.log(res)
-          // if (res.status != 201) => L'un ou l'autre fonctionne...
           if (res.data.error) {
             emailError.innerHTML =
               'Email déjà enregistré dans la base de données'

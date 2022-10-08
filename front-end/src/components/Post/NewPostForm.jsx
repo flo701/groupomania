@@ -4,19 +4,6 @@ import axios from 'axios'
 import Picture from '../../assets/icons/picture.svg'
 
 const NewPostForm = () => {
-  const [title, setTitle] = useState('')
-  console.log(title)
-  const [description, setDescription] = useState('')
-  console.log(description)
-
-  // postPicture est l'image que l'on voit à l'écran lors de la création du post :
-  const [postPicture, setPostPicture] = useState()
-  console.log(postPicture)
-
-  // file est l'image que l'on va envoyer au back-end :
-  const [file, setFile] = useState()
-  console.log(file)
-
   const token = getCookie('token')
 
   const api = axios.create({ baseURL: `${process.env.REACT_APP_API_URL}/api` })
@@ -25,10 +12,17 @@ const NewPostForm = () => {
     return req
   })
 
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const titleError = document.querySelector('.title-error')
   const descriptionError = document.querySelector('.description-error')
 
-  const handlePost = async () => {
+  // postPicture est l'image que l'on voit à l'écran lors de la création du post :
+  const [postPicture, setPostPicture] = useState()
+  // file est l'image que l'on va envoyer au back-end :
+  const [file, setFile] = useState()
+
+  const handlePost = () => {
     const checkTitle = () => {
       if (title.length < 5) {
         titleError.innerHTML =
@@ -59,10 +53,9 @@ const NewPostForm = () => {
       data.append('description', description)
       if (file) data.append('image', file)
 
-      await api
+      api
         .post('/posts', data)
         .then((res) => {
-          console.log(res)
           window.location = '/'
         })
         .catch((err) => console.log(err))

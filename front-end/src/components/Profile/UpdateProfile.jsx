@@ -7,31 +7,29 @@ import Unsubscribe from './Unsubscribe'
 
 const UpdateProfile = () => {
   const token = getCookie('token')
-  let decodedToken
-  if (token) {
-    decodedToken = jwt_decode(token)
-  }
   const headers = { Authorization: `Bearer ${token}` }
+
+  const decodedToken = jwt_decode(token)
+
+  const [updateFormSubmit, setUpdateFormSubmit] = useState(false)
 
   const [passwordUpdate, setPasswordUpdate] = useState('')
   const [controlPasswordUpdate, setControlPasswordUpdate] = useState('')
 
-  const [updateFormSubmit, setUpdateFormSubmit] = useState(false)
+  const passwordUpdateInput = document.querySelector('#password-update')
+  const controlPasswordUpdateInput = document.querySelector(
+    '#password-conf-update'
+  )
+  const passwordError = document.querySelector('.password-update.error')
+  const passwordConfirmError = document.querySelector(
+    '.password-confirm-update.error'
+  )
 
-  const handleRegister = async (e) => {
+  let regExpPassword =
+    /^(?=.{8,25}$)(?=.*?[a-z])(?=.*?[A-Z])(?=(?:.*?[0-9]){2}).*$/
+
+  const handleRegister = (e) => {
     e.preventDefault()
-
-    const passwordUpdateInput = document.querySelector('#password-update')
-    const controlPasswordUpdateInput = document.querySelector(
-      '#password-conf-update'
-    )
-    const passwordError = document.querySelector('.password-update.error')
-    const passwordConfirmError = document.querySelector(
-      '.password-confirm-update.error'
-    )
-
-    let regExpPassword =
-      /^(?=.{8,25}$)(?=.*?[a-z])(?=.*?[A-Z])(?=(?:.*?[0-9]){2}).*$/
 
     const checkPasswordUpdate = () => {
       console.log()
@@ -60,7 +58,7 @@ const UpdateProfile = () => {
     checkControlPasswordUpdate()
 
     if (checkPasswordUpdate() && checkControlPasswordUpdate()) {
-      await axios({
+      axios({
         method: 'put',
         url: `${process.env.REACT_APP_API_URL}/api/auth/profile-infos`,
         headers: headers,
@@ -82,7 +80,9 @@ const UpdateProfile = () => {
       <div className="profile">
         <>
           <>
-            <h3>Voici votre profil {decodedToken.firstname}</h3>
+            <h3>
+              {decodedToken.firstname} {decodedToken.lastname}
+            </h3>
             <div className="profile_creation-date">
               Vous êtes membre depuis :{' '}
               {timestampParser(decodedToken.creationDate)}

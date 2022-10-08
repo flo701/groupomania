@@ -5,6 +5,9 @@ import jwt_encode from 'jwt-encode'
 import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
 
 const UploadImg = () => {
+  const token = getCookie('token')
+  const decodedToken = jwt_decode(token)
+
   // Image que l'on envoie au back-end :
   const [file, setFile] = useState()
   console.log(file)
@@ -15,12 +18,6 @@ const UploadImg = () => {
 
   // Si on a ajouté/changé la photo de profil :
   const [newPhoto, setNewPhoto] = useState(false)
-
-  const token = getCookie('token')
-
-  let decodedToken
-  decodedToken = jwt_decode(token)
-  console.log(decodedToken.profileImage)
 
   const modifyTokenProfileImage = (image) => {
     decodedToken.profileImage = image
@@ -50,7 +47,6 @@ const UploadImg = () => {
         .then((res) => {
           setNewPhoto(true)
           modifyTokenProfileImage(res.data.profileImage)
-          console.log(res.data.profileImage)
         })
         .catch((err) => console.log(err))
     }

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import jwt_decode from 'jwt-decode'
 // import SignUpForm from './SignUpForm'
 
-const SignInForm = () => {
+const SignInForm = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -26,9 +25,6 @@ const SignInForm = () => {
       .then((res) => {
         if (res.status === 200) {
           const token = res.data.token
-          const decodedToken = jwt_decode(token)
-          console.log('Token décodé : ' + JSON.stringify(decodedToken))
-          console.log(decodedToken.lastname)
           setCookie('token', token, 1)
           window.location = '/'
         }
@@ -56,11 +52,11 @@ const SignInForm = () => {
   // }
 
   return (
-    // <>
-    //   {signUpModal ? (
-    //     <SignUpForm />
-    //   ) : (
     <>
+      {/* {signUpModal ? (
+        <SignUpForm />
+      ) : (
+        <> */}
       <form action="" onSubmit={handleLogin} className="signin_form">
         <label htmlFor="email">Email</label>
         <br />
@@ -88,10 +84,10 @@ const SignInForm = () => {
       </form>
       {/* <div className="signin_toggle" onClick={handleRegister}>
             Pas encore de compte ? Inscrivez-vous
-          </div> */}
+          </div>
+        </>
+      )} */}
     </>
-    // )}
-    // </>
   )
 }
 

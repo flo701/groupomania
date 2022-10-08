@@ -1,30 +1,22 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
-import jwt_decode from 'jwt-decode'
 
 const LikeCard = (props) => {
   const token = getCookie('token')
-  let decodedToken
-  decodedToken = jwt_decode(token)
-  console.log("Id de l'utilisateur : " + decodedToken.userId)
-
   const headers = { Authorization: `Bearer ${token}` }
 
-  const arrayOfLikes = props.arrayPostsLiked
-
-  const postId = props.post.id
-  console.log('Id du post : ' + postId)
-
   const [postLiked, setPostLiked] = useState(false)
-  console.log('Statut de la const postLiked dans LikeCard: ', postLiked)
   const [numberOfLikes, setNumberOfLikes] = useState(props.post.postLikes)
+
+  const arrayOfLikes = props.arrayPostsLiked
+  const postId = props.post.id
 
   // Ca fonctionne, et on évite une requête pour chaque post.
   // Au rechargement de la page, les coeurs rouges restent rouges :
   useEffect(() => {
     for (let i = 0; i < arrayOfLikes.length; i++) {
-      console.log(arrayOfLikes[i].post_id)
+      // console.log(arrayOfLikes[i].post_id)
       if (postId === arrayOfLikes[i].post_id) setPostLiked(true)
     }
     // eslint-disable-next-line
@@ -80,7 +72,6 @@ const LikeCard = (props) => {
       headers: headers,
     })
       .then((res) => {
-        console.log(res.data)
         if (res.data === 'Post liké') {
           setPostLiked(true)
         } else {
@@ -100,11 +91,6 @@ const LikeCard = (props) => {
     })
       .then((res) => {
         setNumberOfLikes(res.data)
-
-        console.log('Nombre de likes pour ce post : ' + res.data)
-        console.log(
-          'Résultat de post.likes pour ce post : ' + props.post.postLikes
-        )
       })
       .catch((err) => {
         console.log(err)

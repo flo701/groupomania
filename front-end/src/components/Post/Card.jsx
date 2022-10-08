@@ -11,18 +11,10 @@ import Edit from '../../assets/icons/edit.svg'
 
 const Card = (props) => {
   const token = getCookie('token')
-  let decodedToken
-  if (token) {
-    decodedToken = jwt_decode(token)
-    console.log("Id de l'utilisateur : " + decodedToken.userId)
-  }
+  const headers = { Authorization: `Bearer ${token}` }
+  const config = { headers }
 
-  console.log('Id du créateur du post :' + props.post.user_id)
-  console.log('Id du post :' + props.post.id)
-
-  const postId = props.post.id
-
-  console.log(props.arrayPostsLiked)
+  const decodedToken = jwt_decode(token)
 
   const [isUpdated, setIsUpdated] = useState(false)
 
@@ -33,17 +25,15 @@ const Card = (props) => {
 
   // postUpdatedPicture est l'image que l'on voit à l'écran lors de la modification du post :
   const [postUpdatedPicture, setPostUpdatedPicture] = useState()
-  console.log(postUpdatedPicture)
   // file est la nouvelle image que l'on va envoyer au back-end :
   const [fileUpdated, setFileUpdated] = useState()
-  console.log(fileUpdated)
+
+  const postId = props.post.id
 
   const handlePicture = (e) => {
     setPostUpdatedPicture(URL.createObjectURL(e.target.files[0]))
     setFileUpdated(e.target.files[0])
   }
-
-  const headers = { Authorization: `Bearer ${token}` }
 
   const UpdateCard = () => {
     const titleUpdatedError = document.querySelector('.titleUpdated-error')
@@ -88,7 +78,6 @@ const Card = (props) => {
         data: data,
       })
         .then((res) => {
-          console.log(res)
           window.location = '/'
         })
         .catch((err) => {
@@ -98,22 +87,10 @@ const Card = (props) => {
   }
 
   const deleteCard = () => {
-    const token = getCookie('token')
-    const headers = { Authorization: `Bearer ${token}` }
-    const config = { headers }
-
-    console.log(headers)
-    console.log(`${token}`)
-
-    const postId = props.post.id
-
-    console.log(props.post)
-
     axios
       .delete(`${process.env.REACT_APP_API_URL}/api/posts/${postId}`, config)
       .then((res) => {
         window.location = '/'
-        console.log(res.data)
       })
       .catch((err) => console.log(err))
   }

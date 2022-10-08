@@ -5,30 +5,27 @@ import NewPostForm from './NewPostForm'
 import jwt_decode from 'jwt-decode'
 
 const Posts = () => {
-  const [posts, setPosts] = useState([])
-  const [arrayPostsLiked, setArrayPostsLiked] = useState([])
-  console.log(arrayPostsLiked)
-
   const token = getCookie('token')
   const headers = { Authorization: `Bearer ${token}` }
   const config = { headers }
 
-  let decodedToken = jwt_decode(token)
-
+  const decodedToken = jwt_decode(token)
   const userId = decodedToken.userId
+
+  const [posts, setPosts] = useState([])
+  const [arrayPostsLiked, setArrayPostsLiked] = useState([])
 
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/posts`, config)
       .then((res) => {
         setPosts(res.data)
-        console.log(res.data)
       })
       .catch((err) => console.log(err))
     // eslint-disable-next-line
   }, [])
 
-  // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
+  // On regarde quels posts ont été likés par l'utilisateur connecté :
   useEffect(() => {
     axios({
       method: 'get',
@@ -36,7 +33,6 @@ const Posts = () => {
       headers: headers,
     })
       .then((res) => {
-        console.log(res.data)
         setArrayPostsLiked(res.data)
       })
       .catch((err) => {
@@ -44,10 +40,6 @@ const Posts = () => {
       })
     // eslint-disable-next-line
   }, [])
-
-  console.log(posts)
-
-  console.log(arrayPostsLiked) // C'est ce tableau qu'on veut transmettre à LikeCard
 
   return (
     <div className="posts">
