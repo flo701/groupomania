@@ -12,8 +12,7 @@ const LikeCard = (props) => {
   const arrayOfLikes = props.arrayPostsLiked
   const postId = props.post.id
 
-  // Ca fonctionne, et on évite une requête pour chaque post.
-  // Au rechargement de la page, les coeurs rouges restent rouges :
+  // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
   useEffect(() => {
     for (let i = 0; i < arrayOfLikes.length; i++) {
       // console.log(arrayOfLikes[i].post_id)
@@ -21,48 +20,6 @@ const LikeCard = (props) => {
     }
     // eslint-disable-next-line
   }, [arrayOfLikes])
-
-  // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get',
-  //     url: `${process.env.REACT_APP_API_URL}/api/posts/verifyLikes/${postId}`,
-  //     headers: headers,
-  //   })
-  //     .then((res) => {
-  //       console.log(res)
-  //       if (res.data.length > 0) {
-  //         setPostLiked(true)
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  //   // eslint-disable-next-line
-  // }, [])
-
-  // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
-  // useEffect(() => {
-  //   axios({
-  //     method: 'get',
-  //     url: `${process.env.REACT_APP_API_URL}/api/posts/verifyPostsLiked/${postId}`,
-  //     headers: headers,
-  //   })
-  //     .then((res) => {
-  //       console.log(res.data)
-
-  //       res.data.forEach((i) => {
-  //         console.log(i)
-  //         if (i.post_id === postId) {
-  //           setPostLiked(true)
-  //         }
-  //       })
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  //   // eslint-disable-next-line
-  // }, [])
 
   // Au click sur le coeur, on appelle la fonction "likePost" :
   const likeHandle = () => {

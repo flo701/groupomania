@@ -76,11 +76,15 @@ const UploadImg = () => {
                   <img
                     src={ProfileNoConnected}
                     className="token-image"
-                    alt="user-pic"
+                    alt="profil par défaut"
                   />
                 </div>
                 <div>
-                  <img src={profileImage} className="token-image" alt="" />
+                  <img
+                    src={profileImage}
+                    className="token-image"
+                    alt="profil affiché"
+                  />
                 </div>
               </div>
               <form action="" onSubmit={modifyPicture}>
@@ -104,11 +108,15 @@ const UploadImg = () => {
                   <img
                     src={decodedToken.profileImage}
                     className="token-image"
-                    alt="user-pic"
+                    alt="vrai profil"
                   />
                 </div>
                 <div>
-                  <img src={profileImage} className="token-image" alt="" />
+                  <img
+                    src={profileImage}
+                    className="token-image"
+                    alt="profil affiché"
+                  />
                 </div>
               </div>
               <form action="" onSubmit={modifyPicture}>

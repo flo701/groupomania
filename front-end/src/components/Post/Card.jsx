@@ -102,13 +102,13 @@ const Card = (props) => {
           <img
             className="card_profileImage"
             src={props.post.profileImage}
-            alt=""
+            alt="vrai profil"
           ></img>
         ) : (
           <img
             className="card_profileImage"
             src={ProfileNoConnected}
-            alt=""
+            alt="profil par défaut"
           ></img>
         )}
         <div className="card_firstname">{props.post.firstname}</div>
@@ -120,7 +120,7 @@ const Card = (props) => {
               className="card_modify"
               onClick={(e) => setIsUpdated(!isUpdated)}
               src={Edit}
-              alt="img"
+              alt="modifier"
             />
             <img
               className="card_delete"
@@ -132,7 +132,7 @@ const Card = (props) => {
                 }
               }}
               src={Trash}
-              alt="img"
+              alt="supprimer"
             />
           </div>
         )}
@@ -154,7 +154,7 @@ const Card = (props) => {
             </div>
             <div className="card_description">{props.post.description}</div>
             {props.post.image && (
-              <img src={props.post.image} alt="" className="card_post-img" />
+              <img src={props.post.image} alt="img" className="card_post-img" />
             )}
           </div>
         </>
@@ -182,7 +182,11 @@ const Card = (props) => {
             <p className="descriptionUpdated-error"></p>
             {props.post.image && (
               <>
-                <img src={props.post.image} alt="" className="card_post-img" />
+                <img
+                  src={props.post.image}
+                  alt="img"
+                  className="card_post-img"
+                />
                 <div className="card_file">
                   <img src={postUpdatedPicture} alt="" />
                 </div>

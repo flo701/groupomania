@@ -3,7 +3,7 @@ import { timestampParser } from '../Utils'
 import axios from 'axios'
 import Picture from '../../assets/icons/picture.svg'
 
-const NewPostForm = () => {
+const NewPostForm = (props) => {
   const token = getCookie('token')
 
   const api = axios.create({ baseURL: `${process.env.REACT_APP_API_URL}/api` })
@@ -107,7 +107,7 @@ const NewPostForm = () => {
           <div className="new-post_content">
             <p>{title}</p>
             <p>{description}</p>
-            <img src={postPicture} alt="" />
+            <img src={postPicture} alt="img" />
           </div>
         </>
       ) : null}
@@ -130,11 +130,9 @@ const NewPostForm = () => {
               Annuler
             </button>
           ) : null}
-          {token ? (
-            <button className="send" onClick={handlePost}>
-              Envoyer
-            </button>
-          ) : null}
+          <button className="send" onClick={handlePost}>
+            Envoyer
+          </button>
         </div>
       </div>
     </div>

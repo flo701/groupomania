@@ -21,7 +21,7 @@ const index = () => {
         </Routes>
       ) : (
         <Routes>
-          <Route path="/connexion" element={<Connection />} />
+          <Route path="/" element={<Connection />} />
           <Route path="*" element={<Connection />} />
         </Routes>
       )}
