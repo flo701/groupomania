@@ -107,14 +107,14 @@ const NewPostForm = () => {
           <div className="new-post_content">
             <p>{title}</p>
             <p>{description}</p>
-            <img src={postPicture} alt="img" />
+            <img src={postPicture} alt="" />
           </div>
         </>
       ) : null}
       <div className="new-post_footer">
         <div className="icon">
           <>
-            <img src={Picture} alt="img" />
+            <img src={Picture} alt="" />
             <input
               type="file"
               id="file-upload"
