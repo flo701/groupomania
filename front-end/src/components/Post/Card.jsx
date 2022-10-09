@@ -5,7 +5,7 @@ import axios from 'axios'
 import { timestampParser } from '../Utils'
 import Picture from '../../assets/icons/picture.svg'
 import jwt_decode from 'jwt-decode'
-import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
+import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
 import Trash from '../../assets/icons/trash.svg'
 import Edit from '../../assets/icons/edit.svg'
 
@@ -107,7 +107,7 @@ const Card = (props) => {
         ) : (
           <img
             className="card_profileImage"
-            src={ProfileNoConnected}
+            src={DefaultProfilePhoto}
             alt="profil par défaut"
           ></img>
         )}

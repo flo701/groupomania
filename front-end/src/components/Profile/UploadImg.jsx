@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import jwt_encode from 'jwt-encode'
-import ProfileNoConnected from '../../assets/images/profil-non-connecte.webp'
+import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
 
 const UploadImg = () => {
   const token = getCookie('token')
@@ -63,7 +63,7 @@ const UploadImg = () => {
       {newPhoto ? (
         <>
           <div className="profile-pictures">
-            <img src={profileImage} className="new-image" alt="user-pic" />
+            <img src={profileImage} className="new-image" alt="" />
           </div>
           <span className="update-success">Photo de profil enregistrée</span>
         </>
@@ -74,17 +74,13 @@ const UploadImg = () => {
               <div className="profile-pictures">
                 <div className="file">
                   <img
-                    src={ProfileNoConnected}
-                    className="token-image"
-                    alt="profil par défaut"
+                    src={DefaultProfilePhoto}
+                    className="profile-image"
+                    alt=""
                   />
                 </div>
                 <div>
-                  <img
-                    src={profileImage}
-                    className="token-image"
-                    alt="profil affiché"
-                  />
+                  <img src={profileImage} className="profile-image" alt="" />
                 </div>
               </div>
               <form action="" onSubmit={modifyPicture}>
@@ -107,16 +103,12 @@ const UploadImg = () => {
                 <div className="file">
                   <img
                     src={decodedToken.profileImage}
-                    className="token-image"
-                    alt="vrai profil"
+                    className="profile-image"
+                    alt=""
                   />
                 </div>
                 <div>
-                  <img
-                    src={profileImage}
-                    className="token-image"
-                    alt="profil affiché"
-                  />
+                  <img src={profileImage} className="profile-image" alt="" />
                 </div>
               </div>
               <form action="" onSubmit={modifyPicture}>
