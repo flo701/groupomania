@@ -3,7 +3,7 @@ import { timestampParser } from '../Utils'
 import axios from 'axios'
 import Picture from '../../assets/icons/picture.svg'
 
-const NewPostForm = (props) => {
+const NewPostForm = () => {
   const token = getCookie('token')
 
   const api = axios.create({ baseURL: `${process.env.REACT_APP_API_URL}/api` })

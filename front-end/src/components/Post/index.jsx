@@ -46,7 +46,7 @@ const Posts = () => {
       <>
         <h3 className="posts_h3">Bienvenue {decodedToken.firstname} </h3>
       </>
-      <NewPostForm post={posts} />
+      <NewPostForm />
       <ul>
         {posts.map((post, index) => (
           <Card key={index} post={post} arrayPostsLiked={arrayPostsLiked} />
