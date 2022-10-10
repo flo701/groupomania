@@ -44,7 +44,8 @@ npm start
 Connexion à mySQL réussie !"
 
 ### Démarrer le front-end :
-- Renommez le fichier .env.example du front-end en .env.local. Et assignez une variable de votre choix à :
+- Renommez le fichier .env.example du front-end en .env.local. 
+Et assignez la même variable que vous avez choisie pour RANDOM_TOKEN_SECRET du back-end :
 
 REACT_APP_RANDOM_TOKEN_SECRET = " "
 
@@ -56,7 +57,11 @@ puis
 ```
 npm start
 ```
-- Dans votre navigateur, vous devriez voir apparaître la page de connexion à groupomania (généralement sur le port 3001).
+- Dans votre navigateur, vous devriez voir la page de connexion à groupomania sur le port 3001.
+
+- Si le port 3001 est occupé, le terminal vous proposera de lancer l'application sur un autre port, validez en tapant "y".
+
+
 
 
 
