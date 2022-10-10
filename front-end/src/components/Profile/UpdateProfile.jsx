@@ -3,7 +3,6 @@ import UploadImg from './UploadImg'
 import { timestampParser } from '../Utils'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
-import Unsubscribe from './Unsubscribe'
 
 const UpdateProfile = () => {
   const token = getCookie('token')
@@ -78,72 +77,62 @@ const UpdateProfile = () => {
   return (
     <>
       <div className="profile">
-        <>
+        <h3>
+          {decodedToken.firstname} {decodedToken.lastname}
+        </h3>
+        <div className="profile_creation-date">
+          Vous êtes membre depuis : {timestampParser(decodedToken.creationDate)}
+        </div>
+        <div className="profile_update-container">
           <>
-            <h3>
-              {decodedToken.firstname} {decodedToken.lastname}
-            </h3>
-            <div className="profile_creation-date">
-              Vous êtes membre depuis :{' '}
-              {timestampParser(decodedToken.creationDate)}
-            </div>
-          </>
-        </>
-        <>
-          <div className="profile_update-container">
             <>
-              <>
-                <div className="left-part">
-                  <h3>Photo de profil</h3>
-                  <UploadImg />
-                </div>
-              </>
-              <div className="right-part">
-                <div>
-                  <h3>Modifier votre mot de passe</h3>
-                  <form action="" onSubmit={handleRegister} id="form">
-                    <br />
-                    <label htmlFor="password-update">
-                      Nouveau mot de passe
-                    </label>
-                    <br />
-                    <input
-                      type="password"
-                      name="password-update"
-                      id="password-update"
-                      onChange={(e) => setPasswordUpdate(e.target.value)}
-                      value={passwordUpdate}
-                    />
-                    <div className="password-update error"></div>
-                    <br />
-                    <label htmlFor="password-conf-update">
-                      Confirmez le mot de passe
-                    </label>
-                    <br />
-                    <input
-                      type="password"
-                      name="password-conf-update"
-                      id="password-conf-update"
-                      onChange={(e) => setControlPasswordUpdate(e.target.value)}
-                      value={controlPasswordUpdate}
-                    />
-                    <div className="password-confirm-update error"></div>
-                    {updateFormSubmit ? (
-                      <>
-                        <span className="update-success">
-                          Nouveau mot de passe enregistré
-                        </span>
-                      </>
-                    ) : (
-                      <button type="submit">Valider la modification </button>
-                    )}
-                  </form>
-                </div>
+              <div className="left-part">
+                <h3>Photo de profil</h3>
+                <UploadImg />
               </div>
             </>
-          </div>
-          <Unsubscribe />
-        </>
+            <div className="right-part">
+              <div>
+                <h3>Modifier votre mot de passe</h3>
+                <form action="" onSubmit={handleRegister} id="form">
+                  <br />
+                  <label htmlFor="password-update">Nouveau mot de passe</label>
+                  <br />
+                  <input
+                    type="password"
+                    name="password-update"
+                    id="password-update"
+                    onChange={(e) => setPasswordUpdate(e.target.value)}
+                    value={passwordUpdate}
+                  />
+                  <div className="password-update error"></div>
+                  <br />
+                  <label htmlFor="password-conf-update">
+                    Confirmez le mot de passe
+                  </label>
+                  <br />
+                  <input
+                    type="password"
+                    name="password-conf-update"
+                    id="password-conf-update"
+                    onChange={(e) => setControlPasswordUpdate(e.target.value)}
+                    value={controlPasswordUpdate}
+                  />
+                  <div className="password-confirm-update error"></div>
+                  {updateFormSubmit ? (
+                    <>
+                      <span className="update-success">
+                        Nouveau mot de passe enregistré
+                      </span>
+                    </>
+                  ) : (
+                    <button type="submit">Valider la modification </button>
+                  )}
+                </form>
+              </div>
+            </div>
+          </>
+        </div>
       </div>
     </>
   )
