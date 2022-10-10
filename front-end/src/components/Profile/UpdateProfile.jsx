@@ -115,12 +115,12 @@ const UpdateProfile = () => {
               <div>
                 <h3>Modifier votre mot de passe</h3>
                 <form action="" onSubmit={handleRegister} id="form">
-                  <label htmlFor="password-update">Mot de passe actuel</label>
+                  <label htmlFor="current-password">Mot de passe actuel</label>
                   <br />
                   <input
                     type="password"
                     name="current-password"
-                    id="current-update"
+                    id="current-password"
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     value={currentPassword}
                   />
