@@ -31,9 +31,6 @@ const UpdateProfile = () => {
   let regExpPassword =
     /^(?=.{8,25}$)(?=.*?[a-z])(?=.*?[A-Z])(?=(?:.*?[0-9]){2}).*$/
 
-  console.log(decodedToken.password)
-  console.log(decodedToken.email)
-
   const handleRegister = (e) => {
     e.preventDefault()
 
