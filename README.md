@@ -11,7 +11,9 @@ Node.js et npm devront être installés localement sur votre machine.
 
 Créez un dossier vide et clonez ce repository à l'intérieur en tapant : 
 
-"git clone https://github.com/flo701/groupomania.git".
+```
+git clone https://github.com/flo701/groupomania.git
+```
 
 ### Créer la base de données groupomania :
 Ouvrez le dossier db-config situé dans le dossier back-end, et suivez les indications pour créer votre base de données Groupomania.
@@ -51,9 +53,13 @@ REACT_APP_RANDOM_TOKEN_SECRET = " "
 
 Ouvrez un autre terminal, positionnez-vous dans le dossier front-end (avec la commande "cd groupomania/front-end") et tapez :
 
-npm install, puis
-
+```
+npm install
+```
+puis
+```
 npm start
+```
 
 Dans votre navigateur, vous devriez voir apparaître la page de connexion à groupomania (généralement sur le port 3001).
 
