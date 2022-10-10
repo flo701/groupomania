@@ -4,6 +4,8 @@ import { timestampParser } from '../Utils'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
+var bcrypt = require('bcryptjs')
+
 const UpdateProfile = () => {
   const token = getCookie('token')
   const headers = { Authorization: `Bearer ${token}` }
@@ -12,6 +14,7 @@ const UpdateProfile = () => {
 
   const [updateFormSubmit, setUpdateFormSubmit] = useState(false)
 
+  const [currentPassword, setCurrentPassword] = useState('')
   const [passwordUpdate, setPasswordUpdate] = useState('')
   const [controlPasswordUpdate, setControlPasswordUpdate] = useState('')
 
@@ -23,22 +26,35 @@ const UpdateProfile = () => {
   const passwordConfirmError = document.querySelector(
     '.password-confirm-update.error'
   )
+  const currentPasswordError = document.querySelector('.current-password.error')
 
   let regExpPassword =
     /^(?=.{8,25}$)(?=.*?[a-z])(?=.*?[A-Z])(?=(?:.*?[0-9]){2}).*$/
 
+  console.log(decodedToken.password)
+  console.log(decodedToken.email)
+
   const handleRegister = (e) => {
     e.preventDefault()
 
+    const checkCurrentPassword = () => {
+      if (bcrypt.compareSync(currentPassword, decodedToken.password)) {
+        currentPasswordError.innerHTML = ''
+        return true
+      } else {
+        currentPasswordError.innerHTML = 'Le mot de passe actuel est incorrect'
+        return false
+      }
+    }
+    checkCurrentPassword()
+
     const checkPasswordUpdate = () => {
-      console.log()
       if (!passwordUpdateInput.value.match(regExpPassword)) {
         passwordError.innerHTML =
           'Le mot de passe doit comprendre entre 8 et 25 caractères, au moins une lettre minuscule, au moins une lettre majuscule et au moins 2 chiffres'
         return false
       } else {
         passwordError.innerHTML = ''
-        console.log(passwordUpdate)
         return true
       }
     }
@@ -56,7 +72,11 @@ const UpdateProfile = () => {
     }
     checkControlPasswordUpdate()
 
-    if (checkPasswordUpdate() && checkControlPasswordUpdate()) {
+    if (
+      checkCurrentPassword() &&
+      checkPasswordUpdate() &&
+      checkControlPasswordUpdate()
+    ) {
       axios({
         method: 'put',
         url: `${process.env.REACT_APP_API_URL}/api/auth/profile-infos`,
@@ -95,6 +115,16 @@ const UpdateProfile = () => {
               <div>
                 <h3>Modifier votre mot de passe</h3>
                 <form action="" onSubmit={handleRegister} id="form">
+                  <label htmlFor="password-update">Mot de passe actuel</label>
+                  <br />
+                  <input
+                    type="password"
+                    name="current-password"
+                    id="current-update"
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    value={currentPassword}
+                  />
+                  <div className="current-password error"></div>
                   <br />
                   <label htmlFor="password-update">Nouveau mot de passe</label>
                   <br />
