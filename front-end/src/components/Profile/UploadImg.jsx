@@ -10,11 +10,9 @@ const UploadImg = () => {
 
   // Image que l'on envoie au back-end :
   const [file, setFile] = useState()
-  console.log(file)
 
   // Image que l'on voit à l'écran après sélection de la photo :
   const [profileImage, setProfileImage] = useState()
-  console.log(profileImage)
 
   // Si on a ajouté/changé la photo de profil :
   const [newPhoto, setNewPhoto] = useState(false)
@@ -63,7 +61,7 @@ const UploadImg = () => {
       {newPhoto ? (
         <>
           <div className="profile-pictures">
-            <img src={profileImage} className="new-image" alt="" />
+            <img src={profileImage} className="new-image" alt="img de profil" />
           </div>
           <span className="update-success">Photo de profil enregistrée</span>
         </>
@@ -76,7 +74,7 @@ const UploadImg = () => {
                   <img
                     src={DefaultProfilePhoto}
                     className="profile-image"
-                    alt=""
+                    alt="img de profil par défaut"
                   />
                 </div>
                 <div>
@@ -104,7 +102,7 @@ const UploadImg = () => {
                   <img
                     src={decodedToken.profileImage}
                     className="profile-image"
-                    alt=""
+                    alt="img de profil"
                   />
                 </div>
                 <div>
@@ -112,7 +110,7 @@ const UploadImg = () => {
                 </div>
               </div>
               <form action="" onSubmit={modifyPicture}>
-                <label htmlFor="file">Changer la photo</label>
+                <label htmlFor="file">Choisir une photo</label>
                 <>
                   <input
                     type="file"
