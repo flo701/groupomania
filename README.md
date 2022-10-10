@@ -17,7 +17,7 @@ git clone https://github.com/flo701/groupomania.git
 Ouvrez le dossier db-config situé dans le dossier back-end, et suivez les indications pour créer votre base de données Groupomania.
 
 ### Démarrer le back-end :
-Connectez votre serveur à votre base de données. 
+- Connectez votre serveur à votre base de données. 
 
 Pour cela, renommez le fichier .env.example en .env. Et renseignez-y vos identifiants DB_USER et DB_PASSWORD :
 
@@ -25,11 +25,11 @@ DB_USER = "votre nom d'utilisateur pour votre base de données"
 
 DB_PASSWORD = "votre mot de passe pour votre base de données"
 
-Assignez une variable de votre choix à :
+- Assignez une variable de votre choix à :
 
 RANDOM_TOKEN_SECRET = " "
 
-Ouvrez un terminal, positionnez-vous dans le dossier back-end (avec la commande "cd groupomania/back-end") et tapez :
+- Ouvrez un terminal, positionnez-vous dans le dossier back-end (avec la commande "cd groupomania/back-end") et tapez :
 ```
 npm install
 ```
@@ -37,18 +37,18 @@ puis
 ```
 npm start
 ```
-Vous devriez voir le message suivant dans votre terminal : 
+- Vous devriez voir le message suivant dans votre terminal : 
 
 "Listening on port 3000
 
 Connexion à mySQL réussie !"
 
 ### Démarrer le front-end :
-Renommez le fichier .env.example du front-end en .env.local. Et assignez une variable de votre choix à :
+- Renommez le fichier .env.example du front-end en .env.local. Et assignez une variable de votre choix à :
 
 REACT_APP_RANDOM_TOKEN_SECRET = " "
 
-Ouvrez un autre terminal, positionnez-vous dans le dossier front-end (avec la commande "cd groupomania/front-end") et tapez :
+- Ouvrez un autre terminal, positionnez-vous dans le dossier front-end (avec la commande "cd groupomania/front-end") et tapez :
 ```
 npm install
 ```
@@ -56,7 +56,7 @@ puis
 ```
 npm start
 ```
-Dans votre navigateur, vous devriez voir apparaître la page de connexion à groupomania (généralement sur le port 3001).
+- Dans votre navigateur, vous devriez voir apparaître la page de connexion à groupomania (généralement sur le port 3001).
 
 
 
