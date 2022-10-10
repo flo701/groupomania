@@ -14,7 +14,7 @@ Créez un dossier vide et clonez ce repository à l'intérieur en tapant :
 git clone https://github.com/flo701/groupomania.git
 ```
 ### Créer la base de données groupomania :
-Ouvrez le dossier db-config situé dans le dossier back-end, et suivez les indications pour créer votre base de données Groupomania.
+Ouvrez le fichier db-config.sql situé dans le back-end, et suivez les indications pour créer votre base de données Groupomania.
 
 ### Démarrer le back-end :
 - Connectez votre serveur à votre base de données. 
@@ -45,7 +45,7 @@ Connexion à mySQL réussie !"
 
 ### Démarrer le front-end :
 - Renommez le fichier .env.example du front-end en .env.local. 
-Et assignez la même variable que vous avez choisie pour RANDOM_TOKEN_SECRET du back-end :
+Et assignez la même variable que vous avez choisie pour RANDOM_TOKEN_SECRET du back-end à :
 
 REACT_APP_RANDOM_TOKEN_SECRET = " "
 
