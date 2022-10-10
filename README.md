@@ -7,7 +7,7 @@
 Utilisation de MySQL, Express et React.
 
 ## Lancer le projet :
-Node et "npm" devront être installés localement sur votre machine.
+Node.js et npm devront être installés localement sur votre machine.
 
 Créez un dossier vide et clonez ce repository à l'intérieur en tapant : 
 
@@ -31,10 +31,13 @@ RANDOM_TOKEN_SECRET = " "
 
 Ouvrez un terminal, positionnez-vous dans le dossier back-end (avec la commande "cd groupomania/back-end") et tapez :
 
-npm install, puis
-
+```
+npm install
+```
+puis
+```
 npm start
-
+```
 Vous devriez voir le message suivant dans votre terminal : 
 
 "Listening on port 3000
