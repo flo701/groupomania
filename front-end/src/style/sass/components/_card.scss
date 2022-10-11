@@ -209,24 +209,24 @@
     width: 35px;
     height: 35px;
     margin: auto;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     img {
       position: absolute;
       left: 0px;
       height: 35px;
       width: 35px;
-      cursor: pointer;
     }
     input {
       width: 35px;
       height: 35px;
       position: absolute;
       opacity: 0;
-      cursor: pointer;
     }
   }
 
   &_validation-btn {
+    padding: 8px 20px 8px 20px;
+    border-radius: 20px;
     cursor: pointer;
   }
 }
