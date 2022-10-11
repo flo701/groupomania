@@ -149,10 +149,12 @@ const Card = (props) => {
             <p>{timestampParser(props.post.creationDate)}</p>
           </div>
           <div className="card_title-and-description-and-image">
-            <div className="card_title">
-              <h2> {props.post.title}</h2>
+            <div className="card_title-and-description">
+              <div className="card_title">
+                <h3> {props.post.title}</h3>
+              </div>
+              <div className="card_description">{props.post.description}</div>
             </div>
-            <div className="card_description">{props.post.description}</div>
             {props.post.image && (
               <img src={props.post.image} alt="img" className="card_post-img" />
             )}

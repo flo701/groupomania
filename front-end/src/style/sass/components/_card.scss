@@ -22,9 +22,6 @@
       width: auto;
       padding-top: 35px;
     }
-    @media screen and (max-width: 281px) {
-      padding-top: 43px;
-    }
   }
 
   &_profileImage {
@@ -98,10 +95,10 @@
   &_date {
     position: absolute;
     right: 20px;
-    top: 0px;
+    top: 10px;
     @media screen and (max-width: 615px) {
+      width: 100%;
       text-align: center;
-      right: 0px;
       left: 50%;
       transform: translateX(-50%);
     }
@@ -144,10 +141,21 @@
     margin-bottom: 15px;
   }
 
-  &_title {
-    margin-top: 23px;
-    margin-bottom: 10px;
+  &_title-and-description {
     width: 450px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: solid 1px black;
+    border-radius: 7px;
+    @media screen and (max-width: 615px) {
+      width: 100%;
+    }
+  }
+
+  &_title {
+    margin-bottom: 10px;
     text-align: center;
     @media screen and (max-width: 615px) {
       width: auto;
@@ -155,7 +163,6 @@
   }
 
   &_description {
-    width: 450px;
     margin-bottom: 30px;
     text-align: center;
     @media screen and (max-width: 615px) {
