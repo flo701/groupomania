@@ -5,16 +5,6 @@ import NewPostForm from './NewPostForm'
 import jwt_decode from 'jwt-decode'
 
 const Posts = () => {
-  document.onreadystatechange = () => {
-    if (document.readyState !== 'complete') {
-      document.querySelector('body').style.visibility = 'hidden'
-      document.querySelector('.loading').style.visibility = 'visible'
-    } else {
-      document.querySelector('.loading').style.display = 'none'
-      document.querySelector('body').style.visibility = 'visible'
-    }
-  }
-
   const token = getCookie('token')
   const headers = { Authorization: `Bearer ${token}` }
   const config = { headers }
@@ -53,7 +43,6 @@ const Posts = () => {
 
   return (
     <div className="posts">
-      <div className="loading"></div>
       <>
         <h3 className="posts_h3">Bienvenue {decodedToken.firstname} </h3>
       </>
