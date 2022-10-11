@@ -4,6 +4,8 @@ import GroupomaniaLogo from '../../assets/logo/icon-left-font.png'
 import LogOutIcon from '../../assets/icons/logout.svg'
 import cookie from 'js-cookie'
 import axios from 'axios'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 const Header = () => {
   const token = getCookie('token')
@@ -47,7 +49,9 @@ const Header = () => {
                 <li>Profil</li>
               </NavLink>
               <li className="logOut" onClick={LogOut}>
-                <img src={LogOutIcon} alt="déconnexion" />
+                <Tippy content="Se déconnecter">
+                  <img src={LogOutIcon} alt="déconnexion" />
+                </Tippy>
               </li>
             </ul>
           </div>

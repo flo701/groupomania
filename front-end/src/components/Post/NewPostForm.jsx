@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { timestampParser } from '../Utils'
 import axios from 'axios'
 import Picture from '../../assets/icons/picture.svg'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 const NewPostForm = () => {
   const token = getCookie('token')
@@ -115,13 +117,15 @@ const NewPostForm = () => {
         <div className="icon">
           <>
             <img src={Picture} alt="" />
-            <input
-              type="file"
-              id="file-upload"
-              name="file"
-              accept=".jpg, .jpeg, .png, .webp"
-              onChange={(e) => handlePicture(e)}
-            />
+            <Tippy content="Choisir une image">
+              <input
+                type="file"
+                id="file-upload"
+                name="file"
+                accept=".jpg, .jpeg, .png, .webp"
+                onChange={(e) => handlePicture(e)}
+              />
+            </Tippy>
           </>
         </div>
         <div className="buttons">

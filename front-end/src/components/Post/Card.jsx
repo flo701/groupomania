@@ -8,6 +8,8 @@ import jwt_decode from 'jwt-decode'
 import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
 import Trash from '../../assets/icons/trash.svg'
 import Edit from '../../assets/icons/edit.svg'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 const Card = (props) => {
   const token = getCookie('token')
@@ -116,24 +118,28 @@ const Card = (props) => {
         {(decodedToken.userId === props.post.user_id ||
           decodedToken.status === 'ADMIN') && (
           <div className="card_modify-and-delete">
-            <img
-              className="card_modify"
-              onClick={(e) => setIsUpdated(!isUpdated)}
-              src={Edit}
-              alt="modifier"
-            />
-            <img
-              className="card_delete"
-              onClick={(e) => {
-                if (
-                  window.confirm('Voulez-vous vraiment supprimer ce post ?')
-                ) {
-                  deleteCard()
-                }
-              }}
-              src={Trash}
-              alt="supprimer"
-            />
+            <Tippy content="Modifier">
+              <img
+                className="card_modify"
+                onClick={(e) => setIsUpdated(!isUpdated)}
+                src={Edit}
+                alt="modifier"
+              />
+            </Tippy>
+            <Tippy content="Supprimer">
+              <img
+                className="card_delete"
+                onClick={(e) => {
+                  if (
+                    window.confirm('Voulez-vous vraiment supprimer ce post ?')
+                  ) {
+                    deleteCard()
+                  }
+                }}
+                src={Trash}
+                alt="supprimer"
+              />
+            </Tippy>
           </div>
         )}
 
@@ -194,13 +200,15 @@ const Card = (props) => {
                 </div>
                 <div className="card_file-icon">
                   <img src={Picture} alt="img" />
-                  <input
-                    type="file"
-                    id="file-upload"
-                    name="file"
-                    accept=".jpg, .jpeg, .png, .webp"
-                    onChange={(e) => handlePicture(e)}
-                  />
+                  <Tippy content="Choisir une image">
+                    <input
+                      type="file"
+                      id="file-upload"
+                      name="file"
+                      accept=".jpg, .jpeg, .png, .webp"
+                      onChange={(e) => handlePicture(e)}
+                    />
+                  </Tippy>
                 </div>
               </>
             )}
