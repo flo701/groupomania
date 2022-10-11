@@ -124,7 +124,7 @@ const NewPostForm = () => {
             />
           </>
         </div>
-        <div className="btn-send">
+        <div className="buttons">
           {title || description || postPicture ? (
             <button className="cancel" onClick={cancelPost}>
               Annuler
