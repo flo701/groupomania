@@ -135,7 +135,7 @@ const UpdateProfile = () => {
                   <div className="password-update error"></div>
                   <br />
                   <label htmlFor="password-conf-update">
-                    Confirmez le mot de passe
+                    Confirmez le nouveau mot de passe
                   </label>
                   <br />
                   <input
