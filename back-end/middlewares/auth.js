@@ -11,18 +11,14 @@ module.exports = (req, res, next) => {
     // Nous extrayons le token du header Authorization de la requête entrante.
     // Il contiendra également le mot-clé Bearer.
     // Nous utilisons donc la fonction split pour tout récupérer après l'espace dans le header :
-
     const token = req.headers.authorization.split(' ')[1]
 
     // Nous utilisons ensuite la fonction verify pour décoder notre token, pour vérifier sa validité :
     // ("iat" : date à laquelle à été créé le jeton (issued at), "exp" : date d'expiration du jeton)
-
     const decodedToken = jwt.verify(token, process.env.RANDOM_TOKEN_SECRET)
-    // console.log('Token décodé : ' + JSON.stringify(decodedToken))
 
     // Nous extrayons l'ID utilisateur de notre token
     // et le rajoutons à l’objet Request afin que nos différentes routes puissent l’exploiter :
-
     const userId = decodedToken.userId
     req.auth = {
       userId: userId,
