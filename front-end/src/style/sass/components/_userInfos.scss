@@ -1,0 +1,63 @@
+.user {
+  &_container {
+    background: $color-secondary;
+    max-width: 400px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 23px;
+    padding-bottom: 23px;
+    border-radius: 20px;
+    text-align: center;
+    @media screen and (max-width: 420px) {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+    @media screen and (max-width: 290px) {
+      margin-left: 6px;
+      margin-right: 6px;
+    }
+  }
+  &_profileImage {
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    cursor: pointer;
+    @media screen and (max-width: 615px) {
+      margin-top: 10px;
+    }
+  }
+  &_names {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  &_creationDate {
+    margin-bottom: 20px;
+  }
+  &_active {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 5px;
+    &-admin {
+      color: green;
+      font-weight: bold;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+  }
+  &_deactivate {
+    color: $color-primary;
+    font-weight: bold;
+    margin-bottom: 5px;
+    &-admin {
+      color: $color-primary;
+      font-weight: bold;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+  }
+}
