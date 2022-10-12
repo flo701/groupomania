@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
+
 const mysql = require('mysql')
 
 const connection = mysql.createConnection({
@@ -61,7 +62,7 @@ exports.login = (req, res) => {
   const password = req.body.password
 
   connection.query(
-    'SELECT * FROM user WHERE email = ?',
+    'SELECT * FROM user WHERE email = ? AND active=1',
     email,
     (error, results, fields) => {
       if (error) {
@@ -86,6 +87,7 @@ exports.login = (req, res) => {
                       lastname: results[0].lastname,
                       firstname: results[0].firstname,
                       email: results[0].email,
+                      password: results[0].password,
                       profileImage: results[0].profileImage,
                       creationDate: results[0].creationDate,
                     },
@@ -101,6 +103,21 @@ exports.login = (req, res) => {
               res.status(500).json({ error })
             })
         }
+      }
+    }
+  )
+}
+
+// Obtenir les infos d'un utilisateur :
+exports.getOneUser = (req, res) => {
+  connection.query(
+    `SELECT * FROM user WHERE id=${req.params.userId}`,
+    function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        console.log('Result : ' + JSON.stringify(result))
+        res.status(200).json(result)
       }
     }
   )
