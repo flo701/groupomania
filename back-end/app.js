@@ -16,14 +16,14 @@ const rateLimit = require('express-rate-limit')
 // On va appliquer la limite suivante aux routes "posts" :
 const limiter1 = rateLimit({
   windowMs: 10 * 60 * 1000, // Equivalent de 10 minutes
-  max: 500, // Le client pourra donc faire 500 requêtes toutes les 10 minutes
+  max: 200, // Le client pourra donc faire 200 requêtes toutes les 10 minutes
   message: 'Too many requests, please try again in 10 minutes.',
 })
 
 // On va appliquer la limite suivante aux routes "auth" :
 const limiter2 = rateLimit({
   windowMs: 10 * 60 * 1000, // Equivalent de 10 minutes
-  max: 500, // le client pourra faire 500 requêtes toutes les 10 minutes
+  max: 200, // le client pourra faire 200 requêtes toutes les 10 minutes
   message: 'Too many requests, please try again in 10 minutes.',
 })
 
