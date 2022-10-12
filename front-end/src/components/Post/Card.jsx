@@ -10,6 +10,8 @@ import Trash from '../../assets/icons/trash.svg'
 import Edit from '../../assets/icons/edit.svg'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
+import UserInfos from '../UserInfos/index.jsx'
+// import UserProfile from '../../pages/UserProfile'
 
 const Card = (props) => {
   const token = getCookie('token')
@@ -29,6 +31,9 @@ const Card = (props) => {
   const [postUpdatedPicture, setPostUpdatedPicture] = useState()
   // file est la nouvelle image que l'on va envoyer au back-end :
   const [fileUpdated, setFileUpdated] = useState()
+
+  const [userId, setUserId] = useState('')
+  console.log(userId)
 
   const postId = props.post.id
 
@@ -105,14 +110,17 @@ const Card = (props) => {
             className="card_profileImage"
             src={props.post.profileImage}
             alt="vrai profil"
+            onClick={(e) => setUserId(props.post.user_id)}
           ></img>
         ) : (
           <img
             className="card_profileImage"
             src={DefaultProfilePhoto}
             alt="profil par défaut"
+            onClick={(e) => setUserId(props.post.user_id)}
           ></img>
         )}
+        {userId && <UserInfos userId={userId} />}
         <div className="card_firstname">{props.post.firstname}</div>
         <div className="card_lastname">{props.post.lastname}</div>
         {(decodedToken.userId === props.post.user_id ||
