@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const fs = require('fs')
 
 const mysql = require('mysql')
+const { log } = require('console')
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -118,6 +119,42 @@ exports.getOneUser = (req, res) => {
       } else {
         console.log('Result : ' + JSON.stringify(result))
         res.status(200).json(result)
+      }
+    }
+  )
+}
+
+// Désactiver ou réactiver le compte d'un utilisateur :
+exports.accountActivation = (req, res) => {
+  connection.query(
+    `SELECT * FROM user WHERE id=${req.params.userId}`,
+    function (err, result) {
+      if (err) {
+        throw err
+      } else {
+        if (result[0].active == '1') {
+          connection.query(
+            `UPDATE user SET active='0' WHERE id=${req.params.userId}`,
+            function (err, result) {
+              if (err) {
+                throw err
+              } else {
+                res.status(201).json({ message: 'Compte désactivé' })
+              }
+            }
+          )
+        } else if (result[0].active == '0') {
+          connection.query(
+            `UPDATE user SET active='1' WHERE id=${req.params.userId}`,
+            function (err, result) {
+              if (err) {
+                throw err
+              } else {
+                res.status(201).json({ message: 'Compte réactivé' })
+              }
+            }
+          )
+        }
       }
     }
   )
