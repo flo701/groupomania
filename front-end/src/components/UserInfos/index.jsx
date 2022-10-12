@@ -4,6 +4,7 @@ import axios from 'axios'
 import { timestampParser } from '../Utils'
 import jwt_decode from 'jwt-decode'
 import { useEffect } from 'react'
+import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
 
 const UserInfos = () => {
   const token = getCookie('token')
@@ -68,13 +69,23 @@ const UserInfos = () => {
 
   return (
     <div className="user_container">
-      <div>
-        <img
-          src={profileImage}
-          alt="img profil"
-          className="user_profileImage"
-        ></img>{' '}
-      </div>
+      {profileImage ? (
+        <div>
+          <img
+            src={profileImage}
+            alt="img profil"
+            className="user_profileImage"
+          ></img>{' '}
+        </div>
+      ) : (
+        <div>
+          <img
+            src={DefaultProfilePhoto}
+            alt="img profil"
+            className="user_profileImage"
+          ></img>{' '}
+        </div>
+      )}
       <div className="user_names">
         {firstname} {lastname}
       </div>
@@ -90,7 +101,7 @@ const UserInfos = () => {
               Compte actif
             </div>
           ) : (
-            <div className="user_deactivate-admin" onClick={handleActivation}>
+            <div className="user_deactivated-admin" onClick={handleActivation}>
               Compte désactivé
             </div>
           )}
@@ -100,7 +111,7 @@ const UserInfos = () => {
           {isActive ? (
             <div className="user_active">Compte actif</div>
           ) : (
-            <div className="user_deactivate">Compte désactivé</div>
+            <div className="user_deactivated">Compte désactivé</div>
           )}
         </>
       )}
