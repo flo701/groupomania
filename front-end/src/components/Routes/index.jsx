@@ -5,6 +5,7 @@ import Posts from '../../pages/Posts'
 import Profile from '../../pages/Profile'
 import Connection from '../../pages/Connection'
 import Footer from '../Footer'
+import UserProfile from '../../pages/UserProfile'
 
 const index = () => {
   const token = getCookie('token')
@@ -16,6 +17,7 @@ const index = () => {
         <Routes>
           <Route path="/" element={<Posts />} />
           <Route path="/profil" element={<Profile />} />
+          <Route path="/infos-utilisateur" element={<UserProfile />} />
           {/* Si aucune route ne correspond, on renvoie à la page d'accueil */}
           <Route path="*" element={<Posts />} />
         </Routes>
