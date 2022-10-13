@@ -109,6 +109,7 @@ exports.login = (req, res) => {
   )
 }
 
+// -----------------------------------------------------------------------------------------------------------
 // Obtenir les infos d'un utilisateur :
 exports.getOneUser = (req, res) => {
   connection.query(
@@ -124,6 +125,7 @@ exports.getOneUser = (req, res) => {
   )
 }
 
+// ------------------------------------------------------------------------------------------------------------
 // Désactiver ou réactiver le compte d'un utilisateur :
 exports.accountActivation = (req, res) => {
   connection.query(
@@ -243,29 +245,29 @@ exports.logout = (req, res) => {
 
 // ---------------------------------------------------------------------------------------------------------------
 // Désinscription d'un utilisateur :
-exports.deleteUser = (req, res, next) => {
-  connection.query(
-    `SELECT * FROM user WHERE id=${req.auth.userId}`,
-    function (err, result) {
-      if (err) {
-        throw err
-      } else {
-        if (result[0].profileImage) {
-          // On supprime l'utilisateur de la base de données, mais aussi sa photo de profil :
-          const filename = result[0].profileImage.split('/images/')[1]
-          fs.unlink(`images/${filename}`, () => {})
-        }
-        connection.query(
-          `DELETE FROM user WHERE id=${req.auth.userId}`,
-          function (err, result) {
-            if (err) {
-              throw err
-            } else {
-              return res.status(200).json('Utilisateur désinscrit')
-            }
-          }
-        )
-      }
-    }
-  )
-}
+// exports.deleteUser = (req, res, next) => {
+//   connection.query(
+//     `SELECT * FROM user WHERE id=${req.auth.userId}`,
+//     function (err, result) {
+//       if (err) {
+//         throw err
+//       } else {
+//         if (result[0].profileImage) {
+//           // On supprime l'utilisateur de la base de données, mais aussi sa photo de profil :
+//           const filename = result[0].profileImage.split('/images/')[1]
+//           fs.unlink(`images/${filename}`, () => {})
+//         }
+//         connection.query(
+//           `DELETE FROM user WHERE id=${req.auth.userId}`,
+//           function (err, result) {
+//             if (err) {
+//               throw err
+//             } else {
+//               return res.status(200).json('Utilisateur désinscrit')
+//             }
+//           }
+//         )
+//       }
+//     }
+//   )
+// }
