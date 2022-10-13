@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 const fs = require('fs')
 
 const mysql = require('mysql')
-const { log } = require('console')
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -118,7 +117,6 @@ exports.getOneUser = (req, res) => {
       if (err) {
         throw err
       } else {
-        console.log('Result : ' + JSON.stringify(result))
         res.status(200).json(result)
       }
     }
@@ -242,32 +240,3 @@ exports.logout = (req, res) => {
   res.clearCookie('token')
   res.status(200).json('Déconnecté')
 }
-
-// ---------------------------------------------------------------------------------------------------------------
-// Désinscription d'un utilisateur :
-// exports.deleteUser = (req, res, next) => {
-//   connection.query(
-//     `SELECT * FROM user WHERE id=${req.auth.userId}`,
-//     function (err, result) {
-//       if (err) {
-//         throw err
-//       } else {
-//         if (result[0].profileImage) {
-//           // On supprime l'utilisateur de la base de données, mais aussi sa photo de profil :
-//           const filename = result[0].profileImage.split('/images/')[1]
-//           fs.unlink(`images/${filename}`, () => {})
-//         }
-//         connection.query(
-//           `DELETE FROM user WHERE id=${req.auth.userId}`,
-//           function (err, result) {
-//             if (err) {
-//               throw err
-//             } else {
-//               return res.status(200).json('Utilisateur désinscrit')
-//             }
-//           }
-//         )
-//       }
-//     }
-//   )
-// }
