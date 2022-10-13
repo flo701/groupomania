@@ -105,19 +105,23 @@ const Card = (props) => {
     <li className="card">
       <div className="card_profileImage-and-names-and-modify-and-like">
         {props.post.profileImage ? (
-          <img
-            className="card_profileImage"
-            src={props.post.profileImage}
-            alt="vrai profil"
-            onClick={handleUserInfos}
-          ></img>
+          <Tippy content="Voir la bio">
+            <img
+              className="card_profileImage"
+              src={props.post.profileImage}
+              alt="vrai profil"
+              onClick={handleUserInfos}
+            ></img>
+          </Tippy>
         ) : (
-          <img
-            className="card_profileImage"
-            src={DefaultProfilePhoto}
-            alt="profil par défaut"
-            onClick={handleUserInfos}
-          ></img>
+          <Tippy content="Voir la bio">
+            <img
+              className="card_profileImage"
+              src={DefaultProfilePhoto}
+              alt="profil par défaut"
+              onClick={handleUserInfos}
+            ></img>
+          </Tippy>
         )}
         <div className="card_firstname">{props.post.firstname}</div>
         <div className="card_lastname">{props.post.lastname}</div>
