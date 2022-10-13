@@ -18,6 +18,7 @@
       margin-right: 6px;
     }
   }
+
   &_profileImage {
     display: flex;
     margin: auto;
@@ -30,13 +31,16 @@
       margin-top: 10px;
     }
   }
+
   &_names {
     font-weight: bold;
     margin-bottom: 10px;
   }
+
   &_creationDate {
     margin-bottom: 20px;
   }
+
   &_active {
     color: green;
     font-weight: bold;
@@ -48,6 +52,7 @@
       cursor: pointer;
     }
   }
+
   &_deactivated {
     color: $color-primary;
     font-weight: bold;

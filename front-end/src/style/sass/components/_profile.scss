@@ -103,6 +103,10 @@
           padding-top: 10px;
           padding-bottom: 10px;
           cursor: pointer;
+          transition: transform 1s 40ms;
+          &:hover {
+            transform: scale(1.1);
+          }
         }
       }
     }
@@ -155,6 +159,10 @@
         padding-top: 10px;
         padding-bottom: 10px;
         cursor: pointer;
+        transition: transform 1s 40ms;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
 
