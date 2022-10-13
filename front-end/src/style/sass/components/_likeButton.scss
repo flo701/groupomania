@@ -6,6 +6,7 @@
   opacity: 0;
   color: transparent;
   background-clip: text;
+  // transition: all 1.5s 100ms;
   -webkit-background-clip: text;
   cursor: pointer;
 }
@@ -17,6 +18,7 @@
   background-clip: text;
   -webkit-background-clip: text;
   transform: scale(1.05);
+  // transition: all 1.5s 100ms;
   @media screen and (max-width: 615px) {
     transform: scale(1.05) translateY(-133%);
   }
