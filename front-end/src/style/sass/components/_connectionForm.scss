@@ -43,8 +43,9 @@
 .signup {
   &_success {
     display: flex;
+    text-align: center;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     color: green;
     font-weight: 600;
   }

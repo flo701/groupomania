@@ -1,12 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-// import SignUpForm from './SignUpForm'
 
 const SignInForm = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
-  // const [signUpModal, setSignUpModal] = useState(props.signup)
 
   const handleLogin = (e) => {
     // On ne veut pas que la page se recharge, donc on empêche le comportement par défaut :
@@ -47,47 +44,32 @@ const SignInForm = (props) => {
       })
   }
 
-  // const handleRegister = () => {
-  //   setSignUpModal(true)
-  // }
-
   return (
-    <>
-      {/* {signUpModal ? (
-        <SignUpForm />
-      ) : (
-        <> */}
-      <form action="" onSubmit={handleLogin} className="signin_form">
-        <label htmlFor="email">Email</label>
-        <br />
-        <input
-          type="text"
-          name="email"
-          id="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <div className="email error"></div>
-        <br />
-        <label htmlFor="password">Mot de passe</label>
-        <br />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-        <div className="password error"></div>
-        <br />
-        <input id="submit" type="submit" value="Se connecter" />
-      </form>
-      {/* <div className="signin_toggle" onClick={handleRegister}>
-            Pas encore de compte ? Inscrivez-vous
-          </div>
-        </>
-      )} */}
-    </>
+    <form action="" onSubmit={handleLogin} className="signin_form">
+      <label htmlFor="email">Email</label>
+      <br />
+      <input
+        type="text"
+        name="email"
+        id="email"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+      />
+      <div className="email error"></div>
+      <br />
+      <label htmlFor="password">Mot de passe</label>
+      <br />
+      <input
+        type="password"
+        name="password"
+        id="password"
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
+      />
+      <div className="password error"></div>
+      <br />
+      <input id="submit" type="submit" value="Se connecter" />
+    </form>
   )
 }
 
