@@ -30,7 +30,7 @@
       margin: 10px 10px;
       position: relative;
       text-align: center;
-      width: 450px;
+      width: 410px;
       background: #ffd7d7;
       border-radius: 20px;
       padding-top: 10px;
@@ -118,12 +118,12 @@
       padding-right: 40px;
       padding-top: 10px;
       padding-bottom: 28px;
-      width: 450px;
+      width: 410px;
       background: #ffd7d7;
       border-radius: 20px;
-      @media screen and (min-width: 767px) and (max-width: 786px) {
-        padding-left: 34px;
-        padding-right: 34px;
+      @media screen and (min-width: 767px) and (max-width: 792px) {
+        padding-left: 33px;
+        padding-right: 33px;
       }
 
       h3 {
@@ -175,10 +175,4 @@
       font-weight: 600;
     }
   }
-
-  // .unsubscribe {
-  //   text-align: center;
-  //   margin-top: 20px;
-  //   cursor: pointer;
-  // }
 }
