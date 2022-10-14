@@ -23,6 +23,9 @@ const normalizePort = (val) => {
 // On déclare le port (dont le numéro est indiqué dans le fichier .env) :
 const port = normalizePort(`${process.env.PORT}`)
 
+// On dit à notre application express sur quel port elle doit tourner :
+app.set('port', port)
+
 // La fonction errorHandler recherche les différentes erreurs et les gère de manière appropriée :
 const errorHandler = (error) => {
   if (error.syscall !== 'listen') {
@@ -43,10 +46,6 @@ const errorHandler = (error) => {
       throw error
   }
 }
-
-// On dit à notre application express sur quel port elle doit tourner :
-app.set('port', port)
-// app.set (process.env.PORT);
 
 // La fonction errorHandler est enregistrée dans le serveur :
 server.on('error', errorHandler)

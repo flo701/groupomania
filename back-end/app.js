@@ -64,7 +64,7 @@ app.use(helmet({ crossOriginResourcePolicy: false }))
 // Les headers suivants permettent :
 //    - d'accéder à notre API depuis n'importe quelle origine ( '*' )
 // (afin d'éviter les erreurs de CORS.
-// Dans notre cas, nous avons deux origines : localhost:3000 et localhost:4200,
+// Dans notre cas, nous avons deux origines : localhost:3000 et localhost:3001,
 // et nous souhaitons qu'elles puissent communiquer entre elles) ;
 //    - d'ajouter les headers mentionnés aux requêtes envoyées vers notre API (Origin , X-Requested-With , etc.) ;
 //    - d'envoyer des requêtes avec les méthodes mentionnées ( GET ,POST , etc.) :
