@@ -126,34 +126,41 @@ exports.getOneUser = (req, res) => {
 // ------------------------------------------------------------------------------------------------------------
 // Désactiver ou réactiver le compte d'un utilisateur :
 exports.accountActivation = (req, res) => {
+  const token = req.headers.authorization.split(' ')[1]
+  const decodedToken = jwt.verify(token, process.env.RANDOM_TOKEN_SECRET)
+
   connection.query(
     `SELECT * FROM user WHERE id=${req.params.userId}`,
     function (err, result) {
       if (err) {
         throw err
       } else {
-        if (result[0].active == '1') {
-          connection.query(
-            `UPDATE user SET active='0' WHERE id=${req.params.userId}`,
-            function (err, result) {
-              if (err) {
-                throw err
-              } else {
-                res.status(201).json({ message: 'Compte désactivé' })
+        if (decodedToken.status != 'ADMIN') {
+          res.status(403).json({ message: 'Requête non autorisée' })
+        } else {
+          if (result[0].active == '1') {
+            connection.query(
+              `UPDATE user SET active='0' WHERE id=${req.params.userId}`,
+              function (err, result) {
+                if (err) {
+                  throw err
+                } else {
+                  res.status(201).json({ message: 'Compte désactivé' })
+                }
               }
-            }
-          )
-        } else if (result[0].active == '0') {
-          connection.query(
-            `UPDATE user SET active='1' WHERE id=${req.params.userId}`,
-            function (err, result) {
-              if (err) {
-                throw err
-              } else {
-                res.status(201).json({ message: 'Compte réactivé' })
+            )
+          } else if (result[0].active == '0') {
+            connection.query(
+              `UPDATE user SET active='1' WHERE id=${req.params.userId}`,
+              function (err, result) {
+                if (err) {
+                  throw err
+                } else {
+                  res.status(201).json({ message: 'Compte réactivé' })
+                }
               }
-            }
-          )
+            )
+          }
         }
       }
     }
