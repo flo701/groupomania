@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import axios from 'axios'
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 
 const LikeCard = (props) => {
   const token = getCookie('token')
@@ -57,12 +59,14 @@ const LikeCard = (props) => {
   return (
     <>
       <div className="card_like">
-        <div
-          className={postLiked === true ? 'heart2' : 'heart1'}
-          onClick={likeHandle}
-        >
-          <i className="fa-solid fa-2x fa-heart"></i>
-        </div>
+        <Tippy content="Aimer / Ne plus aimer">
+          <div
+            className={postLiked === true ? 'heart2' : 'heart1'}
+            onClick={likeHandle}
+          >
+            <i className="fa-solid fa-2x fa-heart"></i>
+          </div>
+        </Tippy>
       </div>
       <span className="card_number-of-likes">{numberOfLikes} </span>
     </>
