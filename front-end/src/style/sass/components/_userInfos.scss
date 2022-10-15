@@ -37,6 +37,11 @@
     margin-bottom: 10px;
   }
 
+  &_admin {
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
   &_creationDate {
     margin-bottom: 20px;
   }
@@ -45,11 +50,20 @@
     color: green;
     font-weight: bold;
     margin-bottom: 5px;
-    &-admin {
-      color: green;
-      font-weight: bold;
-      margin-bottom: 5px;
-      cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: white;
+    width: 130px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3px;
+  }
+  &_active-admin {
+    cursor: pointer;
+    transition: transform 1000ms 40ms;
+    &:hover {
+      transform: scale(1.15);
     }
   }
 
@@ -57,11 +71,20 @@
     color: $color-primary;
     font-weight: bold;
     margin-bottom: 5px;
-    &-admin {
-      color: $color-primary;
-      font-weight: bold;
-      margin-bottom: 5px;
-      cursor: pointer;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: white;
+    width: 160px;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3px;
+  }
+  &_deactivated-admin {
+    cursor: pointer;
+    transition: transform 1000ms 40ms;
+    &:hover {
+      transform: scale(1.15);
     }
   }
 }

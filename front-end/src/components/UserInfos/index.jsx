@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { timestampParser } from '../Utils'
+import { timestampParser } from '../../utils/timestampParser'
 import jwt_decode from 'jwt-decode'
 import { useEffect } from 'react'
 import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
@@ -20,6 +20,7 @@ const UserInfos = () => {
   const [creationDate, setCreationDate] = useState('')
 
   const [isActive, setIsActive] = useState()
+  const [isAdmin, setIsAdmin] = useState(false)
 
   const handleActivation = () => {
     setIsActive(!isActive)
@@ -37,6 +38,9 @@ const UserInfos = () => {
           setIsActive(true)
         } else {
           setIsActive(false)
+        }
+        if (res.data[0].status === 'ADMIN') {
+          setIsAdmin(true)
         }
         setProfileImage(res.data[0].profileImage)
         setFirstname(res.data[0].firstname)
@@ -89,6 +93,7 @@ const UserInfos = () => {
       <div className="user_names">
         {firstname} {lastname}
       </div>
+      {isAdmin && <div className="user_admin">Administratrice</div>}
       <div className="user_creationDate">
         Membre depuis : <br />
         {creationDate}{' '}
@@ -97,11 +102,17 @@ const UserInfos = () => {
       {decodedToken.status === 'ADMIN' ? (
         <>
           {isActive ? (
-            <div className="user_active-admin" onClick={handleActivation}>
+            <div
+              className="user_active user_active-admin"
+              onClick={handleActivation}
+            >
               Compte actif
             </div>
           ) : (
-            <div className="user_deactivated-admin" onClick={handleActivation}>
+            <div
+              className="user_deactivated user_deactivated-admin"
+              onClick={handleActivation}
+            >
               Compte désactivé
             </div>
           )}
