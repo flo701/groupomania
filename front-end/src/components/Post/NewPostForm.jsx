@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { timestampParser } from '../Utils'
+import { timestampParser } from '../../utils/timestampParser'
 import axios from 'axios'
 import Picture from '../../assets/icons/picture.svg'
 import Tippy from '@tippyjs/react'

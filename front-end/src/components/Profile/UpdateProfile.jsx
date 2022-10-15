@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import UploadImg from './UploadImg'
-import { timestampParser } from '../Utils'
+import { timestampParser } from '../../utils/timestampParser'
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
