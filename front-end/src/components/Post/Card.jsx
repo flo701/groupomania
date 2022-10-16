@@ -33,7 +33,7 @@ const Card = (props) => {
   const [fileUpdated, setFileUpdated] = useState()
 
   const handleUserInfos = (id) => {
-    window.location = `/infos-utilisateur?id=${props.post.user_id}`
+    window.location = `/infos-utilisateur?id=${id}`
   }
 
   const handlePicture = (e) => {
@@ -110,7 +110,7 @@ const Card = (props) => {
               className="card_profileImage"
               src={props.post.profileImage}
               alt="vrai profil"
-              onClick={handleUserInfos}
+              onClick={handleUserInfos(props.post.user_id)}
             ></img>
           </Tippy>
         ) : (
@@ -119,7 +119,7 @@ const Card = (props) => {
               className="card_profileImage"
               src={DefaultProfilePhoto}
               alt="profil par défaut"
-              onClick={handleUserInfos}
+              onClick={handleUserInfos(props.post.user_id)}
             ></img>
           </Tippy>
         )}

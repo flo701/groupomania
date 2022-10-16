@@ -9,12 +9,6 @@ import 'tippy.js/dist/tippy.css'
 const NewPostForm = () => {
   const token = getCookie('token')
 
-  const api = axios.create({ baseURL: `${process.env.REACT_APP_API_URL}/api` })
-  api.interceptors.request.use((req) => {
-    req.headers.Authorization = `Bearer ${token}`
-    return req
-  })
-
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const titleError = document.querySelector('.title-error')
@@ -24,6 +18,12 @@ const NewPostForm = () => {
   const [postPicture, setPostPicture] = useState()
   // file est l'image que l'on va envoyer au back-end :
   const [file, setFile] = useState()
+
+  const api = axios.create({ baseURL: `${process.env.REACT_APP_API_URL}/api` })
+  api.interceptors.request.use((req) => {
+    req.headers.Authorization = `Bearer ${token}`
+    return req
+  })
 
   const handlePost = () => {
     const checkTitle = () => {

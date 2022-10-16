@@ -2,11 +2,9 @@ import React, { useState } from 'react'
 import SignUpForm from './SignUpForm'
 import SignInForm from './SignInForm'
 
-// Les props ont été définies dans pages/Connection/index.jsx.
-// Pour rappel, on a mis signup={false} signin={true} :
-const ConnectionForm = (props) => {
-  const [signUpModal, setSignUpModal] = useState(props.signup)
-  const [signInModal, setSignInModal] = useState(props.signin)
+const ConnectionForm = () => {
+  const [signUpModal, setSignUpModal] = useState(false)
+  const [signInModal, setSignInModal] = useState(true)
 
   const handleModals = (e) => {
     if (e.target.id === 'connection-form_register') {

@@ -146,8 +146,8 @@ const SignUpForm = () => {
       {formSubmit ? (
         <>
           <span className="signup_success">
-            Enregistrement réussi. <br />
-            Vous pouvez vous connecter.
+            Enregistrement réussi <br />
+            Vous pouvez vous connecter
           </span>
           <SignInForm />
         </>
