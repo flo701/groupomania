@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import UploadImg from './UploadImg'
-import { timestampParser } from '../../utils/timestampParser'
-import axios from 'axios'
+import getCookie from '../../utils/getCookie'
 import jwt_decode from 'jwt-decode'
+import axios from 'axios'
+import { timestampParser } from '../../utils/timestampParser'
+import UploadImg from './UploadImg'
 
 var bcrypt = require('bcryptjs')
 
@@ -163,23 +164,6 @@ const UpdateProfile = () => {
       </div>
     </>
   )
-}
-
-// https://www.w3schools.com/js/js_cookies.asp :
-function getCookie(cname) {
-  let name = cname + '='
-  let decodedCookie = decodeURIComponent(document.cookie)
-  let ca = decodedCookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1)
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length)
-    }
-  }
-  return ''
 }
 
 export default UpdateProfile

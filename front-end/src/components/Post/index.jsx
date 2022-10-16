@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import getCookie from '../../utils/getCookie'
+import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import Card from './Card'
 import NewPostForm from './NewPostForm'
-import jwt_decode from 'jwt-decode'
 
 const Posts = () => {
   const token = getCookie('token')
@@ -54,23 +55,6 @@ const Posts = () => {
       </ul>
     </div>
   )
-}
-
-// https://www.w3schools.com/js/js_cookies.asp :
-function getCookie(cname) {
-  let name = cname + '='
-  let decodedCookie = decodeURIComponent(document.cookie)
-  let ca = decodedCookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1)
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length)
-    }
-  }
-  return ''
 }
 
 export default Posts

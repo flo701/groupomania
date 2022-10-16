@@ -1,9 +1,10 @@
 import React from 'react'
+import cookie from 'js-cookie'
+import getCookie from '../../utils/getCookie'
+import axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import GroupomaniaLogo from '../../assets/logo/icon-left-font.png'
 import LogOutIcon from '../../assets/icons/logout.svg'
-import cookie from 'js-cookie'
-import axios from 'axios'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
@@ -65,23 +66,6 @@ const Header = () => {
       )}
     </>
   )
-}
-
-// https://www.w3schools.com/js/js_cookies.asp :
-function getCookie(cname) {
-  let name = cname + '='
-  let decodedCookie = decodeURIComponent(document.cookie)
-  let ca = decodedCookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1)
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length)
-    }
-  }
-  return ''
 }
 
 export default Header

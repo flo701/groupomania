@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SignUpForm from './SignUpForm'
 import SignInForm from './SignInForm'
 
-// Les props ont été définis dans pages/Connection/index.jsx.
+// Les props ont été définies dans pages/Connection/index.jsx.
 // Pour rappel, on a mis signup={false} signin={true} :
 const ConnectionForm = (props) => {
   const [signUpModal, setSignUpModal] = useState(props.signup)

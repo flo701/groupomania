@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import setCookie from '../../utils/setCookie'
 import axios from 'axios'
 
 const SignInForm = (props) => {
@@ -71,14 +72,6 @@ const SignInForm = (props) => {
       <input id="submit" type="submit" value="Se connecter" />
     </form>
   )
-}
-
-// https://www.w3schools.com/js/js_cookies.asp :
-function setCookie(cname, cvalue, exdays) {
-  const d = new Date()
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000)
-  let expires = 'expires=' + d.toUTCString()
-  document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/'
 }
 
 export default SignInForm

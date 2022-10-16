@@ -1,13 +1,13 @@
-import React from 'react'
-import { useState } from 'react'
-import LikeCard from './LikeCard'
+import React, { useState } from 'react'
+import getCookie from '../../utils/getCookie'
+import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { timestampParser } from '../../utils/timestampParser'
 import Picture from '../../assets/icons/picture.svg'
-import jwt_decode from 'jwt-decode'
-import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
 import Trash from '../../assets/icons/trash.svg'
 import Edit from '../../assets/icons/edit.svg'
+import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
+import LikeCard from './LikeCard'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
@@ -234,23 +234,6 @@ const Card = (props) => {
       )}
     </li>
   )
-}
-
-// https://www.w3schools.com/js/js_cookies.asp :
-function getCookie(cname) {
-  let name = cname + '='
-  let decodedCookie = decodeURIComponent(document.cookie)
-  let ca = decodedCookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1)
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length)
-    }
-  }
-  return ''
 }
 
 export default Card

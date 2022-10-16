@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import getCookie from '../../utils/getCookie'
 import axios from 'axios'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
@@ -17,13 +17,12 @@ const LikeCard = (props) => {
   // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
   useEffect(() => {
     for (let i = 0; i < arrayOfLikes.length; i++) {
-      // console.log(arrayOfLikes[i].post_id)
       if (postId === arrayOfLikes[i].post_id) setPostLiked(true)
     }
     // eslint-disable-next-line
   }, [arrayOfLikes])
 
-  // Au click sur le coeur, on appelle la fonction "likePost" :
+  // Au clic sur le coeur, on appelle la fonction "likePost" :
   const likeHandle = () => {
     axios({
       method: 'post',
@@ -71,23 +70,6 @@ const LikeCard = (props) => {
       <span className="card_number-of-likes">{numberOfLikes} </span>
     </>
   )
-}
-
-// https://www.w3schools.com/js/js_cookies.asp :
-function getCookie(cname) {
-  let name = cname + '='
-  let decodedCookie = decodeURIComponent(document.cookie)
-  let ca = decodedCookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1)
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length)
-    }
-  }
-  return ''
 }
 
 export default LikeCard
