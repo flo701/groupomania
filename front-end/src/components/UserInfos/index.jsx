@@ -21,11 +21,6 @@ const UserInfos = () => {
   const [isActive, setIsActive] = useState()
   const [isAdmin, setIsAdmin] = useState(false)
 
-  const handleActivation = () => {
-    setIsActive(!isActive)
-    accountActivation(userId)
-  }
-
   useEffect(() => {
     axios({
       method: 'get',
@@ -51,6 +46,11 @@ const UserInfos = () => {
       })
     // eslint-disable-next-line
   }, [])
+
+  const handleActivation = () => {
+    setIsActive(!isActive)
+    accountActivation(userId)
+  }
 
   const accountActivation = (id) => {
     axios({

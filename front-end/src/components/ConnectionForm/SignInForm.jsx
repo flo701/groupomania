@@ -6,11 +6,11 @@ const SignInForm = (props) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const emailError = document.querySelector('.email.error')
+  const passwordError = document.querySelector('.password.error')
+
   const handleLogin = (e) => {
-    // On ne veut pas que la page se recharge, donc on empêche le comportement par défaut :
     e.preventDefault()
-    const emailError = document.querySelector('.email.error')
-    const passwordError = document.querySelector('.password.error')
 
     axios({
       method: 'post',

@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import getCookie from './utils/getCookie'
 import Header from './components/Header'
 import Connection from './pages/Connection'
 import Posts from './pages/Posts'
@@ -30,23 +31,6 @@ const App = () => {
       <Footer />
     </Router>
   )
-}
-
-// https://www.w3schools.com/js/js_cookies.asp :
-function getCookie(cname) {
-  let name = cname + '='
-  let decodedCookie = decodeURIComponent(document.cookie)
-  let ca = decodedCookie.split(';')
-  for (let i = 0; i < ca.length; i++) {
-    let c = ca[i]
-    while (c.charAt(0) === ' ') {
-      c = c.substring(1)
-    }
-    if (c.indexOf(name) === 0) {
-      return c.substring(name.length, c.length)
-    }
-  }
-  return ''
 }
 
 export default App

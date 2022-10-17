@@ -14,7 +14,7 @@ const LikeCard = (props) => {
   const arrayOfLikes = props.arrayPostsLiked
   const postId = props.post.id
 
-  // On regarde quels posts ont été likés par l'utilisateur connecté, pour voir les coeurs rouges :
+  // On regarde quels posts ont été likés par l'utilisateur connecté, pour pouvoir afficher les coeurs rouges :
   useEffect(() => {
     for (let i = 0; i < arrayOfLikes.length; i++) {
       if (postId === arrayOfLikes[i].post_id) setPostLiked(true)
@@ -22,7 +22,7 @@ const LikeCard = (props) => {
     // eslint-disable-next-line
   }, [arrayOfLikes])
 
-  // Au clic sur le coeur, on appelle la fonction "likePost" :
+  // Au clic sur le coeur, on appelle la fonction "likePost" du back-end :
   const likeHandle = () => {
     axios({
       method: 'post',
@@ -67,7 +67,7 @@ const LikeCard = (props) => {
           </div>
         </Tippy>
       </div>
-      <span className="card_number-of-likes">{numberOfLikes} </span>
+      <span className="card_number-of-likes">{numberOfLikes}</span>
     </>
   )
 }

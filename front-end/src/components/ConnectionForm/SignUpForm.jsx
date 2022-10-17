@@ -3,37 +3,36 @@ import axios from 'axios'
 import SignInForm from './SignInForm'
 
 const SignUpForm = () => {
-  const [formSubmit, setFormSubmit] = useState(false)
-
   const [lastName, setLastName] = useState('')
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [controlPassword, setControlPassword] = useState('')
 
+  const lastNameInput = document.querySelector('#lastName')
+  const firstNameInput = document.querySelector('#firstName')
+  const emailInput = document.querySelector('#email')
+  const passwordInput = document.querySelector('#password')
+  const controlPasswordInput = document.querySelector('#password-conf')
+  const terms = document.getElementById('terms')
+
+  const lastNameError = document.querySelector('.lastName.error')
+  const firstNameError = document.querySelector('.firstName.error')
+  const emailError = document.querySelector('.email.error')
+  const passwordError = document.querySelector('.password.error')
+  const passwordConfirmError = document.querySelector('.password-confirm.error')
+  const termsError = document.querySelector('.terms.error')
+
+  let regExpNames = /^[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ'\s-]{2,20}$/i
+  let regExpEmail = /^[A-Z0-9.+-_]+@[A-Z0-9]+\.[A-Z]{2,4}$/i
+  // Entre 8 et 25 caractères, au moins une lettre minuscule, au moins une lettre majuscule et au moins 2 chiffres :
+  let regExpPassword =
+    /^(?=.{8,25}$)(?=.*?[a-z])(?=.*?[A-Z])(?=(?:.*?[0-9]){2}).*$/
+
+  const [formSubmit, setFormSubmit] = useState(false)
+
   const handleRegister = (e) => {
     e.preventDefault()
-    const lastNameInput = document.querySelector('#lastName')
-    const firstNameInput = document.querySelector('#firstName')
-    const emailInput = document.querySelector('#email')
-    const passwordInput = document.querySelector('#password')
-    const controlPasswordInput = document.querySelector('#password-conf')
-    const terms = document.getElementById('terms')
-
-    const lastNameError = document.querySelector('.lastName.error')
-    const firstNameError = document.querySelector('.firstName.error')
-    const emailError = document.querySelector('.email.error')
-    const passwordError = document.querySelector('.password.error')
-    const passwordConfirmError = document.querySelector(
-      '.password-confirm.error'
-    )
-    const termsError = document.querySelector('.terms.error')
-
-    let regExpNames = /^[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœ'\s-]{2,20}$/i
-    let regExpEmail = /^[A-Z0-9.+-_]+@[A-Z0-9]+\.[A-Z]{2,4}$/i
-    // Entre 8 et 25 caractères, au moins une lettre minuscule, au moins une lettre majuscule et au moins 2 chiffres :
-    let regExpPassword =
-      /^(?=.{8,25}$)(?=.*?[a-z])(?=.*?[A-Z])(?=(?:.*?[0-9]){2}).*$/
 
     const checkFirstName = () => {
       if (!firstNameInput.value.match(regExpNames)) {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import setCookie from '../../utils/setCookie'
 import getCookie from '../../utils/getCookie'
+import setCookie from '../../utils/setCookie'
 import jwt_decode from 'jwt-decode'
 import jwt_encode from 'jwt-encode'
 import axios from 'axios'
@@ -10,14 +10,19 @@ const UploadImg = () => {
   const token = getCookie('token')
   const decodedToken = jwt_decode(token)
 
+  // Image que l'on voit à l'écran après sélection de la photo :
+  const [profileImage, setProfileImage] = useState()
   // Image que l'on envoie au back-end :
   const [file, setFile] = useState()
 
-  // Image que l'on voit à l'écran après sélection de la photo :
-  const [profileImage, setProfileImage] = useState()
-
   // Si on a ajouté/changé la photo de profil :
   const [newPhoto, setNewPhoto] = useState(false)
+
+  const handlePicture = (e) => {
+    e.preventDefault()
+    setProfileImage(URL.createObjectURL(e.target.files[0]))
+    setFile(e.target.files[0])
+  }
 
   const modifyTokenProfileImage = (image) => {
     decodedToken.profileImage = image
@@ -50,12 +55,6 @@ const UploadImg = () => {
         })
         .catch((err) => console.log(err))
     }
-  }
-
-  const handlePicture = (e) => {
-    e.preventDefault()
-    setProfileImage(URL.createObjectURL(e.target.files[0]))
-    setFile(e.target.files[0])
   }
 
   return (
