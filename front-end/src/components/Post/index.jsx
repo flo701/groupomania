@@ -49,8 +49,8 @@ const Posts = () => {
       </>
       <NewPostForm />
       <ul>
-        {posts.map((post, key) => (
-          <Card post={post} key={key} arrayPostsLiked={arrayPostsLiked} />
+        {posts.map((post) => (
+          <Card post={post} key={post.id} arrayPostsLiked={arrayPostsLiked} />
         ))}
       </ul>
     </div>
