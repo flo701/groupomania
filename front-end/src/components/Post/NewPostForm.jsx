@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import getCookie from '../../utils/getCookie'
 import axios from 'axios'
-import { UrlPost } from '../../utils/axiosUrl'
+import { urlPost } from '../../utils/axiosUrl'
 import { timestampParser } from '../../utils/timestampParser'
 import Picture from '../../assets/icons/picture.svg'
 import Tippy from '@tippyjs/react'
@@ -20,7 +20,7 @@ const NewPostForm = () => {
   // file est l'image que l'on va envoyer au back-end :
   const [file, setFile] = useState()
 
-  const api = axios.create({ baseURL: UrlPost })
+  const api = axios.create({ baseURL: urlPost })
   api.interceptors.request.use((req) => {
     req.headers.Authorization = `Bearer ${token}`
     return req

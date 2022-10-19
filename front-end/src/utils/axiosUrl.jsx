@@ -1,3 +1,3 @@
-export const UrlUser = `${process.env.REACT_APP_API_URL}/api/auth/`
+export const urlUser = `${process.env.REACT_APP_API_URL}/api/auth/`
 
-export const UrlPost = `${process.env.REACT_APP_API_URL}/api/posts/`
+export const urlPost = `${process.env.REACT_APP_API_URL}/api/posts/`

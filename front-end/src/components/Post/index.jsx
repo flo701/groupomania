@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import getCookie from '../../utils/getCookie'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import { UrlPost } from '../../utils/axiosUrl'
+import { urlPost } from '../../utils/axiosUrl'
 import Card from './Card'
 import NewPostForm from './NewPostForm'
 
@@ -19,7 +19,7 @@ const Posts = () => {
 
   useEffect(() => {
     axios
-      .get(UrlPost, config)
+      .get(urlPost, config)
       .then((res) => {
         setPosts(res.data)
       })
@@ -31,7 +31,7 @@ const Posts = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: UrlPost + `verifyPostsLiked/${userId}`,
+      url: urlPost + `verifyPostsLiked/${userId}`,
       headers: headers,
     })
       .then((res) => {

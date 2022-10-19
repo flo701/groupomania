@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import cookie from 'js-cookie'
 import getCookie from '../../utils/getCookie'
 import axios from 'axios'
-import { UrlUser } from '../../utils/axiosUrl'
+import { urlUser } from '../../utils/axiosUrl'
 import GroupomaniaLogo from '../../assets/logo/icon-left-font.png'
 import LogOutIcon from '../../assets/icons/logout.svg'
 import Tippy from '@tippyjs/react'
@@ -19,7 +19,7 @@ const Header = () => {
 
     axios({
       method: 'get',
-      url: UrlUser + 'logout',
+      url: urlUser + 'logout',
     })
       .then(() => removeCookie('token'))
       .catch((err) => console.log(err))

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { UrlUser } from '../../utils/axiosUrl'
+import { urlUser } from '../../utils/axiosUrl'
 import SignInForm from './SignInForm'
 
 const SignUpForm = () => {
@@ -120,7 +120,7 @@ const SignUpForm = () => {
     ) {
       axios({
         method: 'post',
-        url: UrlUser + 'signup',
+        url: urlUser + 'signup',
         data: {
           firstname: firstName,
           lastname: lastName,

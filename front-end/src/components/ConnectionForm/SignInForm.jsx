@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import setCookie from '../../utils/setCookie'
 import axios from 'axios'
-import { UrlUser } from '../../utils/axiosUrl'
+import { urlUser } from '../../utils/axiosUrl'
 
 const SignInForm = () => {
   const [email, setEmail] = useState('')
@@ -15,7 +15,7 @@ const SignInForm = () => {
 
     axios({
       method: 'post',
-      url: UrlUser + 'login',
+      url: urlUser + 'login',
       data: {
         email,
         password,

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import getCookie from '../../utils/getCookie'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import { UrlUser } from '../../utils/axiosUrl'
+import { urlUser } from '../../utils/axiosUrl'
 import { timestampParser } from '../../utils/timestampParser'
 import UploadImg from './UploadImg'
 
@@ -78,7 +78,7 @@ const UpdateProfile = () => {
     ) {
       axios({
         method: 'put',
-        url: UrlUser + 'profile-infos',
+        url: urlUser + 'profile-infos',
         headers: headers,
         data: {
           password: passwordUpdate,

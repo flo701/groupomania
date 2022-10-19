@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import getCookie from '../../utils/getCookie'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import { UrlPost } from '../../utils/axiosUrl'
+import { urlPost } from '../../utils/axiosUrl'
 import { timestampParser } from '../../utils/timestampParser'
 import Picture from '../../assets/icons/picture.svg'
 import Trash from '../../assets/icons/trash.svg'
@@ -80,7 +80,7 @@ const Card = (props) => {
 
       axios({
         method: 'put',
-        url: UrlPost + `${postId}`,
+        url: urlPost + `${postId}`,
         headers: headers,
         data: data,
       })
@@ -95,7 +95,7 @@ const Card = (props) => {
 
   const deleteCard = () => {
     axios
-      .delete(UrlPost + `${postId}`, config)
+      .delete(urlPost + `${postId}`, config)
       .then((res) => {
         window.location = '/'
       })

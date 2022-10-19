@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import getCookie from '../../utils/getCookie'
 import axios from 'axios'
-import { UrlPost } from '../../utils/axiosUrl'
+import { urlPost } from '../../utils/axiosUrl'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
@@ -27,7 +27,7 @@ const LikeCard = (props) => {
   const likeHandle = () => {
     axios({
       method: 'post',
-      url: UrlPost + `${postId}/like`,
+      url: urlPost + `${postId}/like`,
       headers: headers,
     })
       .then((res) => {
@@ -45,7 +45,7 @@ const LikeCard = (props) => {
   const countLikes = () => {
     axios({
       method: 'get',
-      url: UrlPost + `${postId}/like/count`,
+      url: urlPost + `${postId}/like/count`,
       headers: headers,
     })
       .then((res) => {

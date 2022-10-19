@@ -4,7 +4,7 @@ import setCookie from '../../utils/setCookie'
 import jwt_decode from 'jwt-decode'
 import jwt_encode from 'jwt-encode'
 import axios from 'axios'
-import { UrlUser } from '../../utils/axiosUrl'
+import { urlUser } from '../../utils/axiosUrl'
 import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
 
 const UploadImg = () => {
@@ -40,7 +40,7 @@ const UploadImg = () => {
     data.append('image', file)
 
     const api = axios.create({
-      baseURL: UrlUser,
+      baseURL: urlUser,
     })
     api.interceptors.request.use((req) => {
       req.headers.Authorization = `Bearer ${token}`

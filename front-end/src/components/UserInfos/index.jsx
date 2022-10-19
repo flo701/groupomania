@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import getCookie from '../../utils/getCookie'
 import jwt_decode from 'jwt-decode'
 import axios from 'axios'
-import { UrlUser } from '../../utils/axiosUrl'
+import { urlUser } from '../../utils/axiosUrl'
 import { timestampParser } from '../../utils/timestampParser'
 import DefaultProfilePhoto from '../../assets/images/photo-de-profil-par-defaut.webp'
 
@@ -25,7 +25,7 @@ const UserInfos = () => {
   useEffect(() => {
     axios({
       method: 'get',
-      url: UrlUser + `getOneUser/${userId}`,
+      url: urlUser + `getOneUser/${userId}`,
       headers: headers,
     })
       .then((res) => {
@@ -56,7 +56,7 @@ const UserInfos = () => {
   const accountActivation = (id) => {
     axios({
       method: 'put',
-      url: UrlUser + `accountActivation/${id}`,
+      url: urlUser + `accountActivation/${id}`,
       headers: headers,
     })
       .then((res) => {
