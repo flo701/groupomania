@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { UrlUser } from '../../utils/axiosUrl'
 import SignInForm from './SignInForm'
 
 const SignUpForm = () => {
@@ -119,7 +120,7 @@ const SignUpForm = () => {
     ) {
       axios({
         method: 'post',
-        url: `${process.env.REACT_APP_API_URL}/api/auth/signup`,
+        url: UrlUser + 'signup',
         data: {
           firstname: firstName,
           lastname: lastName,

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import setCookie from '../../utils/setCookie'
 import axios from 'axios'
+import { UrlUser } from '../../utils/axiosUrl'
 
-const SignInForm = (props) => {
+const SignInForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -14,7 +15,7 @@ const SignInForm = (props) => {
 
     axios({
       method: 'post',
-      url: `${process.env.REACT_APP_API_URL}/api/auth/login`,
+      url: UrlUser + 'login',
       data: {
         email,
         password,
