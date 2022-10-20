@@ -12,7 +12,7 @@ import 'tippy.js/dist/tippy.css'
 const Header = () => {
   const token = getCookie('token')
 
-  const LogOut = () => {
+  const logOut = () => {
     const removeCookie = (key) => {
       cookie.remove(key, { expires: 1 })
     }
@@ -50,7 +50,7 @@ const Header = () => {
               >
                 <li>Profil</li>
               </NavLink>
-              <li className="logOut" onClick={LogOut}>
+              <li className="logOut" onClick={logOut}>
                 <Tippy content="Se déconnecter">
                   <img src={LogOutIcon} alt="déconnexion" />
                 </Tippy>
