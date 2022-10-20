@@ -77,7 +77,7 @@ const UserInfos = () => {
         <div>
           <img
             src={profileImage}
-            alt="img profil"
+            alt="profil"
             className="user_profileImage"
           ></img>{' '}
         </div>
@@ -85,7 +85,7 @@ const UserInfos = () => {
         <div>
           <img
             src={DefaultProfilePhoto}
-            alt="img profil"
+            alt="profil par défaut"
             className="user_profileImage"
           ></img>{' '}
         </div>

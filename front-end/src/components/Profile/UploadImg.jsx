@@ -63,7 +63,7 @@ const UploadImg = () => {
       {newPhoto ? (
         <>
           <div className="profile-pictures">
-            <img src={profileImage} className="new-image" alt="img de profil" />
+            <img src={profileImage} className="new-image" alt="profil" />
           </div>
           <span className="update-success">Photo de profil enregistrée</span>
         </>
@@ -76,7 +76,7 @@ const UploadImg = () => {
                   <img
                     src={DefaultProfilePhoto}
                     className="profile-image"
-                    alt="img de profil par défaut"
+                    alt="profil par défaut"
                   />
                 </div>
                 <div>
@@ -104,7 +104,7 @@ const UploadImg = () => {
                   <img
                     src={decodedToken.profileImage}
                     className="profile-image"
-                    alt="img de profil"
+                    alt="profil"
                   />
                 </div>
                 <div>

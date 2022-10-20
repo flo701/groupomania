@@ -121,7 +121,7 @@ const NewPostForm = () => {
         <div className="new-post_footer">
           <div className="icon">
             <>
-              <img src={Picture} alt="" />
+              <img src={Picture} alt="choisir un fichier" />
               <Tippy content="Choisir une image">
                 <input
                   type="file"

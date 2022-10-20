@@ -112,7 +112,7 @@ const Card = (props) => {
             <img
               className="card_profileImage"
               src={props.post.profileImage}
-              alt="vrai profil"
+              alt="profil"
               onClick={() => handleUserInfos(`${props.post.user_id}`)}
             ></img>
           </Tippy>
@@ -212,7 +212,7 @@ const Card = (props) => {
                     <img src={postUpdatedPicture} alt="" />
                   </div>
                   <div className="card_file-icon">
-                    <img src={Picture} alt="img" />
+                    <img src={Picture} alt="choisir un fichier" />
                     <Tippy content="Choisir une image">
                       <input
                         type="file"
