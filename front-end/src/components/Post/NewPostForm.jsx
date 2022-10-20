@@ -26,7 +26,9 @@ const NewPostForm = () => {
     return req
   })
 
-  const handlePost = () => {
+  const handlePost = (e) => {
+    e.preventDefault()
+
     const checkTitle = () => {
       if (title.length < 5) {
         titleError.innerHTML =
@@ -85,62 +87,62 @@ const NewPostForm = () => {
   return (
     <div className="new-post_container">
       <h3 className="new-post_h3">Créer un post</h3>
-      <textarea
-        name="title"
-        maxLength="40"
-        id="title"
-        placeholder="Titre"
-        onChange={(e) => setTitle(e.target.value)}
-        value={title}
-      />
-      <p className="title-error"></p>
-      <textarea
-        name="description"
-        maxLength="255"
-        id="description"
-        placeholder="Description"
-        onChange={(e) => setDescription(e.target.value)}
-        value={description}
-      />
-      <p className="description-error"></p>
-      {title || description || postPicture ? (
-        <>
-          <div>
-            <span>{timestampParser(Date.now())}</span>
-          </div>
-          <div className="new-post_content">
-            <p>{title}</p>
-            <p>{description}</p>
-            <img src={postPicture} alt="" />
-          </div>
-        </>
-      ) : null}
-      <div className="new-post_footer">
-        <div className="icon">
+      <form action="" onSubmit={handlePost}>
+        <textarea
+          name="title"
+          maxLength="40"
+          id="title"
+          placeholder="Titre"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
+        <p className="title-error"></p>
+        <textarea
+          name="description"
+          maxLength="255"
+          id="description"
+          placeholder="Description"
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
+        />
+        <p className="description-error"></p>
+        {title || description || postPicture ? (
           <>
-            <img src={Picture} alt="" />
-            <Tippy content="Choisir une image">
-              <input
-                type="file"
-                id="file-upload"
-                name="file"
-                accept=".jpg, .jpeg, .png, .webp"
-                onChange={(e) => handlePicture(e)}
-              />
-            </Tippy>
+            <div>
+              <span>{timestampParser(Date.now())}</span>
+            </div>
+            <div className="new-post_content">
+              <p>{title}</p>
+              <p>{description}</p>
+              <img src={postPicture} alt="" />
+            </div>
           </>
+        ) : null}
+        <div className="new-post_footer">
+          <div className="icon">
+            <>
+              <img src={Picture} alt="" />
+              <Tippy content="Choisir une image">
+                <input
+                  type="file"
+                  id="file-upload"
+                  name="file"
+                  accept=".jpg, .jpeg, .png, .webp"
+                  onChange={(e) => handlePicture(e)}
+                />
+              </Tippy>
+            </>
+          </div>
+          <div className="buttons">
+            {title || description || postPicture ? (
+              <button className="cancel" onClick={cancelPost}>
+                Annuler
+              </button>
+            ) : null}
+            <button className="send">Envoyer</button>
+          </div>
         </div>
-        <div className="buttons">
-          {title || description || postPicture ? (
-            <button className="cancel" onClick={cancelPost}>
-              Annuler
-            </button>
-          ) : null}
-          <button className="send" onClick={handlePost}>
-            Envoyer
-          </button>
-        </div>
-      </div>
+      </form>
     </div>
   )
 }

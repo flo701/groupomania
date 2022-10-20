@@ -42,7 +42,9 @@ const Card = (props) => {
     setFileUpdated(e.target.files[0])
   }
 
-  const UpdateCard = () => {
+  const UpdateCard = (e) => {
+    e.preventDefault()
+
     const titleUpdatedError = document.querySelector('.titleUpdated-error')
     const descriptionUpdatedError = document.querySelector(
       '.descriptionUpdated-error'
@@ -183,54 +185,53 @@ const Card = (props) => {
           <div className="card_date">
             <p>{timestampParser(props.post.creationDate)}</p>
           </div>
-          <div className="card_title-and-description-and-image">
-            <textarea
-              className="card_title"
-              maxLength="40"
-              defaultValue={props.post.title}
-              onChange={(e) => setTitleUpdated(e.target.value)}
-            />
-            <p className="titleUpdated-error"></p>
-            <textarea
-              className="card_description"
-              maxLength="255"
-              defaultValue={props.post.description}
-              onChange={(e) => setDescriptionUpdated(e.target.value)}
-            />
-            <p className="descriptionUpdated-error"></p>
-            {props.post.image && (
-              <>
-                <img
-                  src={props.post.image}
-                  alt="img"
-                  className="card_post-img"
-                />
-                <div className="card_file">
-                  <img src={postUpdatedPicture} alt="" />
-                </div>
-                <div className="card_file-icon">
-                  <img src={Picture} alt="img" />
-                  <Tippy content="Choisir une image">
-                    <input
-                      type="file"
-                      id="file-upload"
-                      name="file"
-                      accept=".jpg, .jpeg, .png, .webp"
-                      onChange={(e) => handlePicture(e)}
-                    />
-                  </Tippy>
-                </div>
-              </>
-            )}
-            <div className="button-container">
-              <button
-                className="card_validation-btn"
-                onClick={(e) => UpdateCard()}
-              >
-                Valider les modifications
-              </button>
+          <form action="" onSubmit={UpdateCard}>
+            <div className="card_title-and-description-and-image">
+              <textarea
+                className="card_title"
+                maxLength="40"
+                defaultValue={props.post.title}
+                onChange={(e) => setTitleUpdated(e.target.value)}
+              />
+              <p className="titleUpdated-error"></p>
+              <textarea
+                className="card_description"
+                maxLength="255"
+                defaultValue={props.post.description}
+                onChange={(e) => setDescriptionUpdated(e.target.value)}
+              />
+              <p className="descriptionUpdated-error"></p>
+              {props.post.image && (
+                <>
+                  <img
+                    src={props.post.image}
+                    alt="img"
+                    className="card_post-img"
+                  />
+                  <div className="card_file">
+                    <img src={postUpdatedPicture} alt="" />
+                  </div>
+                  <div className="card_file-icon">
+                    <img src={Picture} alt="img" />
+                    <Tippy content="Choisir une image">
+                      <input
+                        type="file"
+                        id="file-upload"
+                        name="file"
+                        accept=".jpg, .jpeg, .png, .webp"
+                        onChange={(e) => handlePicture(e)}
+                      />
+                    </Tippy>
+                  </div>
+                </>
+              )}
+              <div className="button-container">
+                <button className="card_validation-btn">
+                  Valider les modifications
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
         </>
       )}
     </li>
