@@ -42,7 +42,7 @@ const Card = (props) => {
     setFileUpdated(e.target.files[0])
   }
 
-  const UpdateCard = (e) => {
+  const updateCard = (e) => {
     e.preventDefault()
 
     const titleUpdatedError = document.querySelector('.titleUpdated-error')
@@ -185,7 +185,7 @@ const Card = (props) => {
           <div className="card_date">
             <p>{timestampParser(props.post.creationDate)}</p>
           </div>
-          <form action="" onSubmit={UpdateCard}>
+          <form action="" onSubmit={updateCard}>
             <div className="card_title-and-description-and-image">
               <textarea
                 className="card_title"
