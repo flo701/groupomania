@@ -177,7 +177,6 @@ exports.updateProfileImage = (req, res) => {
       let profileImage = `${req.protocol}://${req.get('host')}/images/${
         req.file.filename
       }`
-
       if (err) {
         throw err
       } else {
@@ -216,26 +215,28 @@ exports.updateProfileInfos = (req, res) => {
       if (err) {
         throw err
       } else {
-        let user = {
-          password: req.body.password,
-        }
-
-        bcrypt.hash(req.body.password, 10).then((hash) => {
-          user = {
-            password: hash,
+        if (result[0].id != req.auth.userId) {
+          res.status(403).json({ message: 'Requête non autorisée' })
+        } else {
+          let user = {
+            password: req.body.password,
           }
-
-          connection.query(
-            `UPDATE user SET password="${user.password}"  WHERE id= ${req.auth.userId} `,
-            function (error, result) {
-              if (error) {
-                res.status(400).json({ error })
-              } else {
-                res.status(201).json({ message: 'Mot de passe enregistré' })
-              }
+          bcrypt.hash(req.body.password, 10).then((hash) => {
+            user = {
+              password: hash,
             }
-          )
-        })
+            connection.query(
+              `UPDATE user SET password="${user.password}"  WHERE id= ${req.auth.userId} `,
+              function (error, result) {
+                if (error) {
+                  res.status(400).json({ error })
+                } else {
+                  res.status(201).json({ message: 'Mot de passe enregistré' })
+                }
+              }
+            )
+          })
+        }
       }
     }
   )
