@@ -19,7 +19,6 @@ const multer = require('../middlewares/multer')
 
 // On importe le contrôleur user pour associer les fonctions aux différentes routes :
 const userCtrl = require('../controllers/user.controller')
-const { route } = require('../app')
 
 // Les routes fournies sont celles prévues par l'application front-end.
 // Le segment de route indiqué ici est uniquement le segment final,
