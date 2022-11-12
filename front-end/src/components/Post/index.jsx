@@ -17,6 +17,29 @@ const Posts = () => {
   const [posts, setPosts] = useState([])
   const [arrayPostsLiked, setArrayPostsLiked] = useState([])
 
+  const addPostToState = (post) => {
+    const newPosts = [post, ...posts]
+    setPosts(newPosts)
+  }
+
+  const modifyPostInState = (postId, modif) => {
+    console.log(modif)
+    const newPosts = posts.map((p) =>
+      p.id !== postId
+        ? p
+        : {
+            ...p,
+            ...modif,
+          }
+    )
+    setPosts(newPosts)
+  }
+
+  const removePostToState = (postId) => {
+    const newPosts = posts.filter((p) => p.id !== postId)
+    setPosts(newPosts)
+  }
+
   useEffect(() => {
     axios
       .get(urlPost, config)
@@ -48,10 +71,16 @@ const Posts = () => {
       <>
         <h3 className="posts_h3">Bienvenue {decodedToken.firstname} </h3>
       </>
-      <NewPostForm />
+      <NewPostForm addPostToState={addPostToState} />
       <ul>
         {posts.map((post) => (
-          <Card post={post} key={post.id} arrayPostsLiked={arrayPostsLiked} />
+          <Card
+            post={post}
+            key={post.id}
+            arrayPostsLiked={arrayPostsLiked}
+            modifyPostInState={modifyPostInState}
+            removePostToState={removePostToState}
+          />
         ))}
       </ul>
     </div>

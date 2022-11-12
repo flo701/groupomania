@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import getCookie from '../../utils/getCookie'
+import jwt_decode from 'jwt-decode'
 import axios from 'axios'
 import { urlPost } from '../../utils/axiosUrl'
 import { timestampParser } from '../../utils/timestampParser'
@@ -7,8 +8,9 @@ import Picture from '../../assets/icons/picture.svg'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
 
-const NewPostForm = () => {
+const NewPostForm = ({ addPostToState }) => {
   const token = getCookie('token')
+  const decodedToken = jwt_decode(token)
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -62,7 +64,18 @@ const NewPostForm = () => {
       api
         .post('/', data)
         .then((res) => {
-          window.location = '/'
+          const post = {
+            id: res.data.result.insertId,
+            title,
+            description,
+            creationDate: timestampParser(Date.now()),
+            image: res.data.post.image,
+            profileImage: decodedToken.profileImage,
+            firstname: decodedToken.firstname,
+            lastname: decodedToken.lastname,
+            user_id: decodedToken.userId,
+          }
+          addPostToState(post)
         })
         .catch((err) => console.log(err))
       // Une fois les données envoyées au back-end, on supprime le visuel de la création du post :

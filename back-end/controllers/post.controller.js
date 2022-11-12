@@ -69,7 +69,8 @@ exports.createPost = (req, res, next) => {
       res.status(400).json({ err })
       throw err
     }
-    res.status(201).json('Post créé et enregistré')
+    const newPost = { post, result }
+    res.status(201).json(newPost)
   })
 }
 
@@ -116,13 +117,13 @@ exports.modifyPost = (req, res, next) => {
           }
 
           connection.query(
-            `UPDATE post SET title="${post.title}" , description="${post.description}", creationDate=CURRENT_TIMESTAMP, image="${post.image}"  WHERE id= ${req.params.id} `,
+            `UPDATE post SET title="${post.title}" , description="${post.description}", image="${post.image}"  WHERE id= ${req.params.id} `,
             function (err, result) {
               if (err) {
                 res.status(400).json({ err })
                 throw err
               } else {
-                res.status(201).json('Post modifié :' + JSON.stringify(post))
+                res.status(201).json(post)
               }
             }
           )
@@ -131,13 +132,13 @@ exports.modifyPost = (req, res, next) => {
           let post = req.body
 
           connection.query(
-            `UPDATE post SET title="${post.title}", description="${post.description}", creationDate=CURRENT_TIMESTAMP  WHERE id= ${req.params.id} `,
+            `UPDATE post SET title="${post.title}", description="${post.description}"  WHERE id= ${req.params.id} `,
             function (err, result) {
               if (err) {
                 res.status(400).json({ err })
                 throw err
               }
-              res.status(201).json('Post modifié : ' + JSON.stringify(post))
+              res.status(201).json(post)
             }
           )
         }

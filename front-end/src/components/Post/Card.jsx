@@ -87,7 +87,8 @@ const Card = (props) => {
         data: data,
       })
         .then((res) => {
-          window.location = '/'
+          props.modifyPostInState(postId, res.data)
+          setIsUpdated(false)
         })
         .catch((err) => {
           console.log(err)
@@ -99,7 +100,7 @@ const Card = (props) => {
     axios
       .delete(urlPost + `${postId}`, config)
       .then((res) => {
-        window.location = '/'
+        props.removePostToState(postId)
       })
       .catch((err) => console.log(err))
   }
