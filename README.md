@@ -30,14 +30,15 @@ un utilisateur “administrateur” ; celui-ci aura les droits de modification/s
 ### Identité graphique :
 - Police d’écriture : tous les textes du site doivent utiliser la police Lato.
 - Couleurs : vous êtes libre sur les couleurs, mais voici notre palette actuelle dont vous pouvez vous inspirer :
-● Primaire : #FD2D01
+- Primaire : #FD2D01
 ● Secondaire : #FFD7D7
 ● Tertiaire : #4E5166
 
 
 ## Lancer le projet 
 - Node.js et npm devront être installés localement sur votre machine.
-- Créez un dossier vide et clonez ce repository à l'intérieur en tapant : `git clone https://github.com/flo701/groupomania.git`.
+- Créez un dossier vide et clonez ce repository à l'intérieur en tapant : 
+- `git clone https://github.com/flo701/groupomania.git`.
 
 ### Créer la base de données groupomania :
 - Ouvrez le fichier `db-config.sql` situé dans le back-end, et suivez les indications pour créer votre base de données Groupomania.
