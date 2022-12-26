@@ -1,4 +1,4 @@
-![Logo Groupomania](https://github.com/flo701/groupomania/blob/2eb63fe0bd9b867be2b97601ae3ac6271348b7ac/front-end/src/assets/logo/icon-left-font-2.png)
+![Logo Groupomania](./front-end/src/assets/logo/icon-left-font-2.png)
 
 - Projet 7 du parcours "Développeur Web" d'OpenClassrooms :
 - "Créez un réseau social d'entreprise".
