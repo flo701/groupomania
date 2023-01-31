@@ -41,7 +41,10 @@ un utilisateur “administrateur” ; celui-ci aura les droits de modification/s
 - `git clone https://github.com/flo701/groupomania.git`.
 
 ### Créer la base de données groupomania :
-- Ouvrez le fichier `db-config.sql` situé dans le back-end, et suivez les indications pour créer votre base de données Groupomania.
+- Ouvrez un terminal MySQL. 
+- Tapez : CREATE DATABASE IF NOT EXISTS `groupomania`;
+- Puis : USE `groupomania`;
+- Ensuite, copiez-collez le contenu du fichier `groupomania.sql`, situé dans le dossier back-end.
 
 ### Démarrer le back-end : 
 - Renommez le fichier `.env.example` en `.env`. Et renseignez `DB_USER` avec votre nom d'utilisateur pour votre base de données et `DB_PASSWORD` avec votre mot de passe pour votre base de données.
