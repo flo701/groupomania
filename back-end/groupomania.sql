@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 31 jan. 2023 à 19:01
+-- Généré le : dim. 19 fév. 2023 à 22:32
 -- Version du serveur : 10.4.27-MariaDB
 -- Version de PHP : 8.2.0
 
@@ -49,8 +49,7 @@ INSERT INTO `likes` (`id`, `user_id`, `post_id`) VALUES
 (1473, 196, 292),
 (1518, 265, 292),
 (1556, 265, 291),
-(1562, 265, 331),
-(1565, 266, 456);
+(1562, 265, 331);
 
 -- --------------------------------------------------------
 
@@ -79,8 +78,7 @@ INSERT INTO `post` (`id`, `title`, `description`, `creationDate`, `image`, `user
 (292, 'Nos amis les animaux', 'Aimons-les comme ils nous aiment. Ils sont incroyables...', '2022-09-29 13:41:07', 'http://localhost:3000/images/animaux1664451667893.jpg', 195, 2),
 (315, 'Qui me suit ?', 'Je pars profiter un peu de la vie, et prendre soin de moi...', '2022-10-07 22:15:37', 'http://localhost:3000/images/bora-bora21665173737796.jpg', 196, 1),
 (331, 'Plongée dans un autre univers', 'J\'ai goûté à une sérénité indescriptible lors de l\'immersion dans cet autre monde... \r\nEt ces couleurs ! C\'est incroyable...', '2022-10-13 11:42:59', 'http://localhost:3000/images/poissons1665174205372.jpg', 230, 3),
-(456, 'Incroyable beauté', 'La nature est magnifique !', '2022-10-13 11:42:14', 'http://localhost:3000/images/arbre-a-fleurs1665136546776.webp', 265, 2),
-(457, 'Bonjour à tous', 'Nouvelle sur Groupomania, je suis ravie de vous rejoindre ! A bientôt !', '2023-01-29 20:44:19', 'http://localhost:3000/images/georgia-de-lotz-juQWcOiuuPE-unsplash1675021459629.jpg', 266, NULL);
+(456, 'Incroyable beauté', 'La nature est magnifique !', '2022-10-13 11:42:14', 'http://localhost:3000/images/arbre-a-fleurs1665136546776.webp', 265, 2);
 
 -- --------------------------------------------------------
 
@@ -110,8 +108,7 @@ INSERT INTO `user` (`id`, `status`, `active`, `lastname`, `firstname`, `email`, 
 (195, 'USER', 1, 'Durand', 'Lola', 'lola@yahoo.fr', '$2b$10$nOvqVkRCUrVQyd7oEkcOsOpvW0cUnON.bMKTZC4Uq8GRdRleUjBNG', '2022-09-26 12:26:00', 'http://localhost:3000/images/lola1664548356413.webp'),
 (196, 'USER', 1, 'Lefort', 'Guy', 'guy@orange.fr', '$2b$10$Z.I6dajgWBySeDY8ns1BL.UGVZLUDnSI79kB7LUw4zRgMi7ko0VsK', '2022-09-26 18:07:32', 'http://localhost:3000/images/guy1664704133834.webp'),
 (230, 'USER', 1, 'Lun', 'Gérard ', 'gege@gmail.com', '$2b$10$IikzWhqHOwle2B8kdTE4deIBjLPp5VYqgvQ5/wgpjEhR/tYbDnaJq', '2022-10-02 21:57:40', 'http://localhost:3000/images/gerard1664788655829.jpg'),
-(265, 'ADMIN', 1, 'Real', 'Louise', 'louise@gmail.com', '$2b$10$8UzevRPmS0fcQQ.uZu18nuPd1iyiSmSIylXHGP1B8f2pO8rDCeYG2', '2022-10-07 11:49:27', 'http://localhost:3000/images/louise1665426464083.webp'),
-(266, 'USER', 1, 'Latine', 'Mireille', 'mimi@gmail.com', '$2b$10$QZUdr9FC4y9BociQ0D8/Y.upLqgBmWXHMtw4qr7SIv75ub8fiSK4m', '2023-01-29 20:40:11', 'http://localhost:3000/images/photo_de_profil_femme_21675021670811.webp');
+(265, 'ADMIN', 1, 'Real', 'Louise', 'louise@gmail.com', '$2b$10$8UzevRPmS0fcQQ.uZu18nuPd1iyiSmSIylXHGP1B8f2pO8rDCeYG2', '2022-10-07 11:49:27', 'http://localhost:3000/images/louise1665426464083.webp');
 
 --
 -- Index pour les tables déchargées
